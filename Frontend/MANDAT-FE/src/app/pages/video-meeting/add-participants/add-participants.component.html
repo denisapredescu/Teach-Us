@@ -1,0 +1,59 @@
+
+    <div class="add-participants">
+      <div class="add-participants-header">
+        <h3>Send the meeting link to your student</h3>
+
+      </div>
+  
+      <div class="add-participants-inputs-container">
+        <div class="form-center">
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  [formControl]="emailFormControl"
+                  [(ngModel)]="model.studentEmail"
+                  [errorStateMatcher]="matcher"
+                  placeholder="Ex. pat@example.com"
+                />
+                <mat-hint>Errors appear instantly!</mat-hint>
+                <mat-error
+                  *ngIf="
+                    emailFormControl.hasError('email') &&
+                    !emailFormControl.hasError('required')
+                  "
+                >
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+          
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Link meeting" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'https://meet.jit.si/bwb-bfqi-vmh'"
+          value=""
+          [(ngModel)]="model.link"
+        />
+      </mat-form-field>
+
+      <!-- <mat-form-field class="example-form">
+        <mat-label>{{ "Dial-in meeting" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Dial-in: +1.512.647.1431 PIN: 247 310 33#'"
+          value=""
+          [(ngModel)]="model.dialIn"
+        />
+      </mat-form-field> -->
+
+        </div>
+      </div>
+  
+      <button type="button" (click)="Send()" class="btn btn-primary">Send</button>
+    </div>
+  

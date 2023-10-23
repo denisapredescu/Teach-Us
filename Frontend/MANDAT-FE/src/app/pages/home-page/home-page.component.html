@@ -1,0 +1,18 @@
+<div class="home-page">
+  <div class="first-element"></div>
+
+  <div class="second-element">
+    <h2>How does tutoring at MANDAT work?</h2>
+    <pre> <a routerLink="/register">Sign Up </a> <span>&#8594;</span>   <a> Tell us your expectation </a>  <span>&#8594;</span>  <a> Find a suitable mentor </a>  </pre>
+
+    <pre><span id="last-arrow">&#8594;</span>  Have Fun Learning *icon* </pre>
+  </div>
+
+  <div class="cards-container">
+    <ng-container *ngFor="let card of cards">
+      <app-home-card [title]="card.title" [image]="card.image">
+        {{ card.description }}
+      </app-home-card>
+    </ng-container>
+  </div>
+</div>

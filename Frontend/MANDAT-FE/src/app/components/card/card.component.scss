@@ -1,0 +1,145 @@
+$bg: darken(white, 10%);
+$shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+$shadow1: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+}
+
+.display {
+	display: grid;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+   // margin-left: 30%;
+  .display-item {
+    flex-grow: 1;
+    flex-basis: 1px;
+    display: flex;
+    justify-content: space-around;
+    padding: 25px;
+    max-width: 100%;
+  }
+}
+.card{
+	
+	width:480px;
+	max-width:100%;
+	min-height:620px;
+	overflow:hidden;
+	border-radius:4px;
+	box-shadow:$shadow;
+	background-color:white;
+	position:relative;	
+	display: -webkit-box; 
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex; 
+	display: flex;
+	flex-direction:column;
+	.card-top{
+		-webkit-flex-basis:155px;
+		flex-basis:155px;
+		flex-shrink:1;
+		background-color:rgba(0,0,0,.2);		
+		background-position:center;
+		background-size:cover;	
+	}
+	.card-profile{
+		flex-basis:75px;
+		flex-shrink:1;
+		.profile-image{
+			overflow:hidden;
+			border-radius:100%;
+			position:absolute;
+			left:calc(50% - 75px);
+			top:calc(25% - 75px);
+			border:4px solid white;
+			width:150px;
+			height:150px;			
+			background-size:cover;
+			background-position:center;
+		}
+	}
+	.card-info{
+		padding-bottom: 40px!important;
+		flex-basis:56,66665%;
+		padding:0 15px;
+		text-align:center;
+		display: -webkit-box; 
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex; 
+		display: flex;
+		flex-direction:column;
+		.info-title{
+			padding-bottom:10px;
+            padding-top: 35px;
+			h2{
+				font-size:35px;
+				padding: 15px;
+			}
+			h3{
+				font-size:25px;
+				padding: 0px;
+			}
+		}
+		.card-rating{
+			margin: auto;
+            padding :15px;
+		}
+		.info-bio{
+			padding:15px 0;
+            margin-bottom: 5px;	
+		}
+        .divider {
+            margin-left: 55px;
+            margin-right: 55px;
+			border-bottom:1px solid rgba(0,0,0,.3);
+        }
+        .info-address{
+			padding:15px 0;
+            
+		}
+	}
+}
+
+.card.seamus{
+	.card-top{
+		background-image: url(https://images.unsplash.com/photo-1421789665209-c9b2a435e3dc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=b0aa3fbba9c018e93499effa49dd8e83);
+	}
+	.profile-image{
+		background-image: url(../../../assets/images/profile.jpg);
+	}
+}
+
+i {
+	font-family: 'Poppins';
+    font-size: 70px;
+}
+
+.black {
+	color: black;
+}
+
+.grey {
+	color: grey;
+}
+
+.button {
+	margin: auto;
+	width: 150px;
+	margin-top: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+}

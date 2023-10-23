@@ -1,0 +1,72 @@
+$card-border-radius: 8px;
+
+.background,
+.card-container,
+.card-container .remaining-details,
+.card-container .leftTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.background {
+  padding: 10vh;
+  min-height: 100vh;
+}
+
+.card-container {
+  flex-direction: row;
+  background-color: white;
+  width: 75%;
+  height: 20vh;
+  margin: 3vh;
+  border-radius: 8px;
+  overflow: hidden;
+  // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: relative;
+  > * {
+    height: 100%;
+  }
+  .leftTitle {
+    background: #9599e2;
+    width: 20%;
+    font-size: 135%;
+    color: white;
+  }
+  .remaining-details {
+    width: 80%;
+    // background-color: green;
+    padding-left: 10px;
+    text-align: center;
+    .mainTitle {
+      font-size: 150%;
+    }
+    .type {
+      padding: 1% 2%;
+      border-radius: $card-border-radius;
+    }
+  }
+  .options {
+    // width: 8%;
+    font-size: 130%;
+    position: absolute;
+    right: 2%;
+    top: 10%;
+    > button {
+      background-color: initial;
+      border: unset;
+      padding: unset;
+      font-size: unset;
+      /* etc. */
+    }
+  }
+
+  .multiple-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 40%;
+  }
+}

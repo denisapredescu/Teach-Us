@@ -1,0 +1,34 @@
+<div class="container">
+    <h1 class="title">
+        Add Review
+    </h1>
+    <form [formGroup] = "addReviewForm" class="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Mentor Email</mat-label>
+            <input matInput placeholder="Mentor Email" formControlName="mentorEmail" readonly/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Student Email</mat-label>
+            <input matInput placeholder="Student Email" formControlName="studentEmail" readonly/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <input matInput placeholder="Message" formControlName="message"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Stars Number</mat-label>
+            <input matInput placeholder="Stars" formControlName="starsNumber"/>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <input matInput placeholder="review Status" formControlName="reviewStatus" readonly/>
+        </mat-form-field>     -->
+    </form>
+
+    <button mat-raised-button (click)="saveAdd()" appHoverBtn>Save</button>
+</div>
+
