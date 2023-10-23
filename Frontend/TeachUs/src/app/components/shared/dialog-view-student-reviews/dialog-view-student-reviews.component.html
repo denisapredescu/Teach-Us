@@ -1,0 +1,44 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class = "container" style="overflow-y:auto;">
+    <h1 class="title"><br>
+        My Reviews
+    </h1> 
+    <table mat-table [dataSource]="reviews" class="mat-elevation-z8 table">
+
+        <ng-container matColumnDef="message">
+          <th mat-header-cell *matHeaderCellDef> Message </th>
+          <td mat-cell *matCellDef="let element"> <input type="text" id = "{{element.id}}"  [(ngModel)]="element.message" readonly> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="starsNumber">
+            <th mat-header-cell *matHeaderCellDef> Stars Number </th>
+            <td mat-cell *matCellDef="let element">{{element.starsNumber}}</td>
+        </ng-container>
+      
+        <ng-container matColumnDef="mentorName" *ngIf="role === roles.Student">
+            <th mat-header-cell *matHeaderCellDef> Mentor Name </th>
+            <td mat-cell *matCellDef="let element">{{element.mentorName}}</td>
+        </ng-container> 
+
+        <ng-container matColumnDef="studentName" *ngIf="role === roles.Mentor">
+            <th mat-header-cell *matHeaderCellDef> Student Name </th>
+            <td mat-cell *matCellDef="let element">{{element.studentName}}</td>
+        </ng-container> 
+
+        <ng-container matColumnDef="edit" >
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            
+            <td class ="edit-action"  mat-cell *matCellDef="let element"> 
+                <mat-icon (click)= "editReview(element.id, element.message)">
+                    edit</mat-icon>
+            </td>
+        
+        </ng-container>
+
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>
