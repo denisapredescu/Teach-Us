@@ -47,6 +47,13 @@
     <mat-icon>Create Announcement</mat-icon>
     <a style="color: white" routerLink="/create-announcement">Announcement</a>
   </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-button class="menu-button" onclick="">
+    <mat-icon>person</mat-icon>
+    <a style="color: white;" (click)="logOut()">Log out</a>
+  </button>
 </div>
 
 <div *ngIf="isLoggedin === '' ">
@@ -67,6 +74,9 @@
     <mat-icon>Mentors</mat-icon>
     <a style="color: white" routerLink="/mentors">Mentors</a>
   </button>
+
+  <mat-divider></mat-divider>
+
   <button mat-button class="menu-button" onclick="">
     <mat-icon>person</mat-icon>
     <a routerLink="/login">LogIn</a>
@@ -78,11 +88,6 @@
 </div>
 
 <mat-divider></mat-divider>
-
-<button mat-button class="menu-button" onclick="">
-  <mat-icon>person</mat-icon>
-  <a style="color: white;" (click)="logOut()">LogOut</a>
-</button>
 
 <button mat-button class="menu-button">
   <mat-icon>info</mat-icon>
