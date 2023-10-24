@@ -42,18 +42,19 @@ namespace MANDAT.BusinessLogic.Services
             string tokenStringValue = tokenHandler.WriteToken(token);
             var refreshToken = GenerateRefreshToken();
 
-            
-            UnitOfWork.IdentityUserTokens.Insert(new IdentityUserToken()
-            {
-                Id = Guid.NewGuid(),
-                UserId = user.Id,
-                TokenValue = tokenStringValue,
-                RefreshTokenValue = refreshToken,
-                CreationDate = token.ValidFrom,
-                ExpirationDate = token.ValidTo
-            });
 
-             UnitOfWork.SaveChanges();
+            // the project do not use token logic
+            //UnitOfWork.IdentityUserTokens.Insert(new IdentityUserToken()
+            //{
+            //    Id = Guid.NewGuid(),
+            //    UserId = user.Id,
+            //    TokenValue = tokenStringValue,
+            //    RefreshTokenValue = refreshToken,
+            //    CreationDate = token.ValidFrom,
+            //    ExpirationDate = token.ValidTo
+            //});
+
+            //UnitOfWork.SaveChanges();
             var tuple = new Tuple<string, string>(tokenStringValue, refreshToken);
             return tuple;
 

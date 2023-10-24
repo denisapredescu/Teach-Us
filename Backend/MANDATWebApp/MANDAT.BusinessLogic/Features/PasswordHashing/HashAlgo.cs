@@ -46,8 +46,6 @@ namespace MANDAT.Common.Features.PasswordHashing
                 reHashedPassword = $"{Iterations}.{salt}.{hash}";
             }
 
-
-
             if (initialHash == reHashedPassword)
                 return true;
             return false;

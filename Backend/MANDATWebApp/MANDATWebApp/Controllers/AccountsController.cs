@@ -166,36 +166,6 @@ namespace MANDATWebApp.Controllers
             var result = _userAccountService.UpdateUserWithAddressByEmail(email, user);
             return Ok(result);
         }
-
-        //[HttpGet("userGuid/{email}")]
-        //public IActionResult GetUserGuid(string email)
-        //{
-        //    var result = _userAccountService.GetUserByTheEmail(email);
-        //    return Ok(result);
-        //}
-
-        //[HttpDelete]
-        //[Route("DeleteTokenAsync/{email}")]
-        //public async Task<IActionResult> DeleteTokenAsync(string email)
-        //{
-        //    if (!await _tokenManager.DeleteToken(email))
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok();
-
-        //}
-
-
-        //[HttpGet("GetUserByEmail/{email}")]
-        //public IActionResult GetUserByEmail (string email)
-        //{
-        //    var result = _userAccountService.GetUserIdByEmail(email);
-        //    return Ok(result);
-        //}
-
-
-
     }
 }
 

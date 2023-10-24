@@ -23,7 +23,6 @@ namespace MANDAT.BusinessLogic.Interfaces
         Task<IdentityUser> GetUserById(Guid id);
         Task<IdentityUser> GetUserByEmail(string email);
         Guid GetUserByUsername(string username);
-
         TokenWrapper Login(LoginCommand loginCommand);
         void Register(RegisterCommand registerCommand);
         Task<IdentityUserToken> GetUserTokenByRefreshToken(string refreshtoken);
@@ -32,7 +31,6 @@ namespace MANDAT.BusinessLogic.Interfaces
         CurrentUserDto GetUserInfoByEmail(string email);
         CurrentUserWithAddressDto GetUserInfoWithAddressByEmail(string email);
         Guid GetUserIdByEmail(string email);
-        // Task<bool> saveAsync();
         bool SoftDeleteUser(string email);
         Guid GetUserByTheEmail(string email);
     }
