@@ -208,8 +208,6 @@ namespace MANDAT.BusinessLogic.Services
 
         public TokenWrapper Login(LoginCommand loginCommand)
         {
-            
-
             return ExecuteInTransaction(uow => {
 
                 var email = loginCommand.Email;
@@ -224,39 +222,25 @@ namespace MANDAT.BusinessLogic.Services
                     throw new NotFoundException(nameof(IdentityUser), message);
                 }
 
-
                 string initialsalt = user.PasswordHash.Split('.')[1];
                 bool isPasswordVerified = _hashAlgo.IsPasswordVerified(user.PasswordHash, initialsalt, loginCommand.Password);
+                
                 if (isPasswordVerified)
                 {
-
-                    //  var userL = GetUserById(user.Id);
-
-                    //  updateUser(user);
-
                     var newJti = Guid.NewGuid().ToString();
                     var tokenHandler = new JwtSecurityTokenHandler();
                     //usersecret
                     var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_signInKeySetting.SecretSignInKeyForJwtToken));
-                    //int usedRefreshes = -1;
                     var tokenresult = _tokenManager.GenerateTokenAndRefreshToken(signinKey, user, roles, tokenHandler, newJti);
-                    //var refreshToken = _tokenManager.GenerateRefreshToken();
-
-
 
                     TokenWrapper tokenwrapper = new TokenWrapper();
                     tokenwrapper.Token = tokenresult.Item1;
                     tokenwrapper.RefreshToken = tokenresult.Item2;
 
-
                     return tokenwrapper;
                 }
                 throw new IncorrectPasswordException("Wrong Password");
             });
-
-            
-
-
         }
 
 
