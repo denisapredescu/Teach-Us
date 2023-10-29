@@ -1,17 +1,46 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" />
 <div>
-    <h1>Mentors based on filters</h1>
+  <h1>Mentors</h1>
 
-    <div class="divButton">
-        <button mat-raised-button (click)="sortByNameASC()" class="button" *ngIf="!sortByNameAsc"> Sort by name <i class='fas fa-arrow-down'></i></button>
-        <button mat-raised-button (click)="sortByNameDESC()" class="button" *ngIf="sortByNameAsc"> Sort by name <i class='fas fa-arrow-up'></i></button>
+  <div class="divButton">
+    <button
+      mat-raised-button
+      (click)="sortByNameASC()"
+      class="button"
+      *ngIf="!sortByNameAsc">
+      Sort by name <i class="fas fa-arrow-down"></i
+    ></button>
+    <button
+      mat-raised-button
+      (click)="sortByNameDESC()"
+      class="button"
+      *ngIf="sortByNameAsc">
+      Sort by name <i class="fas fa-arrow-up"></i
+    ></button>
 
-        <button mat-raised-button (click)="sortedStarsAscending()" class="button" *ngIf="!sortByStarsAsc"> Sort by stars <i class='fas fa-arrow-down'></i></button>
-        <button mat-raised-button (click)="sortedStarsDescending()" class="button" *ngIf="sortByStarsAsc"> Sort by stars <i class='fas fa-arrow-up'></i></button>
-    </div>
+    <button
+      mat-raised-button
+      (click)="sortedStarsAscending()"
+      class="button"
+      *ngIf="!sortByStarsAsc">
+      Sort by stars <i class="fas fa-arrow-down"></i
+    ></button>
+    <button
+      mat-raised-button
+      (click)="sortedStarsDescending()"
+      class="button"
+      *ngIf="sortByStarsAsc">
+      Sort by stars <i class="fas fa-arrow-up"></i
+    ></button>
+  </div>
 
-    <div class="page">
-        <app-card *ngFor="let mentor of filteredList" [person] = "mentor" [pageToShowOn] = "'mentors'" [status] = "matchStatus"></app-card>
-    </div>
-
+  <div class="page">
+    <app-card
+      *ngFor="let mentor of filteredList"
+      [person]="mentor"
+      [pageToShowOn]="'mentors'"
+      [status]="matchStatus"></app-card>
+  </div>
 </div>

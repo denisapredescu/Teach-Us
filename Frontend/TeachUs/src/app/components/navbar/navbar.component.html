@@ -3,7 +3,7 @@
   rel="stylesheet" />
 
 <div *ngIf="isLoggedin === 'true'">
-  <a routerLink="/user-profile">
+  <a (click)="closeSidenavAndNavigate('/user-profile')">
     <h4 class="name">Hi, {{ name }}</h4>
     <p class="designation">Role: {{ rol }}</p>
   </a>
@@ -11,21 +11,23 @@
   <mat-divider></mat-divider>
   <button mat-button class="menu-button">
     <mat-icon>home</mat-icon>
-    <a routerLink="/home">Home</a>
+    <a (click)="closeSidenavAndNavigate('/home')">Home</a>
   </button>
   <button mat-button class="menu-button" *ngIf="rol === roles.Student">
     <mat-icon>school</mat-icon>
-    <a routerLink="/match">Matching</a>
+    <a (click)="closeSidenavAndNavigate('/match')">Matching</a>
   </button>
   <button mat-button class="menu-button" *ngIf="rol === roles.Student">
     <mat-icon>Mentors</mat-icon>
-    <a style="color: white" routerLink="/mentors">Mentors</a>
+    <a style="color: white" (click)="closeSidenavAndNavigate('/mentors')"
+      >Mentors</a
+    >
   </button>
 
   <mat-divider></mat-divider>
   <button mat-button class="menu-button" *ngIf="rol === roles.Admin">
     <mat-icon>M</mat-icon>
-    <a routerLink="/admin-manage-users">Manage Users</a>
+    <a (click)="closeSidenavAndNavigate('/admin-manage-users')">Manage Users</a>
   </button>
 
   <button
@@ -34,7 +36,9 @@
     onclick=""
     *ngIf="rol === roles.Student">
     <mat-icon>My mentors</mat-icon>
-    <a style="color: white" (click)="myMentors()">My mentors</a>
+    <a style="color: white" (click)="closeSidenavAndNavigate('/my-mentors')"
+      >My mentors</a
+    >
   </button>
 
   <button
@@ -43,7 +47,9 @@
     onclick=""
     *ngIf="rol === roles.Mentor">
     <mat-icon>My students</mat-icon>
-    <a style="color: white" (click)="myStudents()">My students</a>
+    <a style="color: white" (click)="closeSidenavAndNavigate('/my-students')"
+      >My students</a
+    >
   </button>
 
   <button
@@ -52,7 +58,9 @@
     onclick=""
     *ngIf="rol === roles.Mentor">
     <mat-icon>Requests</mat-icon>
-    <a style="color: white" routerLink="/requests">Requests</a>
+    <a style="color: white" (click)="closeSidenavAndNavigate('/requests')"
+      >Requests</a
+    >
   </button>
 
   <button
@@ -61,7 +69,11 @@
     onclick=""
     *ngIf="rol === roles.Mentor">
     <mat-icon>school</mat-icon>
-    <a style="color: white" routerLink="/create-announcement">Announcement</a>
+    <a
+      style="color: white"
+      (click)="closeSidenavAndNavigate('/create-announcement')"
+      >Announcement</a
+    >
   </button>
 
   <mat-divider></mat-divider>
@@ -73,33 +85,34 @@
 </div>
 
 <div *ngIf="isLoggedin === ''">
-  <h4 class="name">Hi anonymous user!</h4>
-  <p class="designation">Role: ?</p>
+  <h4 class="name">Welcome !</h4>
 
   <mat-divider></mat-divider>
 
   <button mat-button class="menu-button">
     <mat-icon>home</mat-icon>
-    <a routerLink="/home">Home</a>
+    <a (click)="closeSidenavAndNavigate('/home')">Home</a>
   </button>
   <button mat-button class="menu-button">
     <mat-icon>school</mat-icon>
-    <a routerLink="/match">Matching</a>
+    <a (click)="closeSidenavAndNavigate('/match')">Matching</a>
   </button>
   <button mat-button class="menu-button">
     <mat-icon>Mentors</mat-icon>
-    <a style="color: white" routerLink="/mentors">Mentors</a>
+    <a style="color: white" (click)="closeSidenavAndNavigate('/mentors')"
+      >Mentors</a
+    >
   </button>
 
   <mat-divider></mat-divider>
 
   <button mat-button class="menu-button" onclick="">
     <mat-icon>person</mat-icon>
-    <a routerLink="/login">LogIn</a>
+    <a (click)="closeSidenavAndNavigate('/login')">Log In</a>
   </button>
   <button mat-button class="menu-button">
     <mat-icon>info</mat-icon>
-    <a routerLink="/register">Register</a>
+    <a (click)="closeSidenavAndNavigate('/register')">Register</a>
   </button>
 </div>
 
