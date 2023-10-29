@@ -37,6 +37,11 @@ export class NavbarComponent {
     }
   }
 
+  closeSidenavAndNavigate(link: string) {
+    this.router.navigate([link]);
+    this.sidenav.close();
+  }
+
   public myMentors(): void {
     this.router.navigate(["my-mentors"]);
     this.sidenav.close();
@@ -49,7 +54,6 @@ export class NavbarComponent {
     this.router.navigate(["/home"]);
     this.isLoggedin = "";
     this.sidenav.close();
-
   }
 
   public myStudents(): void {
