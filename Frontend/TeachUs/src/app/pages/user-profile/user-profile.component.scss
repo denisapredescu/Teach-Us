@@ -40,14 +40,9 @@ $section-shadow: 1px 1px $section-shadow-blur $section-shadow-color,
   width: 30%;
   background-color: $section-background;
 
-  img {
-    height: 30%;
-    width: 100%;
-    object-fit: contain;
-  }
   .details {
     list-style: none;
-    height: 50%;
+    min-height: 15rem;
     width: 100%;
     div {
       text-align: center;
