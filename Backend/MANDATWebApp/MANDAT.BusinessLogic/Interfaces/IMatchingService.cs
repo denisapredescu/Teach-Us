@@ -14,7 +14,7 @@ namespace MANDAT.BusinessLogic.Interfaces
         List<ViewStudentMatchDTO> InWaitingRequests(Guid studentId);
         List<ViewStudentMatchDTO> AcceptedRequests(Guid studentId);
         List<ViewStudentMatchDTO> RejectedRequests(Guid studentId);
-        List<ViewMentorMatchDTO> AllMentorRequests(Guid mentorId);
+        List<ViewMentorMatchDTO> AllMentorRequests(string email);
         List<ViewMentorMatchDTO> MentorInWaitingRequests(string email);
         List<ViewMentorMatchDTO> MentorAcceptedRequests(Guid mentorId);
         List<ViewMentorMatchDTO> MentorRejectedRequests(string email);

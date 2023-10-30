@@ -29,8 +29,8 @@ import {
   SocialLoginModule,
   SocialAuthServiceConfig,
   SocialAuthService,
+  FacebookLoginProvider,
 } from "@abacritt/angularx-social-login";
-import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
 import { AcceptJSService } from "@openutility/acceptjs-angular-wrapper";
 import { MentorRequestsComponent } from "./pages/mentor-requests/mentor-requests.component";
 import { MyMentorsComponent } from "./pages/my-mentors/my-mentors.component";
@@ -94,7 +94,6 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
     MatDividerModule,
     MatListModule,
     BrowserAnimationsModule,
-    SocialLoginModule,
     HttpClientModule,
     FormsModule,
     CommonModule,

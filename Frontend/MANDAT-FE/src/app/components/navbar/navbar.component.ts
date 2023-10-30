@@ -40,25 +40,15 @@ export class NavbarComponent {
   public myMentors(): void {
     this.router.navigate(["my-mentors"]);
   }
-  logOut(): any {
-    let email = this.cookieService.get("Email");
-    this.accountService.Logout(email).subscribe(
-      result => {
-        console.log(result);
-        sessionStorage.clear();
-        localStorage.clear();
-        this.cookieService.deleteAll();
 
-        this.router.navigate(["/login"]);
-        setTimeout(function () {
-          window.location.reload();
-        }, 1000);
-      },
-      error => {
-        console.error(error);
-      }
-    );
+  logOut(): any {
+    sessionStorage.clear();
+    localStorage.clear();
+    this.cookieService.deleteAll();
+    this.router.navigate(["/home"]);
+    this.isLoggedin = "";
   }
+  
   ngAfterViewInit() {}
 
   public myStudents(): void {
