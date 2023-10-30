@@ -12,18 +12,18 @@ import { UserAccountService } from "./services/user-account.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
+  @ViewChild("matSidenav")
+  sidenav: MatSidenav;
   title = "MANDAT-FE";
   loginForm!: FormGroup;
   socialUser!: SocialUser;
   isLoggedin?: boolean;
   constructor(
-    private observer: BreakpointObserver,
     private router: Router,
     private formBuilder: FormBuilder,
-    public socialAuthService: SocialAuthService,
-    private cookieService: CookieService,
-    private accountService: UserAccountService
+    public socialAuthService: SocialAuthService
   ) {}
+
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ["", Validators.required],
@@ -35,24 +35,7 @@ export class AppComponent {
       console.log(this.socialUser);
       this.router.navigate(["/home"]);
     });
-
     var t = this.isLoggedin;
-    //var p = this.socialUser.firstName;
-    // if (this.isLoggedin === true){
-    //   this.cookieService.set('Name', this.socialUser.firstName + ' ' + this.socialUser.lastName)
-    // }
-  }
-  logOut(): any {
-    let token = this.cookieService.get("Token");
-    this.accountService.Logout(token).subscribe(
-      result => {
-        console.log(result);
-        this.cookieService.deleteAll;
-        this.router.navigate(["/home"]);
-      },
-      error => {
-        console.error(error);
-      }
-    );
   }
 }
+

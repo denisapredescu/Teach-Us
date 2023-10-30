@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { SocialUser, SocialAuthService } from "@abacritt/angularx-social-login";
@@ -14,20 +14,18 @@ import { Roles } from "src/app/constants/roles";
   styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent {
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
+  @Input() sidenav: MatSidenav;
+  
   socialUser!: SocialUser;
   isLoggedin?: string;
   name?: string;
   rol?: string;
   roles: Roles = new Roles();
+
   constructor(
-    private observer: BreakpointObserver,
     private router: Router,
-    private formBuilder: FormBuilder,
     public socialAuthService: SocialAuthService,
     private cookieService: CookieService,
-    private accountService: UserAccountService
   ) {}
 
   ngOnInit(): void {
@@ -37,8 +35,10 @@ export class NavbarComponent {
       this.rol = this.cookieService.get("Rol");
     }
   }
+  
   public myMentors(): void {
     this.router.navigate(["my-mentors"]);
+    this.sidenav.close();
   }
 
   logOut(): any {
@@ -47,11 +47,13 @@ export class NavbarComponent {
     this.cookieService.deleteAll();
     this.router.navigate(["/home"]);
     this.isLoggedin = "";
+    this.sidenav.close();
   }
-  
+
   ngAfterViewInit() {}
 
   public myStudents(): void {
     this.router.navigate(["my-students"]);
+    this.sidenav.close();
   }
 }
