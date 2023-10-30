@@ -111,13 +111,15 @@ namespace MANDAT.BusinessLogic.Services
         }
   //Mentor Requests
 
-        public List<ViewMentorMatchDTO> AllMentorRequests(Guid mentorId)
+        public List<ViewMentorMatchDTO> AllMentorRequests(string email)
         {
             return ExecuteInTransaction(uow =>
             {
+                var userId = uow.IdentityUsers.Get().Where(s => s.Email == email).Select(s => s.Id).Single();
+
                 return uow.Matches.Get()
                                   .Include(s => s.Student)
-                                  .Where(x => x.MentorId == mentorId)
+                                  .Where(x => x.MentorId == userId)
                                   .Select(x => new ViewMentorMatchDTO
                                   {
                                       FullName = uow.IdentityUsers.Get()

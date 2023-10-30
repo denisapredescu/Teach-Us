@@ -54,12 +54,11 @@ namespace MANDATWebApp.Controllers
             return result;
         }
 
+        [HttpGet("AllRequests/{email}")]
 
-        [HttpGet("AllRequest")]
-
-        public List<ViewMentorMatchDTO> ViewMentorAllRequests(Guid mentorId)
+        public List<ViewMentorMatchDTO> AllRequests(string email)
         {
-            var result = _matchingService.AllMentorRequests(mentorId);
+            var result = _matchingService.AllMentorRequests(email);
             return result;
         }
 
