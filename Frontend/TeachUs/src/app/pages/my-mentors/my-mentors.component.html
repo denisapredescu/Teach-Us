@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<div>
+    <h1>My Mentors</h1>
+    <div class="page">
+        <app-card *ngFor="let mentor of mentors" [person] = "mentor" [pageToShowOn] = "'my-mentors'"></app-card>
+    </div>
+</div>

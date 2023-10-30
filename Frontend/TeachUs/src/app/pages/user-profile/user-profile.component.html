@@ -1,0 +1,88 @@
+<div class="header-section">
+  <div class="profile-card">
+    <img src="../../../assets/images/user-profile.png" class="profile-image" />
+    <div class="details">
+      <div class="name-surname">
+        <span class="value">{{
+          userAccountWithAddress.username | titlecase
+        }}</span>
+      </div>
+
+      <div class="city"
+        >{{ "City: " | titlecase }}
+        <span class="value">{{ userAccountWithAddress.city | titlecase }}</span>
+      </div>
+
+      <div
+        *ngIf="roles.isMentor(rol)"
+        class="courses"
+        [style.display]="
+          userAccountWithAddress.subject === null ? 'none' : 'flex'
+        ">
+        <div>{{ "Courses: " | titlecase }}</div>
+        <span class="courses-list">
+          <ng-container *ngFor="let sub of userAccountWithAddress.subject">
+            <li class="value">{{ sub | titlecase }}</li>
+          </ng-container>
+        </span>
+      </div>
+
+      <div class="stars">
+        {{ "Stars" | titlecase }}
+      </div>
+
+      <div class="rating">
+        <span
+          [ngClass]="rating !== undefined && rating >= 1 ? 'yellow' : 'gray'"
+          >★</span
+        >
+        <span
+          [ngClass]="rating !== undefined && rating >= 2 ? 'yellow' : 'gray'"
+          >★</span
+        >
+        <span
+          [ngClass]="rating !== undefined && rating >= 3 ? 'yellow' : 'gray'"
+          >★</span
+        >
+        <span
+          [ngClass]="rating !== undefined && rating >= 4 ? 'yellow' : 'gray'"
+          >★</span
+        >
+        <span
+          [ngClass]="rating !== undefined && rating >= 5 ? 'yellow' : 'gray'"
+          >★</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-box" *ngIf="isPersonalProfile">
+    <ng-container *ngIf="roles.isMentor(rol)">
+      <a routerLink="/my-students">{{ "My Students" | titlecase }}</a>
+      <a routerLink="/my-announcements">{{ "My Announcements" | titlecase }}</a>
+      <a
+        routerLink="/requests"
+        [ngClass]="notifications > 0 ? 'notifications' : ''"
+        >{{ "Notifications" | titlecase }}</a
+      >
+    </ng-container>
+    <ng-container *ngIf="roles.isStudent(rol)">
+      <a routerLink="/my-mentors">{{ "My Mentors" | titlecase }}</a>
+    </ng-container>
+  </div>
+</div>
+
+<div class="more-about-me">
+  <h1>{{ "🔥 More About Me: 👋" | titlecase }}</h1>
+
+  <div class="studies">
+    <h2>{{ "Studies:" | titlecase }} </h2>
+    <p>{{ userAccountWithAddress.educationalInstitution }}</p>
+  </div>
+
+  <div class="bio">
+    <h2>{{ "Bio:" | titlecase }} </h2>
+    <p>{{ userAccountWithAddress.bio }}</p>
+  </div>
+</div>
+<div id="map"></div>
