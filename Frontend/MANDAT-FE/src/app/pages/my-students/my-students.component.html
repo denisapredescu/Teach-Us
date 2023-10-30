@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<div>
+    <h1>My students</h1>
+
+    <div class="divButton">
+        <button mat-raised-button (click)="getMyReviews()" class="button">
+            My Reviews
+        </button>
+
+        <button mat-raised-button (click)="sortByNameASC()" class="button" *ngIf="!sortByNameAsc">Sort by name  <i class='fas fa-arrow-down'></i></button>
+        <button mat-raised-button (click)="sortByNameDESC()" class="button" *ngIf="sortByNameAsc">Sort by name  <i class='fas fa-arrow-up'></i></button>
+
+        <button mat-raised-button (click)="sortedStarsAscending()" class="button" *ngIf="!sortByStarsAsc">Sort by stars <i class='fas fa-arrow-down'></i></button>
+        <button mat-raised-button (click)="sortedStarsDescending()" class="button" *ngIf="sortByStarsAsc">Sort by stars <i class='fas fa-arrow-up'></i></button>
+    </div>
+
+    <div class="page">
+        <app-card *ngFor="let student of students" [person] = "student" [pageToShowOn] = "'my-students'"></app-card>
+    </div>
+
+</div>

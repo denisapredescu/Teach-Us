@@ -1,0 +1,10 @@
+<div class="home-page">
+  <div class="first-element"></div>
+  <div class="cards-container">
+    <ng-container *ngFor="let card of cards">
+      <app-home-card [title]="card.title" [image]="card.image">
+        {{ card.description }}
+      </app-home-card>
+    </ng-container>
+  </div>
+</div>

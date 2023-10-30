@@ -1,0 +1,29 @@
+
+<div class="landing" *ngIf="requests.length > 0" else noData>
+<div *ngFor="let req of requests " class="container" >
+<span style="  display: flex; " class="card" id="{{req.email}}"><img alt="user Avatar" src="../../../assets/images/profile.jpg"/>
+  <h2>{{req.fullName}}</h2>
+  <p>Email: {{req.email}} <br> Data request: {{req.matchDate}} <br> Subject: {{req.subject}}</p>
+  <div class="buttongroup">
+     <button (click)="acceptStudent(req.email, req.subject)">Approve</button> <!-- -->
+    <button (click)="rejectStudent(req.email, req.subject)" >Remove</button> 
+    <!--  -->
+  </div>
+</span>
+</div>
+</div>
+<div #noData class="container2" [style.display]="requests.length !== 0 ? 'none' : 'block'">
+  <div class="empty-icon-container">
+    <div class="animation-container">
+      <div class="bounce"></div>
+      <div class="pebble1"></div>
+      <div class="pebble2"></div>
+      <div class="pebble3"></div>
+    </div>
+    <div>
+      <h2>0 results found</h2>
+      <p>Sorry! We couldn't find any results.</p>
+    </div>
+
+  </div>
+  </div>

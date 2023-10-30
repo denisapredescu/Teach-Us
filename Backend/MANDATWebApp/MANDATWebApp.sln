@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MANDATWebApp", "MANDATWebApp\MANDATWebApp.csproj", "{70413CF1-57A2-4537-A60E-4073C19BD6E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MANDAT.Common", "MANDAT.Common\MANDAT.Common.csproj", "{050609F6-4EF8-4BFF-8709-23BB2F94561A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{EFC0525F-34E1-411D-A6F1-36A5B6E3FD49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastracture", "Infrastracture", "{EDD143DB-4459-4A50-A9F1-8109027D6031}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MANDAT.Entities", "MANDAT.Entities\MANDAT.Entities.csproj", "{42507AAD-C409-43E2-836B-C6C0625B81B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MANDAT.BusinessLogic", "MANDAT.BusinessLogic\MANDAT.BusinessLogic.csproj", "{9F64A359-BFEE-47ED-9580-A61CFBB74CB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MANDAT.DataAccess", "MANDAT.DataAccess\MANDAT.DataAccess.csproj", "{1113AE58-03D2-46C9-AA63-80309583ADB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70413CF1-57A2-4537-A60E-4073C19BD6E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70413CF1-57A2-4537-A60E-4073C19BD6E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70413CF1-57A2-4537-A60E-4073C19BD6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70413CF1-57A2-4537-A60E-4073C19BD6E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050609F6-4EF8-4BFF-8709-23BB2F94561A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050609F6-4EF8-4BFF-8709-23BB2F94561A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050609F6-4EF8-4BFF-8709-23BB2F94561A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050609F6-4EF8-4BFF-8709-23BB2F94561A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42507AAD-C409-43E2-836B-C6C0625B81B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42507AAD-C409-43E2-836B-C6C0625B81B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42507AAD-C409-43E2-836B-C6C0625B81B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42507AAD-C409-43E2-836B-C6C0625B81B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F64A359-BFEE-47ED-9580-A61CFBB74CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F64A359-BFEE-47ED-9580-A61CFBB74CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F64A359-BFEE-47ED-9580-A61CFBB74CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F64A359-BFEE-47ED-9580-A61CFBB74CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1113AE58-03D2-46C9-AA63-80309583ADB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1113AE58-03D2-46C9-AA63-80309583ADB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1113AE58-03D2-46C9-AA63-80309583ADB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1113AE58-03D2-46C9-AA63-80309583ADB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42507AAD-C409-43E2-836B-C6C0625B81B9} = {EFC0525F-34E1-411D-A6F1-36A5B6E3FD49}
+		{9F64A359-BFEE-47ED-9580-A61CFBB74CB5} = {EFC0525F-34E1-411D-A6F1-36A5B6E3FD49}
+		{1113AE58-03D2-46C9-AA63-80309583ADB8} = {EDD143DB-4459-4A50-A9F1-8109027D6031}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7EE6AFB-832B-4A2B-AA1E-F33AFE99CC7C}
+	EndGlobalSection
+EndGlobal

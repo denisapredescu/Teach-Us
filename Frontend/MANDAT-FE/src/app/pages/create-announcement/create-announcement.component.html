@@ -1,0 +1,63 @@
+<div class="background">
+  <div class="banner">
+    <div class="header">
+      <h1 class="title">Get Started</h1>
+      <div>
+        <p>
+          Not sure how it should look like?
+          <a routerLink="/mentors" class="login-link">View Examples</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field appearance="fill" id="subject">
+        <mat-label>{{ "Subject" | titlecase }}</mat-label>
+        <mat-select [(ngModel)]="model.subject">
+          <mat-option *ngFor="let subjects of subjects" [value]="subjects">
+            {{ subjects }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Price" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex: 100'"
+          value=""
+          type="number"
+          [(ngModel)]="model.price" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ "Meeting Type" | titlecase }}</mat-label>
+        <mat-select [(ngModel)]="selectedMeetingType">
+          <mat-option
+            *ngFor="let meetingType of meetingTypes"
+            [value]="meetingType">
+            {{ meetingType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Description" | titlecase }}</mat-label>
+        <textarea
+          matInput
+          [placeholder]="'Ex: I teach High School level algebra, calculus and geometry.'"
+          value=""
+          type="text"
+          [(ngModel)]="model.description"></textarea>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        (click)="post()"
+        color="primary">
+        {{ "Post Announcement" | titlecase }}
+      </button>
+    </div>
+  </div>
+</div>
+

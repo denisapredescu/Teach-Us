@@ -1,0 +1,162 @@
+<div class="background">
+  <div class="banner">
+    <div class="header">
+      <h1 class="title">{{ accountFormDetails.pageTitle | titlecase }}</h1>
+      <div class="already-have-account">
+        <p>
+          {{ accountFormDetails.subTitle.question }}
+          <a
+            [routerLink]="accountFormDetails.subTitle.button.link"
+            class="login-link"
+            >{{ accountFormDetails.subTitle.button.caption }}</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="form-fields">
+      <mat-form-field class="example-form">
+        <mat-label>{{ "First Name" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + 'Jeff'"
+          value=""
+          type="text"
+          [(ngModel)]="model.firstName" />
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Last Name" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + 'Smith'"
+          value=""
+          type="text"
+          [(ngModel)]="model.lastName" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          [formControl]="emailFormControl"
+          [(ngModel)]="model.email"
+          [errorStateMatcher]="matcher"
+          placeholder="Ex. pat@example.com" />
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          ">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Password" | titlecase }}</mat-label>
+        <input
+          matInput
+          [formControl]="passwordFormControl"
+          name="password"
+          required
+          pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"
+          value=""
+          type="password"
+          [(ngModel)]="model.password" />
+        <mat-error *ngIf="passwordFormControl.hasError('pattern')"
+          >Password must be a combination of lower-case, upper-case, numbers and
+          at least 9 characters long</mat-error
+        >
+
+        <mat-error *ngIf="passwordFormControl.hasError('required')"
+          >Password is <strong>required</strong></mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "County" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + 'Ilfov'"
+          value=""
+          type="text"
+          [(ngModel)]="model.county" />
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "City" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + 'Bucuresti'"
+          value=""
+          type="text"
+          [(ngModel)]="model.city" />
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Address" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + 'Cool People Street, number 1'"
+          value=""
+          type="text"
+          [(ngModel)]="model.addressInfo" />
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Phone Number" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + '0769905888'"
+          value=""
+          type="text"
+          [(ngModel)]="model.phoneNumber" />
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Bio" | titlecase }}</mat-label>
+        <textarea
+          matInput
+          [placeholder]="'Ex. Description for your profile....'"
+          value=""
+          type="text"
+          [(ngModel)]="model.bio"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-form">
+        <mat-label>{{ "Educational Institution" | titlecase }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'Ex. ' + 'ICHB'"
+          value=""
+          type="text"
+          [(ngModel)]="model.educationalInstitution" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" *ngIf="isRegisterPage()">
+        <mat-label>{{ "Account Type" | titlecase }}</mat-label>
+        <mat-select [(ngModel)]="model.role">
+          <mat-option
+            *ngFor="let accountType of accountTypes"
+            [value]="accountType">
+            {{ accountType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        (click)="submit()"
+        color="primary"
+        [disabled]="!emailFormControl.valid || (isRegisterPage() && !passwordFormControl.valid)"
+        [routerLink]="[accountFormDetails.submitButton.link]">
+        {{ accountFormDetails.submitButton.caption | titlecase }}
+      </button>
+    </div>
+  </div>
+</div>
