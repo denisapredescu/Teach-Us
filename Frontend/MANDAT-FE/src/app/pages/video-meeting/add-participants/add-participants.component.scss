@@ -1,0 +1,40 @@
+.add-participants {
+    padding: 0px 240px 0px 240px;
+}
+.add-participants-header {
+    font-weight:bolder!important;
+    font-size: medium;
+    color: gray;
+}
+
+.add-participants-inputs-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.button {
+    
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.form-center {
+    padding: 0px 0px 0px 150px;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+input:focus, input {
+    outline: none !important;
+    outline-style: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    background-color: transparent;
+    width: 70%;
+}
+
+label {
+    font-weight: bold;
+}
