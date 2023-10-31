@@ -34,4 +34,10 @@ export class AdminManageUsersComponent {
       console.log(result);
     });
   }
+  public delete(email: string): void {
+    console.log("Delete user");
+    this.userAccountService.SoftDeleteUserByEmail(email).subscribe(result => {
+      console.log(result);
+    });
+  }
 }

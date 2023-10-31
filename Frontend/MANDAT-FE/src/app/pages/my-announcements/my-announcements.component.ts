@@ -41,4 +41,10 @@ export class MyAnnouncementsComponent {
         console.log(this.cardsListModel);
       });
   }
+
+  public delete(id: string): void{
+    this.announcementService.DeleteAnnouncement(id).subscribe(result => {
+      console.log(result);
+    });
+  }
 }

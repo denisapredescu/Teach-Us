@@ -144,7 +144,7 @@
           <mat-option
             *ngFor="let accountType of accountTypes"
             [value]="accountType">
-            {{ accountType }}
+            {{ accountType === "Mentor" ? "Teacher": accountType }}
           </mat-option>
         </mat-select>
       </mat-form-field>

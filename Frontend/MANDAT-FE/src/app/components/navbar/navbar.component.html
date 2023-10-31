@@ -5,7 +5,7 @@
 
 <div *ngIf="isLoggedin === 'true'">
   <h4 class="name">Hi, {{ name }}</h4>
-  <p class="designation">Role: {{ rol }}</p>
+  <p class="designation">Role: {{ rol1 }}</p>
 
   <mat-divider></mat-divider>
   <button mat-button class="menu-button">
@@ -13,8 +13,8 @@
       <a  routerLink="/home">Home</a>
   </button>
   <button mat-button class="menu-button" *ngIf="rol === roles.Student">
-      <mat-icon>Mentors</mat-icon>
-      <a style="color: white;" routerLink="/mentors">Mentors</a>
+      <mat-icon>Teachers</mat-icon>
+      <a style="color: white;" routerLink="/mentors">Teachers</a>
   </button>
 
 
@@ -25,8 +25,8 @@
   </button>
 
   <button mat-button class="menu-button" onclick="" *ngIf="rol === roles.Student">
-      <mat-icon>My mentors</mat-icon>
-      <a style="color: white;" (click)="myMentors()">My mentors</a>
+      <mat-icon>My teachers</mat-icon>
+      <a style="color: white;" (click)="myMentors()">My teachers</a>
   </button>
 
   <button mat-button class="menu-button" onclick="" *ngIf="rol === roles.Mentor">
@@ -63,8 +63,8 @@
     <a routerLink="/home">Home</a>
   </button>
   <button mat-button class="menu-button">
-    <mat-icon>Mentors</mat-icon>
-    <a style="color: white" routerLink="/mentors">Mentors</a>
+    <mat-icon>Teachers</mat-icon>
+    <a style="color: white" routerLink="/mentors">Teachers</a>
   </button>
   <button mat-button class="menu-button" onclick="">
     <mat-icon>person</mat-icon>
