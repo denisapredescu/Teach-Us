@@ -1,11 +1,11 @@
 import { Component, Input } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DialogAddReviewByStudentComponent } from "../shared/dialog-add-review-by-student/dialog-add-review-by-student.component";
-import { CookieService } from "ngx-cookie-service";
 import { Router } from "@angular/router";
 import { MentorService } from "src/app/services/mentor.service";
 import { StudentModel } from "../../models/student-model";
 import { MentorModel } from "src/app/models/mentor-model";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-card",

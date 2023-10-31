@@ -35,7 +35,7 @@ export class NavbarComponent {
       this.rol = this.cookieService.get("Rol");
     }
   }
-  
+
   public myMentors(): void {
     this.router.navigate(["my-mentors"]);
     this.sidenav.close();

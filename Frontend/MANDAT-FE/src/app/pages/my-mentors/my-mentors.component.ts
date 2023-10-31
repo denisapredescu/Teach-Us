@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
-import { DialogViewStudentReviewsComponent } from 'src/app/components/shared/dialog-view-student-reviews/dialog-view-student-reviews.component';
 import { MentorModel } from 'src/app/models/mentor-model';
 import { ReviewService } from 'src/app/services/review.service';
 import { StudentService } from 'src/app/services/student.service';

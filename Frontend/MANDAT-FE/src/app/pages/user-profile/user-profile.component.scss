@@ -26,6 +26,7 @@ $section-shadow: 1px 1px $section-shadow-blur $section-shadow-color,
 .profile-card,
 .more-about-me {
   background-color: $section-background;
+  margin: 30px;
 }
 
 .header-section {
@@ -33,6 +34,7 @@ $section-shadow: 1px 1px $section-shadow-blur $section-shadow-color,
   width: 100%;
   flex-direction: row;
   justify-content: space-evenly;
+  margin: 30px;
 }
 
 .profile-card {
@@ -136,4 +138,8 @@ $section-shadow: 1px 1px $section-shadow-blur $section-shadow-color,
 #map {
   height: 35%;
   width: 75%;
+}
+
+.requests-chart {
+  margin: 30px auto;
 }
