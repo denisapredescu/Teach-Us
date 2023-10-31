@@ -39,7 +39,7 @@ export class NavbarComponent {
 
     }
   }
-  
+
   public myMentors(): void {
     this.router.navigate(["my-mentors"]);
     this.sidenav.close();

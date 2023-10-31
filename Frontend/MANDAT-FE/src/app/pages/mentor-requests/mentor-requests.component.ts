@@ -11,7 +11,6 @@ import { MentorRequestsService } from 'src/app/services/mentor-requests.service'
 })
 
 export class MentorRequestsComponent {
- 
   requests: RequestModel[] = [];
   result = [];
   constructor(
@@ -19,44 +18,37 @@ export class MentorRequestsComponent {
     private changeDetectorRef: ChangeDetectorRef,
     private mentorRequests: MentorRequestsService,
     private cookieService: CookieService
-  ) { 
+  ) { }
 
-    
-  }
-   ngOnInit(): void{
-    
+  ngOnInit(): void {  
     this.changeDetectorRef.detectChanges();   
     var email = this.cookieService.get('Email');
-     this.mentorRequests.GetUserRequests(email).forEach(
+    
+    this.mentorRequests.GetUserRequests(email).forEach(
       (result)=> {
         this.requests = result;   
         this.changeDetectorRef.detectChanges();   
-        console.log(this.requests.length);  
-          });
-   
-   }
-   
-   acceptStudent(data: string, sub: string) : void{
+      }); 
+  }
+  
+  acceptStudent(data: string, sub: string) : void{
     var email = this.cookieService.get('Email');
-    
-      this.mentorRequests.ChangeRequestStatus(email, data, true, sub).subscribe(
-        (result) => {
-           const  div =  document.getElementById(data);
-           div!!.remove();
-        }
-      );
+  
+    this.mentorRequests.ChangeRequestStatus(email, data, true, sub).subscribe(
+      (result) => {
+          const  div =  document.getElementById(data);
+          div!!.remove();
+      }
+    );
+  }
 
-   }
-
-   rejectStudent(data: string, sub: string) : void{
+  rejectStudent(data: string, sub: string) : void{
     var email = this.cookieService.get('Email');
-      this.mentorRequests.ChangeRequestStatus(email, data, false, sub).subscribe(
-        (result) => {
-           const  div =  document.getElementById(data);
-           div!!.remove();
-        }
-      );
-
-   }
-
+    this.mentorRequests.ChangeRequestStatus(email, data, false, sub).subscribe(
+      (result) => {
+          const  div =  document.getElementById(data);
+          div!!.remove();
+      }
+    );
+  }
 }

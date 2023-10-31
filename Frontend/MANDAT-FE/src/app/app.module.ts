@@ -24,12 +24,12 @@ import { MatListModule } from "@angular/material/list";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDividerModule } from "@angular/material/divider";
 import { HttpClientModule } from "@angular/common/http";
+import { NgApexchartsModule } from "ng-apexcharts";
 
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
   SocialAuthService,
-  FacebookLoginProvider,
 } from "@abacritt/angularx-social-login";
 import { AcceptJSService } from "@openutility/acceptjs-angular-wrapper";
 import { MentorRequestsComponent } from "./pages/mentor-requests/mentor-requests.component";
@@ -69,7 +69,6 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
     CardComponent,
     HomeCardComponent,
     UserProfileComponent,
-    StarRatingComponent,
     MentorRequestCardComponent,
     MentorsComponent,
     CreateAnnouncementComponent,
@@ -98,23 +97,11 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
     FormsModule,
     CommonModule,
     MatDialogModule,
-    //SharedModule
+    NgApexchartsModule
   ],
   providers: [
     AcceptJSService,
     SocialAuthService,
-    {
-      provide: "SocialAuthServiceConfig",
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider("1540989649735951"),
-          },
-        ],
-      } as SocialAuthServiceConfig,
-    },
   ],
   bootstrap: [AppComponent],
 })
