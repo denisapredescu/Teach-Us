@@ -15,7 +15,6 @@ export class AddParticipantsComponent {
     link: "",
     studentEmail: "",
     mentorEmail: this.cookieService.get("Email"),
-    // dialIn: ''
   };
 
   emailFormControl = new FormControl("", [
@@ -40,6 +39,5 @@ export class AddParticipantsComponent {
     );
     this.cookieService.set("Student Email", this.model.studentEmail);
     this.cookieService.set("Link", this.model.link.toString());
-    //this.cookieService.set('Data creare', this.model.createDate);
   }
 }
