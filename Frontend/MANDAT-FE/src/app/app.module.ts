@@ -28,8 +28,9 @@ import { NgApexchartsModule } from "ng-apexcharts";
 
 import {
   SocialLoginModule,
-  SocialAuthServiceConfig,
   SocialAuthService,
+  SocialAuthServiceConfig,
+  FacebookLoginProvider,
 } from "@abacritt/angularx-social-login";
 import { AcceptJSService } from "@openutility/acceptjs-angular-wrapper";
 import { MentorRequestsComponent } from "./pages/mentor-requests/mentor-requests.component";
@@ -49,6 +50,8 @@ import { MyAnnouncementsComponent } from "./pages/my-announcements/my-announceme
 import { AccountFormComponent } from './components/account-form/account-form.component';
 import { CardsListComponent } from './components/cards-list/cards-list.component';
 import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-manage-users.component';
+import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
+import { AddParticipantsComponent } from "./pages/video-meeting/add-participants/add-participants.component";
 
 @NgModule({
   declarations: [
@@ -76,6 +79,8 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
     AccountFormComponent,
     CardsListComponent,
     AdminManageUsersComponent,
+    VideoMeetingComponent,
+    AddParticipantsComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
     MatDividerModule,
     MatListModule,
     BrowserAnimationsModule,
+    SocialLoginModule,
     HttpClientModule,
     FormsModule,
     CommonModule,
@@ -102,6 +108,18 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
   providers: [
     AcceptJSService,
     SocialAuthService,
+    {
+      provide: "SocialAuthServiceConfig",
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider("1540989649735951"),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
   ],
   bootstrap: [AppComponent],
 })

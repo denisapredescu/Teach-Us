@@ -29,3 +29,20 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.video-meeting-screen > #jitsiConferenceFrame0 {
+  height: 650px !important;
+  width: 1475px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: #FFFFFF66!important;
+  border-radius: 10em!important;
+  color: transparent!important;
+  opacity: 0.5!important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: white!important;
+  background-color: transparent!important;
+}

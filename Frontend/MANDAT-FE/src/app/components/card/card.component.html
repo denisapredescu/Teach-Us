@@ -74,6 +74,10 @@
 						Add Review
 					</button>
 					
+					<a *ngIf="pageToShowOn == 'my-mentors'" [ngClass]="person.link" href={{person.link}}>
+						<button mat-raised-button class="button">Meet Link</button>
+					</a>
+					
 					<button *ngIf="pageToShowOn == 'mentors'" mat-raised-button class="button" (click)="chooseMentor(person)">
 						Choose
 					</button>

@@ -30,7 +30,7 @@ export class CardComponent {
     return Array.isArray(subject);
 }
   ngOnInit() {
-    console.log(this.person);
+    console.log("in card ", this.person);
     this.cookieSubject = this.cookie.get("matchSubject");
   }
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { LinksModel } from 'src/app/models/links-model';
 import { MentorModel } from 'src/app/models/mentor-model';
 import { ReviewService } from 'src/app/services/review.service';
 import { StudentService } from 'src/app/services/student.service';
+import { VideoCallService } from 'src/app/services/video-call.service';
 
 @Component({
   selector: 'app-my-mentors',
@@ -13,7 +15,10 @@ import { StudentService } from 'src/app/services/student.service';
 export class MyMentorsComponent implements OnInit{
   public emailSt?: string;
   public mentors: MentorModel[] = [];
+  public links: LinksModel[] = [];
+  public linksNew: Array<[string,string]> = [];
   constructor(
+    private videoService: VideoCallService,
     private reviewService: ReviewService,
     private myStudentService: StudentService,
     private cookie: CookieService,
@@ -35,13 +40,37 @@ export class MyMentorsComponent implements OnInit{
                 }
                 );
             }
+            if(this.emailSt!=null)
+            {
+              this.videoService.getLinkByStudent(this.emailSt).subscribe(
+                (result1:LinksModel[]) =>{
+                  this.links = result1; 
+
+                  for(let mentor of this.mentors)
+                  {
+                    for(let oneLink of this.links)
+                    {
+                      if(oneLink.mentorEmail == mentor.email){
+                        this.linksNew.push([oneLink.link,mentor.email]);
+                        mentor.link = oneLink.link;        
+                        break;
+                      }
+                      else{
+                        this.linksNew.push(["",mentor.email]);
+                        mentor.link = "";
+                      }
+                    }
+                  }
+                },
+                (error) => {
+                  console.error(error);
+                });
+              }
         },
         (error) => {
           console.error(error);
-        }
-        );
+        });
     }
-   
   }
 }
 

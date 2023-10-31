@@ -1,0 +1,29 @@
+
+<div class="add-participants">
+  <div class="add-participants-header">
+    <p>Send the meeting link to your student</p>
+  </div>
+
+  <div class="add-participants-inputs-container">
+    <div class="form-center">
+      <span class="p-float-label">
+        <label htmlFor="email">Email:</label>
+        <input pInputText id="email" 
+        [(ngModel)]="model.studentEmail"
+        type="email"
+        placeholder="..."/>
+      </span>
+      <span class="p-float-label">
+        <label htmlFor="link">Link meeting:</label>
+        <input pInputText id="link" [(ngModel)]="model.link" 
+        type="url"
+        placeholder="..."/>
+      </span>
+    </div>
+    
+    <div class="button">
+      <button type="button" (click)="Send()" mat-stroked-button color="primary"
+        [disabled]="model.studentEmail && model.link ? null : true">Send link</button>
+    </div>
+  </div>
+</div>
