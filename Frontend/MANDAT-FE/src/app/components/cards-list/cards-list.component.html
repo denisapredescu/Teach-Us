@@ -18,6 +18,7 @@
     </div>
 
     <div class="options" [class]="isAdminPage() ? 'multiple-options' : ''">
+      <button (click)="delete(card.id)">❌</button>
       <button *ngIf="isAdminPage()" (click)="settings(card.id)">⚙️</button>
     </div>
   </div>

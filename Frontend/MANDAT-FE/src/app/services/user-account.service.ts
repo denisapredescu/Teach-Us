@@ -39,9 +39,9 @@ export class UserAccountService {
   // }
 
 
-  // public SoftDeleteUserByEmail(email: string): Observable<any> {
-  //   return this.http.put(`${this.url}/SoftDelete`, {email: email});
-  // }
+  public SoftDeleteUserByEmail(email: string): Observable<any> {
+    return this.http.put(`${this.url}/SoftDelete`, {email: email});
+  }
 
 
   public Logout(email: any): Observable<any> {

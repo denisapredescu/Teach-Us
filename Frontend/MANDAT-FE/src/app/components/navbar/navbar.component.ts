@@ -20,6 +20,7 @@ export class NavbarComponent {
   isLoggedin?: string;
   name?: string;
   rol?: string;
+  rol1?: string;
   roles: Roles = new Roles();
 
   constructor(
@@ -33,6 +34,9 @@ export class NavbarComponent {
     if (this.isLoggedin !== "") {
       this.name = this.cookieService.get("Nume");
       this.rol = this.cookieService.get("Rol");
+      if(this.cookieService.get("Rol") === "mentor")
+        this.rol1 = "teacher";
+
     }
   }
   
