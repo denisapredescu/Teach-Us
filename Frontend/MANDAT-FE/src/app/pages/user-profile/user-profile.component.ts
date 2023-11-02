@@ -51,6 +51,7 @@ export class UserProfileComponent implements OnInit {
   roles: Roles = new Roles();
   isPersonalProfile: boolean = false;
   requests: any = [];
+  justViewProfile: string | null = 'false';
 
   requestsMock: any = [
     {
@@ -106,30 +107,28 @@ export class UserProfileComponent implements OnInit {
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.email = params.get("email") || "";
-      this.parameterEmail = this.email;
     });
 
     if (this.email === "") {
       this.isPersonalProfile = true;
-      this.email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+      this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     }
 
     this.email = this.email !== null ? this.email : '';
     let rememberMe = localStorage.getItem("rememberMe");
-    let justViewProfile;
+ 
 
     // verify if is current user profile or not
     if (rememberMe === 'true')
-      justViewProfile = localStorage.getItem("Verificare_User_Profile");
+      this.justViewProfile = localStorage.getItem("Verificare_User_Profile");
     else
-      justViewProfile = sessionStorage.getItem("Verificare_User_Profile");
+      this.justViewProfile = sessionStorage.getItem("Verificare_User_Profile");
 
-    this.rol = localStorage.getItem("Rol") !== '' ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
+    this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
     this.rol = this.rol === null ? '' : this.rol;
 
     // is not current user profile
-    if (justViewProfile === 'true') {
-      console.log(this.rol, this.email, justViewProfile)
+    if (this.justViewProfile === 'true') {
       if(this.rol === "mentor"){
         this.rol = "student";       
       }
@@ -138,18 +137,11 @@ export class UserProfileComponent implements OnInit {
       }
     }
     
-    console.log(this.rol, this.email)
     this.userAccountService
       .GetUserInfoWithAddressByEmail(this.email, this.rol)
       .subscribe(res => {
         this.userAccountWithAddress = res;
         this.rating = res.numberOfStars;
-        let rememberMe = localStorage.getItem("rememberMe");
-
-        if (rememberMe === 'true')
-          localStorage.setItem("Verificare_User_Profile", "");
-        else 
-          sessionStorage.setItem("Verificare_User_Profile", "");
       });
 
     this.mentorRequestService.GetUserRequests(this.email).subscribe(res => {

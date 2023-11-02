@@ -26,8 +26,8 @@ export class DialogViewStudentReviewsComponent implements OnInit{
   ){ }
 
   ngOnInit(){
-    this.emailUser = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
-    this.role = localStorage.getItem("Rol") !== '' ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
+    this.emailUser = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.role = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
     
     if (this.role === "mentor") {
       this.reviewService.getAllMentorReviews(this.emailUser!).subscribe(

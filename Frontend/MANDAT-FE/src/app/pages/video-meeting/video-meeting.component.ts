@@ -23,7 +23,7 @@ export class VideoMeetingComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit(): void {
-        let nume = localStorage.getItem("Nume") !== '' ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
+        let nume = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
     
         var randomWords = require('random-words');
         this.room = randomWords({ exactly: 3, join: '-' }); // Set your room name

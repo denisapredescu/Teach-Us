@@ -22,7 +22,7 @@ export class MyMentorsComponent implements OnInit{
     private myStudentService: StudentService,
   ){}
   ngOnInit(): void {
-    this.emailSt = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.emailSt = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
     
     if(this.emailSt){
       this.myStudentService.getMentorsForStudent(this.emailSt).subscribe(

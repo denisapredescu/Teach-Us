@@ -10,7 +10,7 @@ import { VideoCallService } from "src/app/services/video-call.service";
   styleUrls: ["./add-participants.component.scss"],
 })
 export class AddParticipantsComponent {
-  public email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+  public email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
   public model: MeetingModel = {
     link: "",
     studentEmail: "",
@@ -38,7 +38,7 @@ export class AddParticipantsComponent {
       }
     );
 
-    let rememberMe = localStorage.getItem("rememberMe") !== '' ? localStorage.getItem("rememberMe") : sessionStorage.getItem("rememberMe");;
+    let rememberMe = localStorage.getItem("rememberMe") !== null ? localStorage.getItem("rememberMe") : sessionStorage.getItem("rememberMe");;
     
     if (rememberMe === 'false') {
       sessionStorage.setItem("Student Email", this.model.studentEmail);

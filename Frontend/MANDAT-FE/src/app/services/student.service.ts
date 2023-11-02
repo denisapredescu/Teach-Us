@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class StudentService {
-  token = localStorage.getItem("Token") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+  token = localStorage.getItem("Token") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
   url = "https://localhost:7278/api/Student";
 
   private getHttpOptions(body: any) {
