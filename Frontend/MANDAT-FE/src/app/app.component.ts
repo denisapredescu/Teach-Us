@@ -1,11 +1,9 @@
 import { Component, ViewChild } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
-import { BreakpointObserver } from "@angular/cdk/layout";
 import { SocialUser, SocialAuthService } from "@abacritt/angularx-social-login";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
-import { UserAccountService } from "./services/user-account.service";
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -32,7 +30,6 @@ export class AppComponent {
     this.socialAuthService.authState.subscribe(user => {
       this.socialUser = user;
       this.isLoggedin = user != null;
-      console.log(this.socialUser);
       this.router.navigate(["/home"]);
     });
     var t = this.isLoggedin;

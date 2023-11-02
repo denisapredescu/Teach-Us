@@ -1,13 +1,12 @@
-import { HttpClient, HttpHandler, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class StudentService {
-  token = this.cookieService.get("Token");
+  token = localStorage.getItem("Token") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
   url = "https://localhost:7278/api/Student";
 
   private getHttpOptions(body: any) {
@@ -19,7 +18,7 @@ export class StudentService {
     };
   }
 
-  constructor(public http: HttpClient, private cookieService: CookieService) {}
+  constructor(public http: HttpClient) {}
 
   public getAllStudents(): Observable<any> {
     return this.http.get<any>(`${this.url}/GetAllStudents`);

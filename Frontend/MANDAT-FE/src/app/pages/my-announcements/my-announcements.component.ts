@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { CookieService } from "ngx-cookie-service";
 import { MeetingTypes } from "src/app/constants/meeting-types";
 import { AnnouncementModel } from "src/app/models/announcement-model";
 import { ListCardModel } from "src/app/models/cards-list-model";
@@ -11,16 +10,17 @@ import { AnnouncementService } from "src/app/services/announcement.service";
   styleUrls: ["./my-announcements.component.scss"],
 })
 export class MyAnnouncementsComponent {
-  private email: string;
+  private email: string | null;
   meetingTypes: Map<boolean, string> = MeetingTypes;
   announcements: AnnouncementModel[];
   cardsListModel: ListCardModel[] = [];
 
   constructor(
     private announcementService: AnnouncementService,
-    private cookieService: CookieService
   ) {
-    this.email = cookieService.get("Email");
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.email = this.email !== null ? this.email : '';
+
     this.announcementService
       .GetAllAnnouncmentWithEmail(this.email)
       .subscribe(result => {

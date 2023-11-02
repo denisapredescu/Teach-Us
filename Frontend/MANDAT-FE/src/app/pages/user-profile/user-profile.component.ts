@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { UserAccountService } from "src/app/services/user-account.service";
 import { UserAccountWithAddress } from "src/app/models/user-account-with-address-model";
-import { CookieService } from "ngx-cookie-service";
 import { MentorRequestsService } from "src/app/services/mentor-requests.service";
 import { Roles } from "src/app/constants/roles";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -45,9 +44,9 @@ export class UserProfileComponent implements OnInit {
   public chartOptions: Partial<ChartOptions> | any;
 
   notifications: number;
-  email: string;
+  email: string | null;
   rating: number;
-  rol: string;
+  rol: string | null;
   roles: Roles = new Roles();
   isPersonalProfile: boolean = false;
   requests: any = [];
@@ -102,7 +101,6 @@ export class UserProfileComponent implements OnInit {
     private userAccountService: UserAccountService,
     private mentorRequestService: MentorRequestsService,
     private activatedRoute: ActivatedRoute,
-    private cookieService: CookieService,
     private router: Router
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -111,26 +109,43 @@ export class UserProfileComponent implements OnInit {
 
     if (this.email === "") {
       this.isPersonalProfile = true;
-      this.email = this.cookieService.get("Email");
+      this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     }
-    if(this.cookieService.get("Verificare_User_Profile") == ""){
-      this.rol = cookieService.get("Rol");
+
+    this.email = this.email !== null ? this.email : '';
+    this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
+    this.rol = this.rol === null ? '' : this.rol;
+
+    if(this.rol !== "mentor"){
+      this.rol = "student";       
     }
-    else{
-      if(cookieService.get("Rol") !== "mentor"){
-        this.rol = "student";       
-      }
-      else{
-        this.rol = "mentor";  
-      }
+    else {
+      this.rol = "mentor";  
     }
+    
+    // if(this.cookieService.get("Verificare_User_Profile") == ""){
+    //   this.rol = cookieService.get("Rol");
+    // }
+    // else{
+    //   if(this.rol !== "mentor"){
+    //     this.rol = "student";       
+    //   }
+    //   else {
+    //     this.rol = "mentor";  
+    //   }
+    // }
     
     this.userAccountService
       .GetUserInfoWithAddressByEmail(this.email, this.rol)
       .subscribe(res => {
         this.userAccountWithAddress = res;
         this.rating = res.numberOfStars;
-        this.cookieService.set("Verificare_User_Profile", "");
+        let rememberMe = localStorage.getItem("rememberMe");
+
+        if (rememberMe === 'true')
+          localStorage.setItem("Verificare_User_Profile", "");
+        else 
+          sessionStorage.setItem("Verificare_User_Profile", "");
       });
 
     this.mentorRequestService.GetUserRequests(this.email).subscribe(res => {

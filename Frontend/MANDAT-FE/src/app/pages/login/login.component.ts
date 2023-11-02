@@ -11,7 +11,6 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
 import { MyErrorStateMatcher } from "src/app/components/account-form/account-form.component";
 import { UserAccountService } from "src/app/services/user-account.service";
 
@@ -24,12 +23,16 @@ export class LoginComponent {
   loginForm!: FormGroup;
   socialUser!: SocialUser;
   isLoggedin?: boolean;
+  isRememberMeChecked: boolean = true;
+  email = new FormControl("", [Validators.required, Validators.email]);
+  matcher = new MyErrorStateMatcher();
+  public model: FormGroup;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     public socialAuthService: SocialAuthService,
-    private userAccount: UserAccountService,
-    private cookieService: CookieService
+    private userAccount: UserAccountService
   ) {
     this.model = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
@@ -37,11 +40,11 @@ export class LoginComponent {
       rememberMe: [false],
     });
   }
-  email = new FormControl("", [Validators.required, Validators.email]);
+ 
+  public changeState() {
+    this.isRememberMeChecked = !this.isRememberMeChecked;
+  }
 
-  matcher = new MyErrorStateMatcher();
-
-  public model: FormGroup;
   Login(): void {
     let data = {
       password: this.model.get("password")?.value,
@@ -49,18 +52,23 @@ export class LoginComponent {
     };
     this.userAccount.Login(data).subscribe(
       result => {
-        console.log(result);
         this.isLoggedin = true;
-        this.userAccount
-          .GetUserInfo(this.model.get("email")?.value)
-          .subscribe(details => {
-            this.cookieService.set("Email", details.email);
-            this.cookieService.set("Nume", details.name);
-            this.cookieService.set("Rol", details.roles);
-            this.cookieService.set("LoggedIn", "true");
-          });
-
-        this.cookieService.set("Token", result.token);
+        this.userAccount.GetUserInfo(this.model.get("email")?.value).subscribe(details => {
+          if(this.isRememberMeChecked)  {
+            localStorage.setItem("Email", details.email);
+            localStorage.setItem("Nume", details.name);
+            localStorage.setItem("Rol", details.roles);
+            localStorage.setItem("LoggedIn", "true");
+            localStorage.setItem("Token", result.token);
+          } else {
+            sessionStorage.setItem("Email", details.email);
+            sessionStorage.setItem("Nume", details.name);
+            sessionStorage.setItem("Rol", details.roles);
+            sessionStorage.setItem("LoggedIn", "true");
+            sessionStorage.setItem("Token", result.token);
+          }
+          localStorage.setItem("rememberMe", this.isRememberMeChecked.toString());
+        });
 
         this.router.navigate(["/home"]);
         setTimeout(function () {
@@ -72,20 +80,6 @@ export class LoginComponent {
         console.log(error);
       }
     );
-  }
-  loginWithFacebook(): void {
-    console.log(
-      this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
-    );
-    this.socialAuthService
-      .signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then(res => {
-        console.log(res);
-      });
-  }
-  logOut(): any {
-    // ramane navbarul neactualizat
-    this.socialAuthService.signOut();
-    window.location.reload();
+
   }
 }

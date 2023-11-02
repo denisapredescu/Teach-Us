@@ -12,14 +12,12 @@ export class CardsListComponent {
   @Output() deleteEmitter = new EventEmitter<string>();
 
   constructor(private router: Router) {
-    console.log(this.models);
   }
-
 
   delete(id: string): void {
     this.deleteEmitter.emit(id);
-     this.models = this.models.filter(model => model.id !== id);
-   }
+    this.models = this.models.filter(model => model.id !== id);
+  }
 
   goToProfile(email: string): void {
     if (this.isAdminPage()) {

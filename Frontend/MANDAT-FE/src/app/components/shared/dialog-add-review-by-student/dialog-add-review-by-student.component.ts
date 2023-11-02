@@ -1,12 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MAT_SORT_HEADER_INTL_PROVIDER } from '@angular/material/sort';
-import { CookieService } from 'ngx-cookie-service';
 import { Roles } from 'src/app/constants/roles';
-import { AccountService } from 'src/app/services/account.service';
 import { ReviewService } from 'src/app/services/review.service';
-import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-dialog-add-review-by-student',
@@ -19,8 +15,9 @@ export class DialogAddReviewByStudentComponent implements OnInit{
   }
   public reviewStatus: string = '';
   public emailStudent: string = '';
-  public emailMentor: string = '';
+  public emailMentor: string | null = '';
   public user:any;
+  public role : string | null;
   roles: Roles = new Roles();
 
   public addReviewForm: FormGroup = new FormGroup({
@@ -34,7 +31,6 @@ export class DialogAddReviewByStudentComponent implements OnInit{
   constructor(
     private dialogRef: MatDialogRef<DialogAddReviewByStudentComponent>,
     private reviewService: ReviewService,
-    private cookie: CookieService,
     @Inject(MAT_DIALOG_DATA) public data: any
 
   ){
@@ -42,9 +38,11 @@ export class DialogAddReviewByStudentComponent implements OnInit{
       this.user = data.data;
     }
     
-    if (this.cookie.get('Rol') === this.roles.Mentor) {
+    this.role = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
+    
+    if (this.role === this.roles.Mentor) {
       this.reviewStatus = "ReviewStudent";
-      this.emailMentor =  this.cookie.get('Email');
+      this.emailMentor =  localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
       this.emailStudent= this.user.email;
     }
     
@@ -70,8 +68,6 @@ export class DialogAddReviewByStudentComponent implements OnInit{
   }
 
   public saveAdd(): void{
-    console.log(this.addReviewForm.value);
-
     if (this.addReviewForm.value.starsNumber > 5) 
       this.addReviewForm.value.starsNumber = 5;
       

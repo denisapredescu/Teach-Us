@@ -22,9 +22,7 @@ export class RegisterComponent {
   ) {}
 
   public register(accountFormModel: AccountFormModel): void {
-    // alert("Register!")
     const model = accountFormModel.model;
-    console.log(model);
     this.userAccount.Register(model).subscribe(
       result => {
         console.log(result);
@@ -34,8 +32,6 @@ export class RegisterComponent {
         console.log(error);
       }
     );
-    // //console.log(this.model.value.email);
-    console.log(model);
     //this.router.navigate(['/login'])
   }
 }

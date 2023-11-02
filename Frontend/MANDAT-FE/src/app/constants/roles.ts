@@ -3,15 +3,15 @@ export class Roles {
   public Mentor: string = "mentor";
   public Admin: string = "admin";
 
-  public isStudent(role: string): boolean {
+  public isStudent(role: string| null): boolean {
     return role === this.Student;
   }
 
-  public isMentor(role: string): boolean {
+  public isMentor(role: string | null): boolean {
     return role === this.Mentor;
   }
 
-  public isAdmin(role: string): boolean {
+  public isAdmin(role: string | null): boolean {
     return role === this.Admin;
   }
 }

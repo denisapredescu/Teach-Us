@@ -6,11 +6,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
 import { AccountFormDetails } from "src/app/constants/account-form-details";
 import { AccountFormModel, AccountModel } from "src/app/models/account-model";
-import { UserAccountService } from "src/app/services/user-account.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -64,12 +61,7 @@ export class AccountFormComponent {
   @Output() submitEmitter = new EventEmitter<AccountFormModel>();
   @Output() deleteEmitter = new EventEmitter<string>();
 
-  constructor(
-    private userAccountService: UserAccountService,
-    private cookieService: CookieService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) { }
+  constructor() { }
 
   submit(): void {
     const accountFormModel: AccountFormModel = {

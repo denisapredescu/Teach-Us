@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { MentorService } from "src/app/services/mentor.service";
 import { StudentModel } from "../../models/student-model";
 import { MentorModel } from "src/app/models/mentor-model";
-import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-card",
@@ -16,11 +15,11 @@ export class CardComponent {
   @Input() person: StudentModel | MentorModel;
   @Input() pageToShowOn: string = "";
   @Input() status: boolean;
-  public cookieSubject: string;
+  public cookieSubject: string | null;
+  public email: string | null;
   public varTest: boolean = false; /// to verify if the page is access by a mentor or by the student; in backend I verify if the user is mentor or student to find the number of stars
   constructor(
     private dialog: MatDialog,
-    private cookie: CookieService,
     private router: Router,
     private mentorService: MentorService
   ) {
@@ -30,8 +29,7 @@ export class CardComponent {
     return Array.isArray(subject);
 }
   ngOnInit() {
-    console.log("in card ", this.person);
-    this.cookieSubject = this.cookie.get("matchSubject");
+    this.cookieSubject = localStorage.getItem("matchSubject") !== null ? localStorage.getItem("matchSubject") : sessionStorage.getItem("matchSubject");
   }
 
   public addReview(person: any) {
@@ -51,40 +49,58 @@ export class CardComponent {
   }
 
   public chooseMentor(person: any) {
-    let email = this.cookie.get("Email");
-    if (email === "") {
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    
+    if (this.email === "" || this.email === null) {
       this.router.navigate(["/login"]);
     } else {
       this.mentorService
-        .createNewMatch(person.email, email, this.cookieSubject)
+        .createNewMatch(person.email, this.email!, this.cookieSubject!)
         .subscribe(result => {
           if (result) {
             alert("The matching request was send!!");
-            console.log(result);
-            this.cookie.set('matchStars', "");
-            this.cookie.set('matchSubject',  "");
-            this.cookie.set('matchCounty', "");
-            this.cookie.set('matchCity', "");
+            let rememberMe = localStorage.getItem("rememberMe");
+
+            if (rememberMe === 'true') {
+              localStorage.setItem('matchStars', "");
+              localStorage.setItem('matchSubject',  "");
+              localStorage.setItem('matchCounty', "");
+              localStorage.setItem('matchCity', "");
+            } else {
+              sessionStorage.setItem('matchStars', "");
+              sessionStorage.setItem('matchSubject',  "");
+              sessionStorage.setItem('matchCounty', "");
+              sessionStorage.setItem('matchCity', "");
+            }
           }
         });
     }
   }
 
   public chooseAMentor(person: any, subject: any) {
-    let email = this.cookie.get("Email");
-    if (email === "") {
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    
+    if (this.email === "" || this.email === null) {
       this.router.navigate(["/login"]);
     } else {
       this.mentorService
-        .createNewMatch(person.email, email, subject)
+        .createNewMatch(person.email, this.email!, subject)
         .subscribe(result => {
           if (result) {
             alert("The matching request was send!!");
-            console.log(result);
-            this.cookie.set('matchStars', "");
-            this.cookie.set('matchSubject',  "");
-            this.cookie.set('matchCounty', "");
-            this.cookie.set('matchCity', "");
+            let rememberMe = localStorage.getItem("rememberMe");
+
+            if (rememberMe) {
+              localStorage.setItem('matchStars', "");
+              localStorage.setItem('matchSubject',  "");
+              localStorage.setItem('matchCounty', "");
+              localStorage.setItem('matchCity', "");
+            } else {
+              sessionStorage.setItem('matchStars', "");
+              sessionStorage.setItem('matchSubject',  "");
+              sessionStorage.setItem('matchCounty', "");
+              sessionStorage.setItem('matchCity', "");
+            }
           }
         });
     }
@@ -92,7 +108,16 @@ export class CardComponent {
 
   public redirectToProfile() {
     this.varTest = true;
-    this.cookie.set("Verificare_User_Profile", this.varTest.toString());
-    setTimeout(() =>{this.router.navigate([`/user-profile/${this.person.email}`]);}, 1000);
+
+    let rememberMe = localStorage.getItem("rememberMe");
+
+    if (rememberMe === 'true') 
+      localStorage.setItem("Verificare_User_Profile", this.varTest.toString());
+    else 
+      sessionStorage.setItem("Verificare_User_Profile", this.varTest.toString());
+    
+    setTimeout(() => {
+      this.router.navigate([`/user-profile/${this.person.email}`]);
+    }, 1000);
   }
 }
