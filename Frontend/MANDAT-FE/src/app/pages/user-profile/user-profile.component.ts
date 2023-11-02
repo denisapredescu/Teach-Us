@@ -107,6 +107,7 @@ export class UserProfileComponent implements OnInit {
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.email = params.get("email") || "";
+      this.parameterEmail = this.email;
     });
 
     if (this.email === "") {
@@ -116,7 +117,6 @@ export class UserProfileComponent implements OnInit {
 
     this.email = this.email !== null ? this.email : '';
     let rememberMe = localStorage.getItem("rememberMe");
- 
 
     // verify if is current user profile or not
     if (rememberMe === 'true')
@@ -142,6 +142,13 @@ export class UserProfileComponent implements OnInit {
       .subscribe(res => {
         this.userAccountWithAddress = res;
         this.rating = res.numberOfStars;
+
+        let rememberMe = localStorage.getItem("rememberMe");
+
+        if (rememberMe === 'true')
+          localStorage.setItem("Verificare_User_Profile", "");
+        else 
+          sessionStorage.setItem("Verificare_User_Profile", "");
       });
 
     this.mentorRequestService.GetUserRequests(this.email).subscribe(res => {
