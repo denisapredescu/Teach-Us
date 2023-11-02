@@ -18,7 +18,7 @@ export class MyAnnouncementsComponent {
   constructor(
     private announcementService: AnnouncementService,
   ) {
-    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
     this.email = this.email !== null ? this.email : '';
 
     this.announcementService

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReviewService {
-  token = localStorage.getItem("Token") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+  token = localStorage.getItem("Token") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
   
   httpOptions = {
     headers: new HttpHeaders()

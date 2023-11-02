@@ -27,10 +27,9 @@ export class CreateAnnouncementComponent {
     private router: Router,
     private announcementService: AnnouncementService,
   ) {
-    let email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    let email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     this.model.email = email !== null ? email : '';
   }
-  
 
   public post(): void {
     if(this.model.subject === ""){

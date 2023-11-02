@@ -38,11 +38,11 @@ export class DialogAddReviewByStudentComponent implements OnInit{
       this.user = data.data;
     }
     
-    this.role = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
+    this.role = localStorage.getItem("Rol") !== '' ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
     
     if (this.role === this.roles.Mentor) {
       this.reviewStatus = "ReviewStudent";
-      this.emailMentor =  localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+      this.emailMentor =  localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
       this.emailStudent= this.user.email;
     }
     

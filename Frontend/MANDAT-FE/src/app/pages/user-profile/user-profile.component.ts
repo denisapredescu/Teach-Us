@@ -45,6 +45,7 @@ export class UserProfileComponent implements OnInit {
 
   notifications: number;
   email: string | null;
+  parameterEmail: string | null;
   rating: number;
   rol: string | null;
   roles: Roles = new Roles();
@@ -105,36 +106,39 @@ export class UserProfileComponent implements OnInit {
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.email = params.get("email") || "";
+      this.parameterEmail = this.email;
     });
 
     if (this.email === "") {
       this.isPersonalProfile = true;
-      this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+      this.email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     }
 
     this.email = this.email !== null ? this.email : '';
-    this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
+    let rememberMe = localStorage.getItem("rememberMe");
+    let justViewProfile;
+
+    // verify if is current user profile or not
+    if (rememberMe === 'true')
+      justViewProfile = localStorage.getItem("Verificare_User_Profile");
+    else
+      justViewProfile = sessionStorage.getItem("Verificare_User_Profile");
+
+    this.rol = localStorage.getItem("Rol") !== '' ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
     this.rol = this.rol === null ? '' : this.rol;
 
-    if(this.rol !== "mentor"){
-      this.rol = "student";       
-    }
-    else {
-      this.rol = "mentor";  
+    // is not current user profile
+    if (justViewProfile === 'true') {
+      console.log(this.rol, this.email, justViewProfile)
+      if(this.rol === "mentor"){
+        this.rol = "student";       
+      }
+      else {
+        this.rol = "mentor";  
+      }
     }
     
-    // if(this.cookieService.get("Verificare_User_Profile") == ""){
-    //   this.rol = cookieService.get("Rol");
-    // }
-    // else{
-    //   if(this.rol !== "mentor"){
-    //     this.rol = "student";       
-    //   }
-    //   else {
-    //     this.rol = "mentor";  
-    //   }
-    // }
-    
+    console.log(this.rol, this.email)
     this.userAccountService
       .GetUserInfoWithAddressByEmail(this.email, this.rol)
       .subscribe(res => {

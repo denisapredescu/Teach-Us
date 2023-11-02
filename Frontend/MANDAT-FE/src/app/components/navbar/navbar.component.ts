@@ -25,10 +25,10 @@ export class NavbarComponent {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedin = localStorage.getItem("LoggedIn") !== null ? localStorage.getItem("LoggedIn") : sessionStorage.getItem("LoggedIn");
-    if (this.isLoggedin !== null) {
-      this.name = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");;
-      this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
+    this.isLoggedin = localStorage.getItem("LoggedIn") !== '' ? localStorage.getItem("LoggedIn") : sessionStorage.getItem("LoggedIn");
+    if (this.isLoggedin !== '') {
+      this.name = localStorage.getItem("Nume") !== '' ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");;
+      this.rol = localStorage.getItem("Rol") !== '' ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
       
       if(this.rol === "mentor")
         this.rol1 = "teacher";

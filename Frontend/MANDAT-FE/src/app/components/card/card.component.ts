@@ -29,7 +29,7 @@ export class CardComponent {
     return Array.isArray(subject);
 }
   ngOnInit() {
-    this.cookieSubject = localStorage.getItem("matchSubject") !== null ? localStorage.getItem("matchSubject") : sessionStorage.getItem("matchSubject");
+    this.cookieSubject = localStorage.getItem("matchSubject") !== '' ? localStorage.getItem("matchSubject") : sessionStorage.getItem("matchSubject");
   }
 
   public addReview(person: any) {
@@ -49,9 +49,9 @@ export class CardComponent {
   }
 
   public chooseMentor(person: any) {
-    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
     
-    if (this.email === "" || this.email === null) {
+    if (this.email === "") {
       this.router.navigate(["/login"]);
     } else {
       this.mentorService
@@ -78,7 +78,7 @@ export class CardComponent {
   }
 
   public chooseAMentor(person: any, subject: any) {
-    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    this.email = localStorage.getItem("Email") !== '' ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     
     if (this.email === "" || this.email === null) {
       this.router.navigate(["/login"]);
