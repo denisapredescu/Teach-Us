@@ -26,12 +26,14 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     this.isLoggedin = localStorage.getItem("LoggedIn") !== null ? localStorage.getItem("LoggedIn") : sessionStorage.getItem("LoggedIn");
-    if (this.isLoggedin !== null) {
+    if (this.isLoggedin !== '' && this.isLoggedin !== null) {
       this.name = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");;
       this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
       
       if(this.rol === "mentor")
         this.rol1 = "teacher";
+      else 
+        this.rol1 = "student"
     }
   }
 
@@ -53,5 +55,16 @@ export class NavbarComponent {
   public myStudents(): void {
     this.router.navigate(["my-students"]);
     this.sidenav.close();
+  }
+
+  public redirectToProfile() {
+    let rememberMe = localStorage.getItem("rememberMe");
+
+    if (rememberMe === 'true') 
+      localStorage.setItem("Verificare_User_Profile", "false");
+    else 
+      sessionStorage.setItem("Verificare_User_Profile", "false");
+    
+    this.router.navigate(["/user-profile"]);
   }
 }
