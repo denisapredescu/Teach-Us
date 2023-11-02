@@ -87,7 +87,7 @@
   </div>
 </div>
 
-<div class="requests-chart" *ngIf="roles.isMentor(rol) && requestsMock.length !== 0 && justViewProfile === 'false'">
+<div class="requests-chart" *ngIf="roles.isMentor(rol) && requestsMock.length !== 0 && parameterEmail === ''">
   <div id="chart" *ngIf="chartOptions !== undefined"> 
     <apx-chart
       [series]="chartOptions.series"
