@@ -20,6 +20,7 @@ namespace MANDAT.DataAccess
         public DbSet<Mentor> Mentors { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<Assessment> Assessments { get; set; }
         public DbSet<VideoMeetingDetails> VideoMeetingsDetails { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
@@ -100,6 +101,18 @@ namespace MANDAT.DataAccess
             builder.Entity<VideoMeetingDetails>()
                 .HasOne(m => m.Mentor)
                 .WithMany(me => me.VideoMeetingsDetails)
+                .HasForeignKey(m => m.MentorId);
+
+            builder.Entity<Assessment>().HasKey(m => new { m.AssessmentId });
+            builder.Entity<Assessment>()
+                .HasOne(m => m.Student)
+                .WithMany(s => s.Assessments)
+                .HasForeignKey(m => m.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Assessment>()
+                .HasOne(m => m.Mentor)
+                .WithMany(me => me.Assessments)
                 .HasForeignKey(m => m.MentorId);
         }
 
