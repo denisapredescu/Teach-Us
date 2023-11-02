@@ -25,7 +25,7 @@ export class MyStudentsComponent {
   ngOnInit(): void {
     this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
     
-    if (this.email !== null) {
+    if (this.email !== null && this.email !== '') {
       this.mentorService.getMyStudents(this.email).subscribe(
         (response) => {
           this.students = response;

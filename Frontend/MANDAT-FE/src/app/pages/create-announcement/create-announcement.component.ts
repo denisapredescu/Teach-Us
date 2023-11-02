@@ -30,7 +30,6 @@ export class CreateAnnouncementComponent {
     let email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     this.model.email = email !== null ? email : '';
   }
-  
 
   public post(): void {
     if(this.model.subject === ""){

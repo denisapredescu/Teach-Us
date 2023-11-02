@@ -22,7 +22,7 @@ export class MentorRequestsComponent {
     this.changeDetectorRef.detectChanges();   
     var email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
     
-    if (email !== null) {
+    if (email !== '' && email !== null) {
       this.mentorRequests.GetUserRequests(email).forEach(
         (result)=> {
           this.requests = result;   
@@ -34,7 +34,7 @@ export class MentorRequestsComponent {
   acceptStudent(data: string, sub: string) : void{
     var email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
   
-    if (email !== null) {
+    if (email !== '' && email !== null) {
       this.mentorRequests.ChangeRequestStatus(email, data, true, sub).subscribe(
         (result) => {
             const  div =  document.getElementById(data);
@@ -47,7 +47,7 @@ export class MentorRequestsComponent {
   rejectStudent(data: string, sub: string) : void{
     var email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
     
-    if (email !== null) {
+    if (email !== '' && email !== null) {
       this.mentorRequests.ChangeRequestStatus(email, data, false, sub).subscribe(
         (result) => {
             const  div =  document.getElementById(data);

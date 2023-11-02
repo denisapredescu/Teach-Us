@@ -45,11 +45,13 @@ export class UserProfileComponent implements OnInit {
 
   notifications: number;
   email: string | null;
+  parameterEmail: string | null;
   rating: number;
   rol: string | null;
   roles: Roles = new Roles();
   isPersonalProfile: boolean = false;
   requests: any = [];
+  justViewProfile: string | null = 'false';
 
   requestsMock: any = [
     {
@@ -113,40 +115,33 @@ export class UserProfileComponent implements OnInit {
     }
 
     this.email = this.email !== null ? this.email : '';
+    let rememberMe = localStorage.getItem("rememberMe");
+ 
+
+    // verify if is current user profile or not
+    if (rememberMe === 'true')
+      this.justViewProfile = localStorage.getItem("Verificare_User_Profile");
+    else
+      this.justViewProfile = sessionStorage.getItem("Verificare_User_Profile");
+
     this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
     this.rol = this.rol === null ? '' : this.rol;
 
-    if(this.rol !== "mentor"){
-      this.rol = "student";       
+    // is not current user profile
+    if (this.justViewProfile === 'true') {
+      if(this.rol === "mentor"){
+        this.rol = "student";       
+      }
+      else {
+        this.rol = "mentor";  
+      }
     }
-    else {
-      this.rol = "mentor";  
-    }
-    
-    
-    // if(this.cookieService.get("Verificare_User_Profile") == ""){
-    //   this.rol = cookieService.get("Rol");
-    // }
-    // else{
-    //   if(this.rol !== "mentor"){
-    //     this.rol = "student";       
-    //   }
-    //   else {
-    //     this.rol = "mentor";  
-    //   }
-    // }
     
     this.userAccountService
       .GetUserInfoWithAddressByEmail(this.email, this.rol)
       .subscribe(res => {
         this.userAccountWithAddress = res;
         this.rating = res.numberOfStars;
-        let rememberMe = localStorage.getItem("rememberMe");
-
-        if (rememberMe === 'true')
-          localStorage.setItem("Verificare_User_Profile", "");
-        else 
-          sessionStorage.setItem("Verificare_User_Profile", "");
       });
 
     this.mentorRequestService.GetUserRequests(this.email).subscribe(res => {
