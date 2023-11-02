@@ -123,6 +123,7 @@ export class UserProfileComponent implements OnInit {
       this.rol = "mentor";  
     }
     
+    
     // if(this.cookieService.get("Verificare_User_Profile") == ""){
     //   this.rol = cookieService.get("Rol");
     // }
@@ -165,6 +166,9 @@ export class UserProfileComponent implements OnInit {
           type: "pie",
           events: {
             dataPointSelection: (event: any, chartContext: any, config: any) => {
+              if (config.w.config.labels[config.dataPointIndex] === "Accepted") {
+                this.router.navigate(["/my-students"]);
+              }
               if (config.w.config.labels[config.dataPointIndex] === "Waiting") {
                 this.router.navigate(["/requests"]);
               }
