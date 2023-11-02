@@ -191,38 +191,5 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    const address = `${this.userAccountWithAddress.addressInfo}, ${this.userAccountWithAddress.city}, ${this.userAccountWithAddress.county}`;
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${apiKey}&address=${address}`;
-    fetch(url)
-      .then(resp => resp.json())
-      .then(data => {
-        const location = data.results[0]?.geometry.location;
-
-        let latitude = location !== undefined ? location.lat : -34.397;
-        let longitude = location !== undefined ? location.lng : 150.644;
-
-        const map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: latitude, lng: longitude },
-          zoom: 8,
-        });
-
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode(
-          { address: address },
-          (results: { geometry: { location: any } }[], status: string) => {
-            if (status === "OK") {
-              map.setCenter(results[0].geometry.location);
-              const marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location,
-              });
-            } else {
-              console.log(
-                `Geocode was not successful for the following reason: ${status}`
-              );
-            }
-          }
-        );
-      });
   }
 }

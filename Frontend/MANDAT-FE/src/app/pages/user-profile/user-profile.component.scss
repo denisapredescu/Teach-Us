@@ -102,11 +102,9 @@ $section-shadow: 1px 1px $section-shadow-blur $section-shadow-color,
   background-color: $section-background;
   > a {
     font-size: 1rem;
-    // background-color: aqua;
     width: 100%;
     text-align: center;
     height: 33.3%;
-    // border-top: 1px solid black;
     border-bottom: 1px solid black;
     text-decoration: none;
     color: black;
@@ -133,11 +131,6 @@ $section-shadow: 1px 1px $section-shadow-blur $section-shadow-color,
   p {
     font-size: 70%;
   }
-}
-
-#map {
-  height: 35%;
-  width: 75%;
 }
 
 .requests-chart {
