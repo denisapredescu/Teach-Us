@@ -18,9 +18,7 @@ export class MentorRequestCardComponent {
 
   ngOnInit(): void {
     this.request.forEach(element => {
-      console.log("aici");
       console.log(element.email);
     });
-     
   }
 }

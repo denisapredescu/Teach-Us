@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { LinksModel } from 'src/app/models/links-model';
 import { MentorModel } from 'src/app/models/mentor-model';
 import { ReviewService } from 'src/app/services/review.service';
@@ -13,7 +12,7 @@ import { VideoCallService } from 'src/app/services/video-call.service';
 })
 
 export class MyMentorsComponent implements OnInit{
-  public emailSt?: string;
+  public emailSt?: string | null;
   public mentors: MentorModel[] = [];
   public links: LinksModel[] = [];
   public linksNew: Array<[string,string]> = [];
@@ -21,10 +20,10 @@ export class MyMentorsComponent implements OnInit{
     private videoService: VideoCallService,
     private reviewService: ReviewService,
     private myStudentService: StudentService,
-    private cookie: CookieService,
   ){}
   ngOnInit(): void {
-    this.emailSt = this.cookie.get('Email');
+    this.emailSt = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    
     if(this.emailSt){
       this.myStudentService.getMentorsForStudent(this.emailSt).subscribe(
         (result: MentorModel[]) =>{

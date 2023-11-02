@@ -1,22 +1,22 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
+  token = localStorage.getItem("Token") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+  
   httpOptions = {
     headers: new HttpHeaders()
     .set('Content-Type','application/json')
-    .set('Authorization', 'Bearer ' + this.cookieService.get('Token'))
+    .set('Authorization', 'Bearer ' + this.token)
   };
   public url ='https://localhost:7278/api/Accounts'
 
   constructor(
     public http: HttpClient,
-    private cookieService: CookieService,
   ) { }
 
   public getGuidByEmail(email: string): Observable<any>{

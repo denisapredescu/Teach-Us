@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 declare var JitsiMeetExternalAPI: any;
 
@@ -20,20 +19,19 @@ export class VideoMeetingComponent implements OnInit, AfterViewInit {
     isVideoMuted = false;
 
     constructor(
-        private router: Router,
-        private cookieService: CookieService
-
+        private router: Router
     ) { }
 
     ngOnInit(): void {
-        let nume = this.cookieService.get('Name');
+        let nume = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
+    
         var randomWords = require('random-words');
         this.room = randomWords({ exactly: 3, join: '-' }); // Set your room name
         this.user = {
             name: nume// Set your username
         }
         let text =  document.getElementsByTagName("text");
-        text[0].innerHTML = nume;
+        text[0].innerHTML = nume !== null ? nume : '';
     }
 
     ngAfterViewInit(): void {

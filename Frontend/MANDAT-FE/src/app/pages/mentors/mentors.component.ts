@@ -19,7 +19,6 @@ export class MentorsComponent {
     this.mentorsService.getAllMentors().subscribe(
       (result: MentorModel[]) => {
         this.mentors = result;
-        console.log(this.mentors); 
       },
       (error) => {
         console.error(error);

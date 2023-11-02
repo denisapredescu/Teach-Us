@@ -29,9 +29,6 @@ export class AdminManageUsersComponent {
         };
         this.cardsListModel.push(model);
       });
-      console.log(this.cardsListModel);
-
-      console.log(result);
     });
   }
   public delete(email: string): void {

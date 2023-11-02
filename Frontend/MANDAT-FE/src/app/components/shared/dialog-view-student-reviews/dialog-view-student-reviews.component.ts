@@ -1,6 +1,5 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CookieService } from 'ngx-cookie-service';
 import { Roles } from 'src/app/constants/roles';
 import { MyReviews } from 'src/app/models/my-reviews';
 import { ReviewEdit } from 'src/app/models/review-edit';
@@ -16,32 +15,28 @@ export class DialogViewStudentReviewsComponent implements OnInit{
   public reviews: MyReviews[]=[];
   public reviewEdit: ReviewEdit[] = [];
   public displayedColumns = ['message','starsNumber', 'studentName','edit'];
-  public emailUser: string | undefined;
-  public role: string = '';
+  public emailUser: string | null;
+  public role: string  | null = '';
   roles: Roles = new Roles();
   public count: number = 0;
 
   constructor(
     private reviewService: ReviewService,
-    public cookie: CookieService,
     @Inject(MAT_DIALOG_DATA) public date: any
   ){ }
 
   ngOnInit(){
+    this.emailUser = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.role = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
     
-    this.emailUser = this.cookie.get('Email');
-    this.role = this.cookie.get('Rol');
-    console.log(this.emailUser);
-    if (this.role == "mentor") {
-      this.reviewService.getAllMentorReviews(this.emailUser).subscribe(
+    if (this.role === "mentor") {
+      this.reviewService.getAllMentorReviews(this.emailUser!).subscribe(
         (result: MyReviews[]) => {
-          console.log(result);
           this.reviews = result;
         },
         (error) => {
           console.error(error);
-        }
-       );
+        });
       this.displayedColumns = ['message','starsNumber', 'studentName','edit'];
     }  
   }

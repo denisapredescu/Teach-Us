@@ -4,7 +4,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogViewStudentReviewsComponent } from 'src/app/components/shared/dialog-view-student-reviews/dialog-view-student-reviews.component';
 import { ReviewService } from 'src/app/services/review.service';
 import { StudentModel } from 'src/app/models/student-model';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: "app-my-students",
@@ -13,40 +12,40 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class MyStudentsComponent {
   public students: StudentModel[] = [];
-  public email: string = "";
+  public email: string | null = "";
   public sortByStarsAsc: boolean = true;
   public sortByNameAsc: boolean = true;
   
   constructor(
     private mentorService: MentorService,
     private reviewService: ReviewService,
-    private cookieService: CookieService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.email = this.cookieService.get('Email');
-    console.log(this.email);
-    this.mentorService.getMyStudents(this.cookieService.get('Email')).subscribe(
-      (response) => {
-        console.log(response);
-        this.students = response;
-        for(let student of this.students) {
-          this.reviewService.getStudentStars(student.email).subscribe(
-            (result:number) => {
-              student.numberOfStars = result;
-            },
-            (error) => {
-              console.error(error);
-            });
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    
+    if (this.email !== null) {
+      this.mentorService.getMyStudents(this.email).subscribe(
+        (response) => {
+          this.students = response;
+          for(let student of this.students) {
+            this.reviewService.getStudentStars(student.email).subscribe(
+              (result:number) => {
+                student.numberOfStars = result;
+              },
+              (error) => {
+                console.error(error);
+              });
+          }
+          this.sortByNameASC();
+          this.sortByNameAsc = true;
+        }, 
+        (error) => {
+          console.error(error);
         }
-        this.sortByNameASC();
-        this.sortByNameAsc = true;
-      }, 
-      (error) => {
-        console.error(error);
-      }
-    );
+      );
+    }
   }
 
   public sortByNameASC() {

@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
 import { subjects } from "src/app/constants/subjects";
 import { AnnouncementModel } from "src/app/models/announcement-model";
 import { AnnouncementService } from "src/app/services/announcement.service";
@@ -27,9 +26,9 @@ export class CreateAnnouncementComponent {
   constructor(
     private router: Router,
     private announcementService: AnnouncementService,
-    private cookieService: CookieService
   ) {
-    this.model.email = cookieService.get('Email');
+    let email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    this.model.email = email !== null ? email : '';
   }
   
 
@@ -56,6 +55,5 @@ export class CreateAnnouncementComponent {
         console.log(error);
       }
     );
-    console.log(this.model);
   }
 }

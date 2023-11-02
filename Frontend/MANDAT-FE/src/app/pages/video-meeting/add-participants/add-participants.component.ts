@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
-import { CookieService } from "ngx-cookie-service";
 import { MyErrorStateMatcher } from "src/app/components/account-form/account-form.component";
 import { MeetingModel } from "src/app/models/meeting-model";
 import { VideoCallService } from "src/app/services/video-call.service";
@@ -11,10 +10,11 @@ import { VideoCallService } from "src/app/services/video-call.service";
   styleUrls: ["./add-participants.component.scss"],
 })
 export class AddParticipantsComponent {
+  public email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
   public model: MeetingModel = {
     link: "",
     studentEmail: "",
-    mentorEmail: this.cookieService.get("Email"),
+    mentorEmail: this.email !== null ? this.email : ''
   };
 
   emailFormControl = new FormControl("", [
@@ -23,9 +23,9 @@ export class AddParticipantsComponent {
   ]);
 
   matcher = new MyErrorStateMatcher();
+
   constructor(
     private videocallService: VideoCallService,
-    private cookieService: CookieService
   ) {}
 
   public Send(): void {
@@ -37,7 +37,15 @@ export class AddParticipantsComponent {
         console.log(error);
       }
     );
-    this.cookieService.set("Student Email", this.model.studentEmail);
-    this.cookieService.set("Link", this.model.link.toString());
+
+    let rememberMe = localStorage.getItem("rememberMe") !== null ? localStorage.getItem("rememberMe") : sessionStorage.getItem("rememberMe");;
+    
+    if (rememberMe === 'false') {
+      sessionStorage.setItem("Student Email", this.model.studentEmail);
+      sessionStorage.setItem("Link", this.model.link.toString());
+    } else {
+      localStorage.setItem("Student Email", this.model.studentEmail);
+      localStorage.setItem("Link", this.model.link.toString());
+    }
   }
 }
