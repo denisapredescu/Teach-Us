@@ -3,9 +3,74 @@
 
   <div class="second-element">
     <h2>How does tutoring at MANDAT work?</h2>
-    <pre> <a routerLink="/register">Sign Up </a> <span>&#8594;</span>   <a> Tell us your expectation </a>  <span>&#8594;</span>  <a> Find a suitable mentor </a>  </pre>
+    <div class="pre">
+      <a routerLink="/register">Sign Up </a> <span>&#8594;</span>
+      <a> Tell us your expectation </a> <span>&#8594;</span>
+      <a> Find a suitable mentor </a>
+    </div>
 
-    <pre><span id="last-arrow">&#8594;</span>  Have Fun Learning *icon* </pre>
+    <div class="pre"
+      ><span id="last-arrow">&#8594;</span> Have Fun Learning
+    </div>
+  </div>
+
+  <div class="top-container">
+    <div class="top-title">Top Mentors</div>
+    <div class="top-mentors">
+      <div
+        class="mentor-card"
+        *ngFor="let mentor of topMentors; let i = index"
+        [attr.id]="'mentor_' + i">
+        <div class="name">
+          {{ mentor.username }}
+        </div>
+        <div class="stars">
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 1
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 2
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 3
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 4
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 5
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+        </div>
+        <div class="bio">
+          {{ mentor.bio }}
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="cards-container">
