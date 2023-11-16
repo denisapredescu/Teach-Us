@@ -1,5 +1,88 @@
 <div class="home-page">
   <div class="first-element"></div>
+
+  <div class="second-element">
+    <h2>How does tutoring at Teach Us work?</h2>
+    <div class="pre" *ngIf="rol === null">
+      <a routerLink="/register">Sign Up </a> <span>&#8594;</span>
+      <a> Tell us your expectation </a> <span>&#8594;</span>
+      <a> Find a suitable teacher or teach your favorite subject</a>
+    </div>
+    <div class="pre" *ngIf="rol === 'student'">
+      <a routerLink="/user-profile">Edit profile </a> <span>&#8594;</span>
+      <a routerLink="/mentors">Search teacher </a> <span>&#8594;</span>
+      <a> Learn </a> <span>&#8594;</span>
+    </div>
+
+    <div class="pre" *ngIf="rol === 'mentor'">
+      <a routerLink="/user-profile">Edit profile </a> <span>&#8594;</span>
+      <a routerLink="/register">Publish announcement </a> <span>&#8594;</span>
+      <a routerLink="/register">Accept students </a> <span>&#8594;</span>
+    </div>
+
+    <div class="pre"><span id="last-arrow">&#8594;</span> Have Fun </div>
+  </div>
+
+  <div class="top-container">
+    <div class="top-title">Top Mentors</div>
+    <div class="top-mentors">
+      <div
+        class="mentor-card"
+        *ngFor="let mentor of topMentors; let i = index"
+        [attr.id]="'mentor_' + i">
+        <div class="number"> #{{ i === 0 ? 2 : i === 1 ? 1 : 3 }} </div>
+        <div class="name">
+          {{ mentor.username }}
+        </div>
+        <div class="stars">
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 1
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 2
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 3
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 4
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+          <i
+            [ngClass]="
+              mentor.numberOfStars !== undefined && mentor.numberOfStars >= 5
+                ? 'black'
+                : 'grey'
+            "
+            >★</i
+          >
+        </div>
+        <div class="bio">
+          {{ mentor.bio }}
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="cards-container">
     <ng-container *ngFor="let card of cards">
       <app-home-card [title]="card.title" [image]="card.image">
