@@ -17,8 +17,12 @@ deep::mat-sidenav {
   font-size: 1rem;
 
   mat-icon {
-    margin-right: 8px;
+    padding: 0 30px 0 0;
+    color: white;
   }
+}
+a {
+  color: white !important;
 }
 
 .avatar {
