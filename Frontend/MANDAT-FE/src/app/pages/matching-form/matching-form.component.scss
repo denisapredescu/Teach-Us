@@ -1,0 +1,85 @@
+body,
+html {
+  overflow: hidden;
+}
+
+.background {
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  overflow-y: hidden !important;
+}
+
+.banner {
+  background-color: #e6e9fa;
+  height: 98vh;
+  width: 92vw;
+  margin: auto;
+  margin-top: 2vh;
+  box-shadow: 1px 1px 5px rgb(84, 82, 82), -1px -1px 5px rgb(84, 82, 82);
+  border-radius: 4px;
+}
+.header {
+  display: grid;
+  place-items: center;
+  padding: 2% 0px;
+}
+
+.form-fields {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
+  > * {
+    margin: 2% 6%;
+    width: 75%;
+  }
+  mat-form-field {
+    margin: 0;
+  }
+}
+#rating-title {
+    margin-bottom: 0;
+  }
+  .rating {
+    margin: 0px !important;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .stars-container:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+  }
+  .stars-container:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 35px;
+    color: #ccc;
+  }
+  .stars-container:not(:checked) > label:before {
+    content: "★ ";
+  }
+  .stars-container > input:checked ~ label {
+    color: #ffc700;
+  }
+  .stars-container:not(:checked) > label:hover,
+.stars-container:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.stars-container > input:checked + label:hover,
+.stars-container > input:checked + label:hover ~ label,
+.stars-container > input:checked ~ label:hover,
+.stars-container > input:checked ~ label:hover ~ label,
+.stars-container > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+p {
+    font-size: 25px;
+    display: grid;
+    place-items: center;
+    padding: 2% 0px;
+  }
+  

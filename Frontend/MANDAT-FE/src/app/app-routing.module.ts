@@ -13,6 +13,7 @@ import { CreateAnnouncementComponent } from "./pages/create-announcement/create-
 import { MyAnnouncementsComponent } from "./pages/my-announcements/my-announcements.component";
 import { AdminManageUsersComponent } from "./pages/admin-manage-users/admin-manage-users.component";
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
+import { MatchingFormComponent } from "./pages/matching-form/matching-form.component";
 
 const routes: Routes = [
   { path: "home", component: HomePageComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: "requests", component: MentorRequestsComponent },
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "mentors", component: MentorsComponent },
+  { path: "match", component: MatchingFormComponent },
   { path: "#popup-article", component: MyStudentsComponent },
   { path: "video-meeting", component: VideoMeetingComponent },
   { path: "**", component: NotFoundComponent },
