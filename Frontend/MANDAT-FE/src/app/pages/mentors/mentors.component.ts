@@ -30,102 +30,131 @@ export class MentorsComponent {
   ) {}
 
   ngOnInit(): void {
-    this.mentors = [
-      {
-        username: "ana",
-        email: "email",
-        phoneNumber: "0728282106",
-        passwordHash: "csdcsdcsc",
-        createdAt: new Date(),
-        isActive: true,
-        isDeleted: false,
-        bio: "bio",
-        educationalInstitution: "fmi",
-        subject: ["mate"],
-        reviewStatus: "nimic",
-        city: "buc",
-        county: "ro",
-        addressInfo: "dr taberei",
-        numberOfStars: 2,
-        price: [50],
-      },
-      {
-        username: "daniel",
-        email: "email",
-        phoneNumber: "0728282106",
-        passwordHash: "csdcsdcsc",
-        createdAt: new Date(),
-        isActive: true,
-        isDeleted: false,
-        bio: "bio",
-        educationalInstitution: "fmi",
-        subject: ["mate"],
-        reviewStatus: "nimic",
-        city: "buc",
-        county: "ro",
-        addressInfo: "dr taberei",
-        numberOfStars: 5,
-        price: [50],
-      },
-      {
-        username: "mircea",
-        email: "email",
-        phoneNumber: "0728282106",
-        passwordHash: "csdcsdcsc",
-        createdAt: new Date(),
-        isActive: true,
-        isDeleted: false,
-        bio: "bio",
-        educationalInstitution: "fmi",
-        subject: ["mate"],
-        reviewStatus: "nimic",
-        city: "buc",
-        county: "ro",
-        addressInfo: "dr taberei",
-        numberOfStars: 1,
-        price: [50],
-      },
-      {
-        username: "ileana",
-        email: "email",
-        phoneNumber: "0728282106",
-        passwordHash: "csdcsdcsc",
-        createdAt: new Date(),
-        isActive: true,
-        isDeleted: false,
-        bio: "bio",
-        educationalInstitution: "fmi",
-        subject: ["mate"],
-        reviewStatus: "nimic",
-        city: "buc",
-        county: "ro",
-        addressInfo: "dr taberei",
-        price: [50],
-      },
-      {
-        username: "cristi",
-        email: "email",
-        phoneNumber: "0728282106",
-        passwordHash: "csdcsdcsc",
-        createdAt: new Date(),
-        isActive: true,
-        isDeleted: false,
-        bio: "bio",
-        educationalInstitution: "fmi",
-        subject: ["mate"],
-        reviewStatus: "nimic",
-        city: "buc",
-        county: "ro",
-        addressInfo: "dr taberei",
-        numberOfStars: 5,
-        price: [50],
-      },
-    ];
 
-    console.log(this.mentors);
-    this.filterMentors();
-    this.sortByNameASC();
-    this.sortByNameAsc = true;
+    this.mentorsService.getAllMentors().subscribe(
+      (result:MentorModel[]) => {
+        this.mentors = result;
+        console.log(this.mentors);
+
+        if(this.cookie.get("matchCity")!="" ||
+         this.cookie.get("matchCounty")!="" ||
+         this.cookie.get("matchSubject")!="" ||
+         this.cookie.get("matchMeeting")!="" ||
+         this.cookie.get("matchStars")!="0")
+            {this.filterMentors();
+
+    this.cookie.delete("matchCity");
+    this.cookie.delete("matchCounty");
+    this.cookie.delete("matchSubject");
+    this.cookie.delete("matchMeeting");
+    this.cookie.delete("matchStars");
+            }
+        this.filteredList=this.mentors;
+        this.sortByNameASC();
+        this.sortByNameAsc = true;
+      },
+      (error)=>{
+        console.error(error);
+      }
+    );
+
+
+    // this.mentors = [
+    //   {
+    //     username: "ana",
+    //     email: "email",
+    //     phoneNumber: "0728282106",
+    //     passwordHash: "csdcsdcsc",
+    //     createdAt: new Date(),
+    //     isActive: true,
+    //     isDeleted: false,
+    //     bio: "bio",
+    //     educationalInstitution: "fmi",
+    //     subject: ["mate"],
+    //     reviewStatus: "nimic",
+    //     city: "buc",
+    //     county: "ro",
+    //     addressInfo: "dr taberei",
+    //     numberOfStars: 2,
+    //     price: [50],
+    //   },
+    //   {
+    //     username: "daniel",
+    //     email: "email",
+    //     phoneNumber: "0728282106",
+    //     passwordHash: "csdcsdcsc",
+    //     createdAt: new Date(),
+    //     isActive: true,
+    //     isDeleted: false,
+    //     bio: "bio",
+    //     educationalInstitution: "fmi",
+    //     subject: ["mate"],
+    //     reviewStatus: "nimic",
+    //     city: "buc",
+    //     county: "ro",
+    //     addressInfo: "dr taberei",
+    //     numberOfStars: 5,
+    //     price: [50],
+    //   },
+    //   {
+    //     username: "mircea",
+    //     email: "email",
+    //     phoneNumber: "0728282106",
+    //     passwordHash: "csdcsdcsc",
+    //     createdAt: new Date(),
+    //     isActive: true,
+    //     isDeleted: false,
+    //     bio: "bio",
+    //     educationalInstitution: "fmi",
+    //     subject: ["mate"],
+    //     reviewStatus: "nimic",
+    //     city: "buc",
+    //     county: "ro",
+    //     addressInfo: "dr taberei",
+    //     numberOfStars: 1,
+    //     price: [50],
+    //   },
+    //   {
+    //     username: "ileana",
+    //     email: "email",
+    //     phoneNumber: "0728282106",
+    //     passwordHash: "csdcsdcsc",
+    //     createdAt: new Date(),
+    //     isActive: true,
+    //     isDeleted: false,
+    //     bio: "bio",
+    //     educationalInstitution: "fmi",
+    //     subject: ["mate"],
+    //     reviewStatus: "nimic",
+    //     city: "buc",
+    //     county: "ro",
+    //     addressInfo: "dr taberei",
+    //     price: [50],
+    //   },
+    //   {
+    //     username: "cristi",
+    //     email: "email",
+    //     phoneNumber: "0728282106",
+    //     passwordHash: "csdcsdcsc",
+    //     createdAt: new Date(),
+    //     isActive: true,
+    //     isDeleted: false,
+    //     bio: "bio",
+    //     educationalInstitution: "fmi",
+    //     subject: ["mate"],
+    //     reviewStatus: "nimic",
+    //     city: "buc",
+    //     county: "ro",
+    //     addressInfo: "dr taberei",
+    //     numberOfStars: 5,
+    //     price: [50],
+    //   },
+    // ];
+
+    //console.log(this.mentors);
+    //this.filterMentors();
+    //this.sortByNameASC();
+   // this.sortByNameAsc = true;
     // this.mentorsService.getAllMentors().subscribe(
     //   (result: MentorModel[]) => {
     //     this.mentors = result;
@@ -205,6 +234,16 @@ export class MentorsComponent {
     this.mentors = this.filteredList;
 
     console.log(this.mentors);
+    // this.cookie.set("matchCity", "");
+    // this.cookie.set("matchCounty", "");
+    // this.cookie.set("matchSubject", "");
+    // this.cookie.set("matchMeeting", "");
+    // this.cookie.set("matchStars", "0");
+    // this.cookie.delete("matchCity");
+    // this.cookie.delete("matchCounty");
+    // this.cookie.delete("matchSubject");
+    // this.cookie.delete("matchMeeting");
+    // this.cookie.delete("matchStars");
   }
 
   public sortByNameASC() {
