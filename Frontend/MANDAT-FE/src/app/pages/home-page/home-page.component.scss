@@ -170,3 +170,15 @@ span {
   color: #4b52df;
   margin-bottom: 8px;
 }
+
+form {
+  align-self: center;
+  margin-bottom: 8px;
+  background-color: transparent;
+}
+select {
+  background: transparent; /* Set background to transparent */
+  border: none; /* Remove the border */
+  outline: none; /* Remove the outline */
+  /* Add any additional styles as needed */
+}

@@ -25,6 +25,14 @@
 
   <div class="top-container">
     <div class="top-title">Top Mentors</div>
+    <form (change)="onSubjectChange()">
+      <select name="cars" id="cars" [(ngModel)]="selectedSubject">
+        <option value="" disabled selected>Select a subject</option>
+        <option *ngFor="let subject of subjects" [value]="subject">{{
+          subject
+        }}</option>
+      </select>
+    </form>
     <div class="top-mentors">
       <div
         class="mentor-card"
