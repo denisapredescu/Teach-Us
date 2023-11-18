@@ -23,7 +23,9 @@ namespace MANDAT.DataAccess.Migrations
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MentorPdf = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     StudentPdf = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    checkStatus = table.Column<bool>(type: "bit", nullable: false)
+                    checkStatus = table.Column<bool>(type: "bit", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+
                 },
                 constraints: table =>
                 {

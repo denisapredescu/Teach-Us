@@ -20,6 +20,8 @@ namespace MANDAT.Entities.Entities
         public byte[] StudentPdf { get; set; }
 
         public Boolean checkStatus {get; set;}
+        public string Subject { get; set; } = null!;
+
         public virtual Student Student { get; set; }
         public virtual Mentor Mentor { get; set; }
     }
