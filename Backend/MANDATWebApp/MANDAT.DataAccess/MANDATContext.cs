@@ -101,6 +101,18 @@ namespace MANDAT.DataAccess
                 .HasOne(m => m.Mentor)
                 .WithMany(me => me.VideoMeetingsDetails)
                 .HasForeignKey(m => m.MentorId);
+
+            builder.Entity<Assessment>().HasKey(m => new { m.AssessmentId });
+            builder.Entity<Assessment>()
+                .HasOne(m => m.Student)
+                .WithMany(s => s.Assessments)
+                .HasForeignKey(m => m.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Assessment>()
+                .HasOne(m => m.Mentor)
+                .WithMany(me => me.Assessments)
+                .HasForeignKey(m => m.MentorId);
         }
 
     }
