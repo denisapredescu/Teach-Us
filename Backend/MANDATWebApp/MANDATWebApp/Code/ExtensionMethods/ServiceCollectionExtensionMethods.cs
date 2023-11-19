@@ -37,7 +37,7 @@ namespace MANDATWebApp.Code.ExtensionMethods
             services.AddScoped<IMatchingService, MatchingService>();
             services.AddScoped<IStudentManager, StudentService>();
             services.AddScoped<IVideoCallService, VideoCallService>();
-
+            services.AddScoped<IAssesmentService, AssesmentService>();
             // services.AddScoped<aici adaugam serviciu>();...
 
             return services;
