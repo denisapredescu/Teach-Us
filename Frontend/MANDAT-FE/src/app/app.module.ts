@@ -25,6 +25,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDividerModule } from "@angular/material/divider";
 import { HttpClientModule } from "@angular/common/http";
 import { NgApexchartsModule } from "ng-apexcharts";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import {
   SocialLoginModule,
@@ -53,6 +54,7 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
 import { AddParticipantsComponent } from "./pages/video-meeting/add-participants/add-participants.component";
 import { MatchingFormComponent } from './pages/matching-form/matching-form.component';
+import { MatNativeDateModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -83,12 +85,14 @@ import { MatchingFormComponent } from './pages/matching-form/matching-form.compo
     VideoMeetingComponent,
     AddParticipantsComponent,
     MatchingFormComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -105,7 +109,15 @@ import { MatchingFormComponent } from './pages/matching-form/matching-form.compo
     FormsModule,
     CommonModule,
     MatDialogModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    
+  ],
+  exports: [
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AcceptJSService,

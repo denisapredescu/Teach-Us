@@ -20,7 +20,7 @@ namespace MANDATWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewAssessment(CreateAssesmentDTO assessmentModel)
+        public IActionResult NewAssessment([FromForm] CreateAssesmentDTO assessmentModel)
         {
             var result = _assesment.NewAssessment(assessmentModel);
             return Ok(result);

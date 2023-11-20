@@ -1,0 +1,53 @@
+<div class="container">
+    <h1 class="title">
+        Add Assessment
+    </h1>
+    <form [formGroup]="addAssessmentForm" class="form">
+     <mat-form-field appearance="outline">
+            <mat-label>Teacher Email</mat-label>
+            <input matInput placeholder="Teacher Email" formControlName="mentorEmail" readonly/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Student Email</mat-label>
+            <input matInput placeholder="Student Email" formControlName="studentEmail" readonly/>
+        </mat-form-field> 
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Assessment Deadline</mat-label>
+            <input matInput placeholder="Assessment Deadline" formControlName="assessmentDeadline" readonly/>
+        </mat-form-field> -->
+        <mat-form-field appearance="outline">
+            <mat-label>Assessment Deadline</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Assessment Deadline" formControlName="assessmentDeadline" readonly/>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Subject</mat-label>
+            <input matInput placeholder="Subject" formControlName="subject"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Text</mat-label>
+            <textarea matInput placeholder="Text" formControlName="text"></textarea>
+        </mat-form-field>
+        <div [formGroup]="addAssessmentForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Mentor PDF</mat-label>
+              <input type="text" formControlName="mentorPdf" matInput readonly/>
+            </mat-form-field>
+          
+            <div>
+              <label for="fileInput">Choose File</label>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" formControlName="mentorPdf" style="display: none"/>
+            </div>
+          </div>
+          
+          
+          
+          
+          
+        
+    </form>
+
+    <button mat-raised-button (click)="saveAdd()" appHoverBtn>Save</button>
+</div>
