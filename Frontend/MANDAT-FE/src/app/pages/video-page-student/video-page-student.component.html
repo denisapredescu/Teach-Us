@@ -1,0 +1,47 @@
+<div class="background">
+<div class="header">
+    <h1 class="title">See videos from a teacher of yours</h1>
+</div>
+<form [formGroup]="mentorSubjectForm" (ngSubmit)="save()" autocomplete="off" class="p-1 border">
+    <div>
+        <br>
+        <div class="form-floating mb-3">
+            <label for="emailMentor">Teacher<span class="required">*</span></label>
+            <select formControlName="emailMentor" class="form-control" id="emailMentor">
+                <option *ngFor="let mentorSbj of mentorsSubject" [value]="mentorSbj.emailMentor">
+                    {{ mentorSbj.emailMentor }} </option>
+
+
+            </select>
+        </div>
+
+        <div class="form-floating mb-3">
+            <label for="subject">Subject<span class="required">*</span></label>
+            <select formControlName="subject" class="form-control" id="subject">
+                <option *ngFor="let mentorSubj of filteredSubjects" [value]="mentorSubj">
+                    {{ mentorSubj }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="d-grid mt-4 px-4">
+        <button class="btn btn-warning" type="submit"
+            style="font-weight: bold; margin-left:20%; margin-right: 20%;"
+            >See Video</button>
+    </div>
+    <br>
+</form>
+
+<div class="video-container">
+    <div *ngFor="let videoId of videoCodesDate" class="video-item">
+      <p class="video-date">{{ videoId.sendDate | date:'MMMM d, yyyy' }}</p>
+      <youtube-player
+        [videoId]="videoId.youtubeVideoCode"
+        suggestedQuality="highres"
+        [height]="600"
+        [width]="1080">
+      </youtube-player>
+    </div>
+</div>
+</div>
+  
