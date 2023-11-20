@@ -103,5 +103,19 @@ namespace MANDATWebApp.Controllers
             return Ok(result);
         }
 
+        [HttpGet("MatchedStudent/{mentorEmail}")]
+        public List<string> GetAllMatchingStudents(string mentorEmail)
+        {
+            var result = _matchingService.GetAllMatchingStudents(mentorEmail);
+            return result;
+        }
+
+        [HttpGet("MatchedTeachersSubject/{studentEmail}")]
+        public List<MentorsSubjectDTO> GetAllMatchingMentorsSubject(string studentEmail)
+        {
+            var result = _matchingService.GetAllMatchingMentorsSubject(studentEmail);
+            return result;
+        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace MANDAT.BusinessLogic.Services
 {
     public class MatchingService : BaseService, IMatchingService
     {
-        public MatchingService (ServiceDependencies dependencies) : base(dependencies) { }
+        public MatchingService(ServiceDependencies dependencies) : base(dependencies) { }
 
         public Match NewMatching(Guid mentorId, Guid studentId, string subject)
         {
@@ -35,7 +35,7 @@ namespace MANDAT.BusinessLogic.Services
             });
         }
 
-        public List<ViewStudentMatchDTO> AcceptedRequests (Guid studentId)
+        public List<ViewStudentMatchDTO> AcceptedRequests(Guid studentId)
         {
             return ExecuteInTransaction(uow =>
             {
@@ -109,7 +109,7 @@ namespace MANDAT.BusinessLogic.Services
                                   }).ToList();
             });
         }
-  //Mentor Requests
+        //Mentor Requests
 
         public List<ViewMentorMatchDTO> AllMentorRequests(string email)
         {
@@ -156,7 +156,7 @@ namespace MANDAT.BusinessLogic.Services
                                                          .Single(),
                                       MatchDate = x.MatchDate,
                                       Status = x.Status,
-                                                                        
+
                                   }).ToList();
             });
         }
@@ -242,12 +242,12 @@ namespace MANDAT.BusinessLogic.Services
                     request.Status = StatusMatch.Rejected.ToString();
                 }
 
-                
+
                 uow.Matches.Update(request);
                 uow.SaveChanges();
                 return true;
             });
-        
+
 
         }
         //delete request
@@ -270,7 +270,51 @@ namespace MANDAT.BusinessLogic.Services
             });
         }
 
+        public List<string> GetAllMatchingStudents(string mentorEmail)
+        {
+            return ExecuteInTransaction(uow =>
+            {
+                var mentor = uow.Mentors.Get().FirstOrDefault(s => s.User.Email == mentorEmail);
+                return uow.Matches.Get()
+                                  .Include(s => s.Student)
+                                  .Where(x => x.MentorId == mentor.Id)
+                                  .Select(x => uow.IdentityUsers.Get()
+                                                         .Where(u => u.Id.Equals(x.Student.Id))
+                                                         .Select(u => u.Email)
+                                                         .Single()).Distinct().ToList();
 
 
+            });
+
+
+
+        }
+
+
+        public List<MentorsSubjectDTO> GetAllMatchingMentorsSubject(string studentEmail)
+        {
+            return ExecuteInTransaction(uow =>
+            {
+                var student = uow.Students.Get().FirstOrDefault(s => s.User.Email == studentEmail);
+                return uow.Matches.Get()
+                                  .Include(s => s.Mentor)
+                                  .Where(x => x.StudentId == student.Id)
+                                  .Select(x => new MentorsSubjectDTO
+                                  {
+                                      EmailMentor = uow.IdentityUsers.Get()
+                                                          .Where(u => u.Id.Equals(x.Mentor.Id))
+                                                          .Select(u => u.Email)
+                                                          .Single(),
+                                      Subject = uow.Matches.Get()
+                                                            .Where(m => m.MentorId.Equals(x.MentorId) && m.StudentId.Equals(student.Id))
+                                                            .Select(m => m.Announcement.Subject)
+                                                            .ToList()
+
+                                  })
+                                  .AsEnumerable()
+                                  .Distinct(new MentorsSubjectDTOComp())
+                                  .ToList();
+            });
+        }
     }
 }

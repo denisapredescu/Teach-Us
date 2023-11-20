@@ -21,14 +21,15 @@ namespace MANDAT.DataAccess
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<VideoMeetingDetails> VideoMeetingsDetails { get; set; }
+        public DbSet<Video> Videos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             if (!builder.IsConfigured)
             {
                // builder.UseSqlServer("Data Source=DESKTOP-BOBO71Q\\MSSQLSERVER01;Initial Catalog=MandatProjectDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
-               builder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=MandatProjectDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-               //builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MandatProjectDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+               //builder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=MandatProjectDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+               builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MandatProjectDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
                //builder.UseSqlServer("Data Source=Boogers;Initial Catalog=MandatProjectDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -113,6 +114,18 @@ namespace MANDAT.DataAccess
                 .HasOne(m => m.Mentor)
                 .WithMany(me => me.Assessments)
                 .HasForeignKey(m => m.MentorId);
+
+            builder.Entity<Video>().HasKey(v => new { v.StudentId, v.MentorId, v.SendDate });
+            builder.Entity<Video>()
+                .HasOne(v => v.Student)
+                .WithMany(s => s.Videos)
+                .HasForeignKey(v => v.StudentId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Video>()
+                .HasOne(v => v.Mentor)
+                .WithMany(me => me.Videos)
+                .HasForeignKey(v => v.MentorId);
         }
 
     }

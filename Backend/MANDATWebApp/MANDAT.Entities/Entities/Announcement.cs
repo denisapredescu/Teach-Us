@@ -12,5 +12,6 @@ namespace MANDAT.Entities.Entities
 
         public Guid MentorId { get; set; }
         public virtual Mentor Mentor { get; set; }
+        public virtual ICollection<Match> Matches { get; set; }
     }
 }
