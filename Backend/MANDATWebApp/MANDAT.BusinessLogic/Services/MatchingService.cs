@@ -277,7 +277,7 @@ namespace MANDAT.BusinessLogic.Services
                 var mentor = uow.Mentors.Get().FirstOrDefault(s => s.User.Email == mentorEmail);
                 return uow.Matches.Get()
                                   .Include(s => s.Student)
-                                  .Where(x => x.MentorId == mentor.Id)
+                                  .Where(x => x.MentorId == mentor.Id && x.Status.Equals(StatusMatch.Accepted.ToString()))
                                   .Select(x => uow.IdentityUsers.Get()
                                                          .Where(u => u.Id.Equals(x.Student.Id))
                                                          .Select(u => u.Email)
@@ -298,7 +298,7 @@ namespace MANDAT.BusinessLogic.Services
                 var student = uow.Students.Get().FirstOrDefault(s => s.User.Email == studentEmail);
                 return uow.Matches.Get()
                                   .Include(s => s.Mentor)
-                                  .Where(x => x.StudentId == student.Id)
+                                  .Where(x => x.StudentId == student.Id && x.Status.Equals(StatusMatch.Accepted.ToString()))
                                   .Select(x => new MentorsSubjectDTO
                                   {
                                       EmailMentor = uow.IdentityUsers.Get()
@@ -306,7 +306,7 @@ namespace MANDAT.BusinessLogic.Services
                                                           .Select(u => u.Email)
                                                           .Single(),
                                       Subject = uow.Matches.Get()
-                                                            .Where(m => m.MentorId.Equals(x.MentorId) && m.StudentId.Equals(student.Id))
+                                                            .Where(m => m.MentorId.Equals(x.MentorId) && m.StudentId.Equals(student.Id) && m.Status.Equals(StatusMatch.Accepted.ToString()))
                                                             .Select(m => m.Announcement.Subject)
                                                             .ToList()
 

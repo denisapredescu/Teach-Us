@@ -53,7 +53,9 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
 import { AddParticipantsComponent } from "./pages/video-meeting/add-participants/add-participants.component";
 import { MatchingFormComponent } from './pages/matching-form/matching-form.component';
-
+import { VideoPageMentorComponent } from './pages/video-page-mentor/video-page-mentor.component';
+import { VideoPageStudentComponent } from './pages/video-page-student/video-page-student.component';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,6 +85,8 @@ import { MatchingFormComponent } from './pages/matching-form/matching-form.compo
     VideoMeetingComponent,
     AddParticipantsComponent,
     MatchingFormComponent,
+    VideoPageMentorComponent,
+    VideoPageStudentComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,8 @@ import { MatchingFormComponent } from './pages/matching-form/matching-form.compo
     FormsModule,
     CommonModule,
     MatDialogModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxYoutubePlayerModule.forRoot()
   ],
   providers: [
     AcceptJSService,

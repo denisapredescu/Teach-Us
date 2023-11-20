@@ -14,6 +14,8 @@ import { MyAnnouncementsComponent } from "./pages/my-announcements/my-announceme
 import { AdminManageUsersComponent } from "./pages/admin-manage-users/admin-manage-users.component";
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
 import { MatchingFormComponent } from "./pages/matching-form/matching-form.component";
+import { VideoPageMentorComponent } from "./pages/video-page-mentor/video-page-mentor.component";
+import { VideoPageStudentComponent } from "./pages/video-page-student/video-page-student.component";
 
 const routes: Routes = [
   { path: "home", component: HomePageComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: "match", component: MatchingFormComponent },
   { path: "#popup-article", component: MyStudentsComponent },
   { path: "video-meeting", component: VideoMeetingComponent },
+  { path:"video-mentor",component:VideoPageMentorComponent},
+  { path:"videos-student",component:VideoPageStudentComponent},
   { path: "**", component: NotFoundComponent },
 ];
 
