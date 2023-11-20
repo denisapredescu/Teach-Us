@@ -41,11 +41,11 @@ namespace MANDAT.BusinessLogic.Services
                 assesment.AssessmentId = Guid.NewGuid();
                 assesment.StudentId = student.Id;
                 assesment.MentorId = mentor.Id;
-                assesment.AssessmentDeadline = assesment.AssessmentDeadline;
+                assesment.AssessmentDeadline = assesmentDTO.AssessmentDeadline;
                 assesment.AssessmentCreationDate = DateTime.UtcNow;
                 assesment.checkStatus = false;
-                assesment.Text = assesment.Text;
-                assesment.Subject = assesment.Subject;
+                assesment.Text = assesmentDTO.Text;
+                assesment.Subject = assesmentDTO.Subject;
                 uow.Assessments.Insert(assesment);
                 uow.SaveChanges();
                 return assesment;
