@@ -20,6 +20,8 @@ namespace MANDAT.BusinessLogic.Interfaces
         List<ViewMentorMatchDTO> MentorRejectedRequests(string email);
         bool RespondToRequests(string mentorEmail, string studentEmail, bool response, string subject);
         bool DeleteRequests(Guid mentorId, Guid studentId, string subject);
+        List<string> GetAllMatchingStudents(string mentorEmail);
+        List<MentorsSubjectDTO> GetAllMatchingMentorsSubject(string studentEmail);
 
     }
 }

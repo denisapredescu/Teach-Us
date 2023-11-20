@@ -11,7 +11,7 @@ namespace MANDAT.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+           migrationBuilder.CreateTable(
                 name: "IdentityRoles",
                 columns: table => new
                 {
