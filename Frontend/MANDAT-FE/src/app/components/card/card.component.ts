@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { MentorService } from "src/app/services/mentor.service";
 import { StudentModel } from "../../models/student-model";
 import { MentorModel } from "src/app/models/mentor-model";
+import { DialogAddReviewByMentorComponent } from "../shared/dialog-add-review-by-mentor/dialog-add-review-by-mentor.component";
 
 @Component({
   selector: "app-card",
@@ -39,6 +40,22 @@ export class CardComponent {
     dialogConfig.data = { data: person };
     const dialog = this.dialog.open(
       DialogAddReviewByStudentComponent,
+      dialogConfig
+    );
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        window.location.reload();
+      }
+    });
+  }
+
+  public addReviewForMentor(person: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "550px";
+    dialogConfig.height = "770px";
+    dialogConfig.data = { data: person };
+    const dialog = this.dialog.open(
+      DialogAddReviewByMentorComponent,
       dialogConfig
     );
     dialog.afterClosed().subscribe(result => {

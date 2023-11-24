@@ -11,7 +11,6 @@ namespace MANDAT.BusinessLogic.Interfaces
     public interface IReview
     {
         Review NewReview(NewReviewModel reviewModel);
-        Task<bool> DeleteReview(Guid id);
         List<ViewMentorReview> ViewMentorReviewsDesc(Guid mentorId);
         List<ViewMentorReview> ViewMentorReviewsAsc(Guid mentorId);
         List<ViewStudentReview> ViewStudentReviewsDesc(Guid studentId);
@@ -25,5 +24,6 @@ namespace MANDAT.BusinessLogic.Interfaces
         double GetMentorStarsAverageRatingGood(Guid id);
         double GetMentorStarsAverageRatingByEmail(string email);
         double GetStudentStarsAverageRatingByEmail(string email);
+        bool DeleteReview(Guid id);
     }
 }

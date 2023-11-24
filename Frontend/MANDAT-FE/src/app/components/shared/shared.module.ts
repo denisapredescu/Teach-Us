@@ -9,11 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table'
 import { MatIconModule } from '@angular/material/icon';
 import { DialogAddReviewByStudentComponent } from './dialog-add-review-by-student/dialog-add-review-by-student.component';
+import { DialogAddReviewByMentorComponent } from './dialog-add-review-by-mentor/dialog-add-review-by-mentor.component';
+import { DialogViewMentorReviewsComponent } from './dialog-view-mentor-reviews/dialog-view-mentor-reviews.component';
 
 @NgModule({
   declarations: [
     DialogViewStudentReviewsComponent,
-    DialogAddReviewByStudentComponent
+    DialogAddReviewByStudentComponent,
+    DialogAddReviewByMentorComponent,
+    DialogViewMentorReviewsComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { DialogAddReviewByStudentComponent } from './dialog-add-review-by-studen
   ],
   entryComponents:[
     DialogViewStudentReviewsComponent,
-    DialogAddReviewByStudentComponent
+    DialogAddReviewByStudentComponent,
+    DialogAddReviewByMentorComponent,
+    DialogViewMentorReviewsComponent
   ]
 })
 export class SharedModule { }
