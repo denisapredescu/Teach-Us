@@ -56,6 +56,7 @@ import { MatchingFormComponent } from './pages/matching-form/matching-form.compo
 import { VideoPageMentorComponent } from './pages/video-page-mentor/video-page-mentor.component';
 import { VideoPageStudentComponent } from './pages/video-page-student/video-page-student.component';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { SettingsComponent } from "./pages/settings/settings.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,6 +88,7 @@ import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
     MatchingFormComponent,
     VideoPageMentorComponent,
     VideoPageStudentComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

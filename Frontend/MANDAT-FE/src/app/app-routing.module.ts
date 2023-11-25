@@ -16,6 +16,7 @@ import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.compo
 import { MatchingFormComponent } from "./pages/matching-form/matching-form.component";
 import { VideoPageMentorComponent } from "./pages/video-page-mentor/video-page-mentor.component";
 import { VideoPageStudentComponent } from "./pages/video-page-student/video-page-student.component";
+import { SettingsComponent } from "./pages/settings/settings.component";
 
 const routes: Routes = [
   { path: "home", component: HomePageComponent },
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: "video-meeting", component: VideoMeetingComponent },
   { path:"video-mentor",component:VideoPageMentorComponent},
   { path:"videos-student",component:VideoPageStudentComponent},
+  { path: "settings/:email", component: SettingsComponent },
+  { path: "settings", component: SettingsComponent },
   { path: "**", component: NotFoundComponent },
 ];
 

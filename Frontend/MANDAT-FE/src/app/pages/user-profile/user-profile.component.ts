@@ -198,4 +198,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  public delete(email: any): void{
+    console.log(email);
+    this.userAccountService.SoftDeleteUserByEmail(email).subscribe(result => {
+      console.log(result);
+    });
+  }
 }
