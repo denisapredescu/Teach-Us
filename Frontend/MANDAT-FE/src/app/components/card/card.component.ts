@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { MentorService } from "src/app/services/mentor.service";
 import { StudentModel } from "../../models/student-model";
 import { MentorModel } from "src/app/models/mentor-model";
+import { DialogAddAssessmentByTeacherComponent } from "../shared/dialog-add-assessment-by-teacher/dialog-add-assessment-by-teacher.component";
 import { DialogAddReviewByMentorComponent } from "../shared/dialog-add-review-by-mentor/dialog-add-review-by-mentor.component";
 
 @Component({
@@ -18,6 +19,9 @@ export class CardComponent {
   @Input() status: boolean;
   public cookieSubject: string | null;
   public email: string | null;
+  public emailMMentor: string | null;
+  public emailSStudent: string | null;
+  public Ssubject: string | null;
   public varTest: boolean = false; /// to verify if the page is access by a mentor or by the student; in backend I verify if the user is mentor or student to find the number of stars
   constructor(
     private dialog: MatDialog,
@@ -65,8 +69,35 @@ export class CardComponent {
     });
   }
 
+  public addAssessment(person: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "550px";
+    dialogConfig.height = "770px";
+    dialogConfig.data = { data: person };
+    const dialog = this.dialog.open(
+      DialogAddAssessmentByTeacherComponent,
+      dialogConfig
+    );
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        window.location.reload();
+      }
+    });
+  }
+  public viewHomework(person:any){
+    this.emailSStudent = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    this.emailMMentor = person.email;
+    localStorage.setItem('EmailMMentor', this.emailMMentor?.split(',')[0]!);
+    localStorage.setItem('EmailSStudent', this.emailSStudent!);
+    localStorage.setItem('Subject',  person.subject);
+    this.router.navigate([`/homework`]);
+   
+    
+  }
+
+
   public chooseMentor(person: any) {
-    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     
     if (this.email === "" || this.email === null) {
       this.router.navigate(["/login"]);

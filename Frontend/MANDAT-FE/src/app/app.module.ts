@@ -25,6 +25,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDividerModule } from "@angular/material/divider";
 import { HttpClientModule } from "@angular/common/http";
 import { NgApexchartsModule } from "ng-apexcharts";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import {
   SocialLoginModule,
@@ -57,6 +58,10 @@ import { VideoPageMentorComponent } from './pages/video-page-mentor/video-page-m
 import { VideoPageStudentComponent } from './pages/video-page-student/video-page-student.component';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { SettingsComponent } from "./pages/settings/settings.component";
+import { MatNativeDateModule } from "@angular/material/core";
+import { HomeworkComponent } from './pages/homework/homework.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,12 +94,16 @@ import { SettingsComponent } from "./pages/settings/settings.component";
     VideoPageMentorComponent,
     VideoPageStudentComponent,
     SettingsComponent
+    HomeworkComponent,
+    AboutUsComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -113,6 +122,15 @@ import { SettingsComponent } from "./pages/settings/settings.component";
     MatDialogModule,
     NgApexchartsModule,
     NgxYoutubePlayerModule.forRoot()
+    NgApexchartsModule,
+    
+  ],
+  exports: [
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AcceptJSService,

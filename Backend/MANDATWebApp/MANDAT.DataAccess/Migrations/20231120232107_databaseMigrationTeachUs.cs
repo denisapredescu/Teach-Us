@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MANDAT.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDbTablesAndAddOnDeleteRestriction : Migration
+    public partial class databaseMigrationTeachUs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -142,8 +142,7 @@ namespace MANDAT.DataAccess.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
                     MeetingType = table.Column<bool>(type: "bit", nullable: false),
-                    MentorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    MentorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,11 +153,38 @@ namespace MANDAT.DataAccess.Migrations
                         principalTable: "Mentors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Assessment",
+                columns: table => new
+                {
+                    AssessmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MentorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AssessmentCreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AssessmentDeadline = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MentorPdf = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    StudentPdf = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    checkStatus = table.Column<bool>(type: "bit", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assessment", x => x.AssessmentId);
                     table.ForeignKey(
-                        name: "FK_Announcements_Students_StudentId",
+                        name: "FK_Assessment_Mentors_MentorId",
+                        column: x => x.MentorId,
+                        principalTable: "Mentors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Assessment_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -255,8 +281,13 @@ namespace MANDAT.DataAccess.Migrations
                 column: "MentorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Announcements_StudentId",
-                table: "Announcements",
+                name: "IX_Assessment_MentorId",
+                table: "Assessment",
+                column: "MentorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Assessment_StudentId",
+                table: "Assessment",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
@@ -299,6 +330,9 @@ namespace MANDAT.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Announcements");
+
+            migrationBuilder.DropTable(
+                name: "Assessment");
 
             migrationBuilder.DropTable(
                 name: "IdentityUserTokens");

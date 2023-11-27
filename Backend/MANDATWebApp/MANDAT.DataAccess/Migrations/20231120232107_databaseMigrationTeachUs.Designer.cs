@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MANDAT.DataAccess.Migrations
 {
     [DbContext(typeof(MANDATContext))]
-    [Migration("20231102224357_AssessmentsM")]
-    partial class AssessmentsM
+    [Migration("20231120232107_databaseMigrationTeachUs")]
+    partial class databaseMigrationTeachUs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,10 @@ namespace MANDAT.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -123,7 +127,7 @@ namespace MANDAT.DataAccess.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Assessments");
+                    b.ToTable("Assessment");
                 });
 
             modelBuilder.Entity("MANDAT.Entities.Entities.IdentityRole", b =>

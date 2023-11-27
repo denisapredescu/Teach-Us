@@ -94,5 +94,20 @@
   },
   "cli": {
     "analytics": false
-  }
+  },
+  "styles": [
+    "src/styles.css",
+    "node_modules/bootstrap/dist/css/bootstrap.min.css"
+  ],
+  "styles": [
+    "src/styles.css",
+    "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+  ],
+  "scripts": [
+    "node_modules/turn.js/turn.min.js"
+  ],
+  "scripts": [
+    "node_modules/jquery/dist/jquery.min.js"
+  ]
+    
 }

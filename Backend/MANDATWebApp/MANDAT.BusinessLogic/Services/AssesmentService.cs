@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MANDAT.BusinessLogic.Services
 {
@@ -37,6 +38,7 @@ namespace MANDAT.BusinessLogic.Services
                 if (assesmentDTO.MentorPdf != null)
                 {
                     assesment.MentorPdf = ConvertFileToByteArray(assesmentDTO.MentorPdf);
+                    assesment.StudentPdf = ConvertFileToByteArray(assesmentDTO.MentorPdf);
                 }
                 assesment.AssessmentId = Guid.NewGuid();
                 assesment.StudentId = student.Id;
@@ -76,7 +78,7 @@ namespace MANDAT.BusinessLogic.Services
         {
             return ExecuteInTransaction(uow =>
             {
-                var studentId = uow.Students.Get().FirstOrDefault(s => s.User.Email == studentEmail);
+                var studentId = uow.Students.Get().FirstOrDefault(s => s.User.Email == studentEmail).Id;
 
                 var assesm = uow.Assessments
                                 .Get()
@@ -85,6 +87,7 @@ namespace MANDAT.BusinessLogic.Services
                                 .Where(assesment => assesment.StudentId.Equals(studentId) && assesment.Subject.Equals(subject))//.Where(assesment => assesment.StudentId.Equals(studentId) && assesment.Status.Equals("1"))//
                                 .Select(assesment => new AssesmentViewDTO
                                 {
+                                    AssessmentId = assesment.AssessmentId,
                                     MentorEmail = assesment.Mentor.User.Email,
                                     StudentEmail = studentEmail,
                                     AssessmentDeadline = assesment.AssessmentDeadline,
@@ -95,7 +98,7 @@ namespace MANDAT.BusinessLogic.Services
                                     Materie = assesment.Subject
                                 })
                                 .ToList();
-                var result = assesm.OrderByDescending(o => o.AssesmentDate).ToList();
+                var result = assesm.OrderByDescending(o => o.AssessmentDeadline).ToList();
                 return result;
             });
         }
@@ -103,16 +106,17 @@ namespace MANDAT.BusinessLogic.Services
         {
             return ExecuteInTransaction(uow =>
             {
-                 var studentId = uow.Students.Get().FirstOrDefault(s => s.User.Email == studentEmail);
-                var mentorId = uow.Mentors.Get().FirstOrDefault(s => s.User.Email == mentorEmail);
-           
+                 var studentId = uow.IdentityUsers.Get().Where(s => s.Email.Equals(studentEmail)).Select(s => s.Id).Single();
+                var mentorId = uow.IdentityUsers.Get().Where(s => s.Email.Equals(mentorEmail)).Select(s => s.Id).Single();
+
                 var assesm = uow.Assessments
                                 .Get()
                                 .Include(m => m.Mentor)
                                 .Include(s => s.Student)
-                                .Where(assesment => assesment.StudentId.Equals(studentId) && assesment.MentorId.Equals(mentorId))//.Where(assesment => assesment.StudentId.Equals(studentId) && assesment.Status.Equals("1"))//
+                                .Where(assesment => assesment.StudentId.Equals(studentId) && assesment.MentorId.Equals(mentorId) && assesment.Subject.Equals(subject))//.Where(assesment => assesment.StudentId.Equals(studentId) && assesment.Status.Equals("1"))//
                                 .Select(assesment => new AssesmentViewDTO
                                 {
+                                    AssessmentId = assesment.AssessmentId,
                                     MentorEmail = mentorEmail,
                                     StudentEmail = studentEmail,
                                     AssessmentDeadline = assesment.AssessmentDeadline,
@@ -123,7 +127,7 @@ namespace MANDAT.BusinessLogic.Services
                                     Materie = assesment.Subject
                                 })
                                 .ToList();
-                var result = assesm.OrderByDescending(o => o.AssesmentDate).ToList();  
+                var result = assesm.OrderByDescending(o => o.AssessmentDeadline).ToList();  
             return result;
         });
         }

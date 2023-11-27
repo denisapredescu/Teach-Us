@@ -20,7 +20,7 @@ namespace MANDATWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewAssessment(CreateAssesmentDTO assessmentModel)
+        public IActionResult NewAssessment([FromForm] CreateAssesmentDTO assessmentModel)
         {
             var result = _assesment.NewAssessment(assessmentModel);
             return Ok(result);
@@ -40,7 +40,7 @@ namespace MANDATWebApp.Controllers
         {
             var result = new List<AssesmentViewDTO>();
 
-            result = _assesment.GetAssessmentByStudentTeacher(studentEmail, mentorEmail, subject);
+            result = _assesment.GetAssessmentByStudentTeacher(studentEmail, mentorEmail.Split(',')[0], subject);
             return result;
         }
 
@@ -55,23 +55,23 @@ namespace MANDATWebApp.Controllers
             return NoContent();
         }
 
-        [HttpPatch("checkAssessment/{assesmentId},{check}")]
-        public IActionResult CheckAssessment([FromRoute] Guid assesmentId, bool check)
+        [HttpPatch("checkAssessment")]
+        public IActionResult CheckAssessment([FromForm] Guid assessmentId, [FromForm] bool check)
         {
         
-            var result = _assesment.CheckAssessment(assesmentId, check);
+            var result = _assesment.CheckAssessment(assessmentId, check);
             return Ok(result);
         }
 
 
-        [HttpPatch("addDoneAssessment/{assesmentId},{pdf}")]
-        public IActionResult AddDoneAssessment([FromRoute] Guid assesmentId, IFormFile pdf)
+        [HttpPatch("addDoneAssessment")]
+        public IActionResult AddDoneAssessment([FromForm] Guid assessmentId, [FromForm] IFormFile studentPdf)
         {
-            if (pdf == null)
+            if (studentPdf == null)
             {
                 return BadRequest();
             }
-            var result = _assesment.AddDoneAssessment(assesmentId, pdf);
+            var result = _assesment.AddDoneAssessment(assessmentId, studentPdf);
             return Ok(result);
         }
     }
