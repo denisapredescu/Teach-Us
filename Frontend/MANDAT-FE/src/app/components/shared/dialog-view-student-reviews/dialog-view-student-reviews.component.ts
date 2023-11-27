@@ -14,7 +14,7 @@ export class DialogViewStudentReviewsComponent implements OnInit{
 
   public reviews: MyReviews[]=[];
   public reviewEdit: ReviewEdit[] = [];
-  public displayedColumns = ['message','starsNumber', 'studentName','edit'];
+  public displayedColumns = ['message','starsNumber', 'studentName','edit', 'delete'];
   public emailUser: string | null;
   public role: string  | null = '';
   roles: Roles = new Roles();
@@ -37,7 +37,7 @@ export class DialogViewStudentReviewsComponent implements OnInit{
         (error) => {
           console.error(error);
         });
-      this.displayedColumns = ['message','starsNumber', 'studentName','edit'];
+      this.displayedColumns = ['message','starsNumber', 'studentName','edit', 'delete'];
     }  
   }
 
@@ -59,6 +59,20 @@ export class DialogViewStudentReviewsComponent implements OnInit{
       );
     }
   }
+
+  public delete(id: any): void{
+    this.reviewService.deleteReview(id).subscribe(result => {
+      console.log(result);
+      this.reviewService.getAllMentorReviews(this.emailUser!).subscribe(
+        (result: MyReviews[]) => {
+          this.reviews = result;
+        },
+        (error) => {
+          console.error(error);
+        });
+    });
+  }
+  
 }
 
 

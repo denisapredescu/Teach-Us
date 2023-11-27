@@ -78,6 +78,22 @@
         >
       </mat-form-field>
 
+      <mat-form-field class="example-form" *ngIf="isSettingsPage()">
+        <mat-label>{{ "Repeat Password" | titlecase }}</mat-label>
+        <input
+          matInput
+          name="repeat password"
+          required
+          pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"
+          value=""
+          type="password"
+          [(ngModel)]="model.repeatPassword" />
+        <mat-error *ngIf="model.password !== model.repeatPassword"
+          >The repeated password should be the same as the new
+          password.</mat-error
+        >
+      </mat-form-field>
+
       <mat-form-field class="example-form">
         <mat-label>{{ "County" | titlecase }}</mat-label>
         <input
@@ -144,7 +160,7 @@
           <mat-option
             *ngFor="let accountType of accountTypes"
             [value]="accountType">
-            {{ accountType === "Mentor" ? "Teacher": accountType }}
+            {{ accountType }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -156,6 +172,14 @@
         [disabled]="!emailFormControl.valid || (isRegisterPage() && !passwordFormControl.valid)"
         [routerLink]="[accountFormDetails.submitButton.link]">
         {{ accountFormDetails.submitButton.caption | titlecase }}
+      </button>
+
+      <button
+        mat-raised-button
+        *ngIf="isSettingsPage()"
+        class="delete-button"
+        (click)="delete()">
+        {{ "Delete Account" | titlecase }}
       </button>
     </div>
   </div>

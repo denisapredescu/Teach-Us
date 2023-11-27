@@ -57,9 +57,11 @@
 
   <div class="menu-box" *ngIf="isPersonalProfile">
     <ng-container *ngIf="roles.isMentor(rol)">
+      <a routerLink="/settings">{{ "Settings" | titlecase }}</a> 
       <a routerLink="/video-meeting">{{ "Video Link" | titlecase }}</a>
       <a routerLink="/my-students">{{ "My Students" | titlecase }}</a>
       <a routerLink="/my-announcements">{{ "My Announcements" | titlecase }}</a>
+      <a routerLink="/video-mentor">{{ "Add Video" | titlecase }}</a>
       <a
         routerLink="/requests"
         [ngClass]="notifications > 0 ? 'notifications' : ''"
@@ -67,8 +69,11 @@
       >
     </ng-container>
     <ng-container *ngIf="roles.isStudent(rol)">
+      <a routerLink="/settings">{{ "Settings" | titlecase }}</a> 
       <a routerLink="/my-mentors">{{ "My Teachers" | titlecase }}</a>
       <a routerLink="/match">{{ "Find a Teacher" | titlecase }}</a> 
+      <a routerLink="/videos-student">{{ "Watch Videos" | titlecase }}</a>
+
     </ng-container>
   </div>
 </div>

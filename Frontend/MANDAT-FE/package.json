@@ -34,6 +34,7 @@
     "material-design-icons-iconfont": "^6.7.0",
     "ng-apexcharts": "^1.8.0",
     "ngx-cookie-service": "^15.0.0",
+    "ngx-youtube-player": "^12.0.2",
     "random-words": "^1.2.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

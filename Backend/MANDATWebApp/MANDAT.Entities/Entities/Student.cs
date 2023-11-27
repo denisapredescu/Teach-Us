@@ -19,5 +19,6 @@ namespace MANDAT.Entities.Entities
         public virtual ICollection<Match> Matches { get; set; }
         public virtual ICollection<VideoMeetingDetails> VideoMeetingsDetails { get; set; }
         public virtual ICollection<Assessment> Assessments { get; set; }
+        public virtual ICollection<Video> Videos { get; set; }
     }
 }

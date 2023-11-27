@@ -30,3 +30,19 @@ export const RegisterAccountFormDetails: AccountFormDetails = {
     caption: "Sign Up",
   },
 };
+
+export const SettingsAccountFormDetails: AccountFormDetails = {
+  pageUrl: "/settings",
+  pageTitle: "Settings",
+  subTitle: {
+    question: "Changed your mind?",
+    button: {
+      link: "/user-profile",
+      caption: "Go back",
+    },
+  },
+  submitButton: {
+    link: "/user-profile",
+    caption: "Save Settings",
+  },
+};

@@ -31,6 +31,15 @@
         
         </ng-container>
 
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            
+            <td class="delete-action" mat-cell *matCellDef="let element">
+              <button (click)="delete(element.id)">❌</button>
+            </td>
+        </ng-container>
+          
+
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

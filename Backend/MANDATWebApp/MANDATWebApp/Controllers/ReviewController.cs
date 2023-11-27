@@ -1,5 +1,6 @@
 ﻿using MANDAT.BusinessLogic.Interfaces;
 using MANDAT.BusinessLogic.Models;
+using MANDAT.BusinessLogic.Services;
 using MANDATWebApp.Code.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -99,13 +100,10 @@ namespace MANDATWebApp.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteReviewAsync(Guid idReview)
+        public IActionResult DeleteReviewAsync(Guid id)
         {
-            if(!await _review.DeleteReview(idReview))
-            {
-                return NotFound();
-            }
-            return NoContent();
+            var result = _review.DeleteReview(id);
+            return Ok(result); 
         }
 
         [HttpPatch("editReview/{id},{message}")]

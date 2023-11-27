@@ -179,8 +179,3 @@ namespace MANDAT.BusinessLogic.Services
 
     }
 }
-
-
-//UPDATE Assessment
-//SET MentorId = '87847d3c-7bb9-4fc3-9c01-0965dc204a4a'
-//WHERE AssessmentId = '70ab5065-b33a-4fea-bf3a-a347d508d695'

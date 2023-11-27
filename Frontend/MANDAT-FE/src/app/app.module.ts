@@ -54,6 +54,10 @@ import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-mana
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
 import { AddParticipantsComponent } from "./pages/video-meeting/add-participants/add-participants.component";
 import { MatchingFormComponent } from './pages/matching-form/matching-form.component';
+import { VideoPageMentorComponent } from './pages/video-page-mentor/video-page-mentor.component';
+import { VideoPageStudentComponent } from './pages/video-page-student/video-page-student.component';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { SettingsComponent } from "./pages/settings/settings.component";
 import { MatNativeDateModule } from "@angular/material/core";
 import { HomeworkComponent } from './pages/homework/homework.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
@@ -87,6 +91,9 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     VideoMeetingComponent,
     AddParticipantsComponent,
     MatchingFormComponent,
+    VideoPageMentorComponent,
+    VideoPageStudentComponent,
+    SettingsComponent
     HomeworkComponent,
     AboutUsComponent,
 
@@ -113,6 +120,8 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     FormsModule,
     CommonModule,
     MatDialogModule,
+    NgApexchartsModule,
+    NgxYoutubePlayerModule.forRoot()
     NgApexchartsModule,
     
   ],
