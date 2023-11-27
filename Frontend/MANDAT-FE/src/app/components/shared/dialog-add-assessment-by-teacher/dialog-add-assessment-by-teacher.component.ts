@@ -52,6 +52,10 @@ export class DialogAddAssessmentByTeacherComponent implements OnInit {
       });
     }
   }
+  formatDateForServer(date: Date): string {
+
+    return date.toISOString();
+  }
   
 
   saveAdd(): void {
@@ -60,7 +64,8 @@ export class DialogAddAssessmentByTeacherComponent implements OnInit {
 
     formData.append('mentorEmail', this.addAssessmentForm.get('mentorEmail')!.value);
     formData.append('studentEmail', this.addAssessmentForm.get('studentEmail')!.value);
-    formData.append('assessmentDeadline', this.addAssessmentForm.get('assessmentDeadline')!.value);
+    //formData.append('assessmentDeadline', this.addAssessmentForm.get('assessmentDeadline')!.value);
+    formData.append('assessmentDeadline', this.formatDateForServer(this.addAssessmentForm.get('assessmentDeadline')!.value));
     formData.append('subject', this.addAssessmentForm.get('subject')!.value);
     formData.append('text', this.addAssessmentForm.get('text')!.value);
 

@@ -103,6 +103,7 @@
       >Teachers</a
     >
   </button>
+ 
   <button mat-button class="menu-button" onclick="">
     <mat-icon>person</mat-icon>
     <a (click)="closeSidenavAndNavigate('/login')">Log In</a>
@@ -111,4 +112,9 @@
     <mat-icon>info</mat-icon>
     <a (click)="closeSidenavAndNavigate('/register')">Register</a>
   </button>
+  
 </div>
+<button mat-button class="menu-button">
+  <mat-icon>library_books</mat-icon>
+  <a (click)="closeSidenavAndNavigate('/about-us')">About Us</a>
+</button>

@@ -55,6 +55,8 @@ import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.compo
 import { AddParticipantsComponent } from "./pages/video-meeting/add-participants/add-participants.component";
 import { MatchingFormComponent } from './pages/matching-form/matching-form.component';
 import { MatNativeDateModule } from "@angular/material/core";
+import { HomeworkComponent } from './pages/homework/homework.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { MatNativeDateModule } from "@angular/material/core";
     VideoMeetingComponent,
     AddParticipantsComponent,
     MatchingFormComponent,
+    HomeworkComponent,
+    AboutUsComponent,
 
   ],
   imports: [

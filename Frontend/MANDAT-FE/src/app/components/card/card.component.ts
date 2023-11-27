@@ -18,6 +18,9 @@ export class CardComponent {
   @Input() status: boolean;
   public cookieSubject: string | null;
   public email: string | null;
+  public emailMMentor: string | null;
+  public emailSStudent: string | null;
+  public Ssubject: string | null;
   public varTest: boolean = false; /// to verify if the page is access by a mentor or by the student; in backend I verify if the user is mentor or student to find the number of stars
   constructor(
     private dialog: MatDialog,
@@ -64,9 +67,20 @@ export class CardComponent {
       }
     });
   }
+  public viewHomework(person:any){
+    this.emailSStudent = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    this.emailMMentor = person.email;
+    localStorage.setItem('EmailMMentor', this.emailMMentor?.split(',')[0]!);
+    localStorage.setItem('EmailSStudent', this.emailSStudent!);
+    localStorage.setItem('Subject',  person.subject);
+    this.router.navigate([`/homework`]);
+   
+    
+  }
+
 
   public chooseMentor(person: any) {
-    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");;
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     
     if (this.email === "" || this.email === null) {
       this.router.navigate(["/login"]);
