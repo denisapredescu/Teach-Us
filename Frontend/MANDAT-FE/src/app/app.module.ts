@@ -56,11 +56,12 @@ import { AddParticipantsComponent } from "./pages/video-meeting/add-participants
 import { MatchingFormComponent } from './pages/matching-form/matching-form.component';
 import { VideoPageMentorComponent } from './pages/video-page-mentor/video-page-mentor.component';
 import { VideoPageStudentComponent } from './pages/video-page-student/video-page-student.component';
-import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+// import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { SettingsComponent } from "./pages/settings/settings.component";
 import { MatNativeDateModule } from "@angular/material/core";
 import { HomeworkComponent } from './pages/homework/homework.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { NgxYoutubePlayerModule } from "ngx-youtube-player";
 
 @NgModule({
   declarations: [
@@ -93,7 +94,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     MatchingFormComponent,
     VideoPageMentorComponent,
     VideoPageStudentComponent,
-    SettingsComponent
+    SettingsComponent,
     HomeworkComponent,
     AboutUsComponent,
 
@@ -121,7 +122,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     CommonModule,
     MatDialogModule,
     NgApexchartsModule,
-    NgxYoutubePlayerModule.forRoot()
+    NgxYoutubePlayerModule.forRoot(),
     NgApexchartsModule,
     
   ],
