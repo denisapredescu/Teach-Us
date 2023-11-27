@@ -28,14 +28,5 @@ namespace MANDAT.BusinessLogic.Interfaces
 
         bool AddDoneAssessment( Guid assesmentId, IFormFile pdf);
 
-        /*   List<ViewMentorReview> ViewMentorReviewsDesc(Guid mentorId);
-           List<ViewMentorReview> ViewMentorReviewsAsc(Guid mentorId);
-           List<ViewStudentReview> ViewStudentReviewsDesc(Guid studentId);
-           List<ViewStudentReview> ViewStudentReviewsAsc(Guid studentId); Review NewReview(NewReviewModel reviewModel);
-           Task<bool> DeleteReview(Guid id);
-           List<ViewMentorReview> ViewMentorReviewsDesc(Guid mentorId);
-           List<ViewMentorReview> ViewMentorReviewsAsc(Guid mentorId);
-           List<ViewStudentReview> ViewStudentReviewsDesc(Guid studentId);
-           List<ViewStudentReview> ViewStudentReviewsAsc(Guid studentId); */
     }
 }
