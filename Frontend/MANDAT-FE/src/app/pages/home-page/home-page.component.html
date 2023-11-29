@@ -5,19 +5,23 @@
     <h2>How does tutoring at Teach Us work?</h2>
     <div class="pre" *ngIf="rol === null">
       <a routerLink="/register">Sign Up </a> <span>&#8594;</span>
-      <a> Tell us your expectation </a> <span>&#8594;</span>
-      <a> Find a suitable teacher or teach your favorite subject</a>
+      <a routerLink="/match"> Tell us your expectation </a> <span>&#8594;</span>
+      <a routerLink="/mentors">
+        Find a suitable teacher or teach your favorite subject</a
+      >
     </div>
     <div class="pre" *ngIf="rol === 'student'">
-      <a routerLink="/user-profile">Edit profile </a> <span>&#8594;</span>
-      <a routerLink="/mentors">Search teacher </a> <span>&#8594;</span>
-      <a> Learn </a> <span>&#8594;</span>
+      <a routerLink="/settings">Edit profile </a> <span>&#8594;</span>
+      <a routerLink="/match">Search teacher </a> <span>&#8594;</span>
+      <a routerLink="/my-mentors">See your teachers </a> <span>&#8594;</span>
+      <a routerLink="/videos-student"> Learn </a> <span>&#8594;</span>
     </div>
 
     <div class="pre" *ngIf="rol === 'mentor'">
-      <a routerLink="/user-profile">Edit profile </a> <span>&#8594;</span>
-      <a routerLink="/register">Publish announcement </a> <span>&#8594;</span>
-      <a routerLink="/register">Accept students </a> <span>&#8594;</span>
+      <a routerLink="/settings">Edit profile </a> <span>&#8594;</span>
+      <a routerLink="/create-announcement">Publish announcement </a>
+      <span>&#8594;</span> <a routerLink="/requests">Accept students </a>
+      <span>&#8594;</span>
     </div>
 
     <div class="pre"><span id="last-arrow">&#8594;</span> Have Fun </div>
