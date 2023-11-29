@@ -39,7 +39,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DialogAddReviewByStudentComponent,
     DialogAddReviewByMentorComponent,
     DialogViewMentorReviewsComponent,
-    DialogAddReviewByStudentComponent,
+  
+    
   ],
   exports: [
     MatDatepickerModule,
