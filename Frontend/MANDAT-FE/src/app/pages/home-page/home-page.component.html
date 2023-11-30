@@ -30,7 +30,7 @@
   <div class="top-container">
     <div class="top-title">Top Teachers</div>
     <form (change)="onSubjectChange()">
-      <select name="cars" id="cars" [(ngModel)]="selectedSubject">
+      <select name="cars" id="cars" [(ngModel)]="selectedSubject" (ngModelChange)="onSubjectChange()">
         <option value="" disabled selected>Select a subject</option>
         <option *ngFor="let subject of subjects" [value]="subject">{{
           subject
