@@ -20,6 +20,7 @@ export class HomePageComponent {
     private mentorsService: MentorService
   ) {}
   ngOnInit(): void {
+    this.rol = localStorage.getItem("Rol");
     this.mentorsService.getAllMentors().subscribe(
       (result: MentorModel[]) => {
         this.mentors = result;
