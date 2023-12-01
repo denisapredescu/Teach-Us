@@ -430,7 +430,7 @@ fdescribe("HomePageComponent", () => {
         email: "email",
         phoneNumber: "0728282106",
         passwordHash: "csdcsdcsc",
-        createdAt: new Date(),
+        createdAt: jasmine.any(Date),
         isActive: true,
         isDeleted: false,
         bio: "bio",
@@ -867,10 +867,4 @@ fdescribe("HomePageComponent", () => {
       }
     )
   });
-
-
-
-
-
-
 });

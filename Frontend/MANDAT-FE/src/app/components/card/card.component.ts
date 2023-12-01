@@ -7,6 +7,7 @@ import { StudentModel } from "../../models/student-model";
 import { MentorModel } from "src/app/models/mentor-model";
 import { DialogAddAssessmentByTeacherComponent } from "../shared/dialog-add-assessment-by-teacher/dialog-add-assessment-by-teacher.component";
 import { DialogAddReviewByMentorComponent } from "../shared/dialog-add-review-by-mentor/dialog-add-review-by-mentor.component";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-card",
@@ -26,7 +27,8 @@ export class CardComponent {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private mentorService: MentorService
+    private mentorService: MentorService,
+    private cookieService: CookieService
   ) {
     this.cookieSubject = "";
   }
@@ -102,6 +104,7 @@ export class CardComponent {
     if (this.email === "" || this.email === null) {
       this.router.navigate(["/login"]);
     } else {
+      console.log("suuubj",this.cookieSubject)
       this.mentorService
         .createNewMatch(person.email, this.email!, this.cookieSubject!)
         .subscribe(result => {

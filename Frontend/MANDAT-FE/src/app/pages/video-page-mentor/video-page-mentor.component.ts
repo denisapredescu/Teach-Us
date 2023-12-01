@@ -66,7 +66,8 @@ export class VideoPageMentorComponent implements OnInit {
     this.videoService.createVideo(this.videoAddForm.value).subscribe(
       (result) => {
         console.log(result);
-        location.reload();
+        console.log(this.videoAddForm.get('mentorEmail')?.value);
+     //   location.reload();
       },
       (error) => {
         console.log(error);
