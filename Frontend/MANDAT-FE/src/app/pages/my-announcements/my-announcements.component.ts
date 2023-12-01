@@ -38,13 +38,13 @@ export class MyAnnouncementsComponent {
           };
           this.cardsListModel.push(model);
         });
-        console.log(this.cardsListModel);
+       // console.log(this.cardsListModel);
       });
   }
 
   public delete(id: string): void{
     this.announcementService.DeleteAnnouncement(id).subscribe(result => {
-      console.log(result);
+     // console.log(result);
     });
   }
 }

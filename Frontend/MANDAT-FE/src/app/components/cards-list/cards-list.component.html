@@ -1,4 +1,4 @@
-<div class="background">
+<!-- <div class="background">
   <div class="card-container" *ngFor="let card of models">
     <div class="leftTitle">{{ card.leftTitle }}</div>
 
@@ -20,6 +20,30 @@
     <div class="options" [class]="isAdminPage() ? 'multiple-options' : ''">
       <button (click)="delete(card.id)">❌</button>
       <button *ngIf="isAdminPage()" (click)="settings(card.id)">⚙️</button>
+    </div>
+  </div>
+</div> -->
+<div class="background">
+  <div class="card-container" *ngFor="let card of models">
+    <div class="leftTitle">{{ card.leftTitle }}</div>
+
+    <div class="remaining-details">
+      <div class="mainTitle">{{ card.mainTitle }}</div>
+      <div
+        class="type"
+        [style]="
+          card.typeSubtitle.value
+            ? 'background-color: green'
+            : 'background-color: red'
+        "
+        style="color: white">
+        {{ card.typeSubtitle.key }}
+      </div>
+      <div>{{ card.description }}</div>
+    </div>
+
+    <div class="options">
+      <button (click)="delete(card.id)">❌</button>
     </div>
   </div>
 </div>

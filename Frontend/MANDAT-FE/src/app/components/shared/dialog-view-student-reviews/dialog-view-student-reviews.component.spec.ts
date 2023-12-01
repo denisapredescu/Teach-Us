@@ -5,7 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MyReviews } from 'src/app/models/my-reviews';
 import { DialogViewStudentReviewsComponent } from './dialog-view-student-reviews.component';
 
-fdescribe('DialogViewStudentReviewsComponent', () => {
+describe('DialogViewStudentReviewsComponent', () => {
   let component: DialogViewStudentReviewsComponent;
   let fixture: ComponentFixture<DialogViewStudentReviewsComponent>;
  

@@ -207,7 +207,9 @@ namespace MANDAT.BusinessLogic.Services
                                                           .Single(),
                                        MatchDate = x.MatchDate,
                                        Status = x.Status,
-                                       subject = uow.Announcements.Get().Where(s => s.MentorId.Equals(userId)).Select(s => s.Subject).First()
+                                       subject = uow.Matches.Get()
+                                       .Include(s => s.Announcement)
+                                       .Where(s => s.MentorId.Equals(userId) && s.Status.Equals(StatusMatch.Waiting.ToString())).Select(s => s.Announcement.Subject).First()
 
 
                                    }).ToList();
