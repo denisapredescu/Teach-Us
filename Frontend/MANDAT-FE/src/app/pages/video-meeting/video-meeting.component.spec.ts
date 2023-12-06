@@ -32,31 +32,41 @@ describe('VideoMeetingComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('get nume from localStorage', fakeAsync(() => {
+  it('should get nume from localStorage', fakeAsync(() => {
     let nume = "student";
-    component.nume = nume;
     spyOn(localStorage, "getItem").and.returnValue(nume);
     spyOn(sessionStorage, "getItem");
     
     component.ngOnInit();
     tick();
+    fixture.detectChanges();
 
     expect(component.nume).toBe(nume);
     expect(localStorage.getItem).toHaveBeenCalledWith("Nume");
     expect(sessionStorage.getItem).not.toHaveBeenCalled();
   }));
 
-  it('get email from sessionStorage', fakeAsync(() => {
+  it('should get email from sessionStorage', fakeAsync(() => {
       let nume = "student";
-      component.nume = nume;
       spyOn(localStorage, "getItem").and.returnValue(null);
       spyOn(sessionStorage, "getItem").and.returnValue(nume);
       
       component.ngOnInit();
       tick();
+      fixture.detectChanges();
 
       expect(component.nume).toBe(nume);
       expect(localStorage.getItem).toHaveBeenCalledWith("Nume");
       expect(sessionStorage.getItem).toHaveBeenCalledWith("Nume");
+  }));
+
+  it('shiuld initialize default data in init function', fakeAsync(() => {
+    component.ngOnInit();
+    tick();
+    fixture.detectChanges();
+
+    expect(component.isAudioMuted).toBe(false);
+    expect(component.isVideoMuted).toBe(false);
+    expect(component.domain).toBe("meet.jit.si");
   }));
 });

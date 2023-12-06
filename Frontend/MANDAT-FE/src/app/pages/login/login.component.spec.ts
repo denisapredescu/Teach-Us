@@ -62,8 +62,7 @@ fdescribe("LoginComponent", () => {
   }));
 
   it("should change remember be value to false", fakeAsync (() => {
-    isRememberMeChecked = true;
-    component.isRememberMeChecked = isRememberMeChecked;
+    component.isRememberMeChecked = true;
     component.changeState();
     tick();
     fixture.detectChanges();

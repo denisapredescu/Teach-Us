@@ -40,7 +40,6 @@ fdescribe('UserProfileComponent', () => {
       providers: [
         // { provide: MentorRequestsService, useValue: requestsServiceSpy },
         // { provide: UserAccountService, useValue: userAccountServiceSpy },
-        // { provide: HttpClient, useValue: httpClientSpy },
         // { provide: ActivatedRoute, useValue: activatedRouteStub }
       ],
     })
@@ -58,7 +57,6 @@ fdescribe('UserProfileComponent', () => {
       series: [1, 3, 2]
     };
       
-
     userAccountWithAddress = {
       username: "",
       email: "",
@@ -210,11 +208,7 @@ fdescribe('UserProfileComponent', () => {
     tick();
 
     fixture.detectChanges();
-    
-    // spyOn(component, "getAllUserRequestsAndCreateChart");
-    // spyOn(requestsServiceSpy, "GetAllRequests");
-    // spyOn(requestsServiceSpy, "GetAllRequests").and.returnValue(of(requests));
-    
+  
     // expect(component.chartOptions.series).toBe(chartOptions.series);
     // expect(component.chartOptions.labels).toBe(chartOptions.labels);
     
