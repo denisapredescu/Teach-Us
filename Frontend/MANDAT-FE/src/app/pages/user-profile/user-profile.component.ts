@@ -53,51 +53,51 @@ export class UserProfileComponent implements OnInit {
   requests: any = [];
   justViewProfile: string | null = 'false';
 
-  requestsMock: any = [
-    {
-      "fullName": "a",
-      "email": "b",
-      "matchDate": "c",
-      "status": "accepted",
-      "subject": "e"
-    },
-    {
-      "fullName": "a",
-      "email": "b",
-      "matchDate": "c",
-      "status": "rejected",
-      "subject": "e"
-    },
-    {
-      "fullName": "a",
-      "email": "b",
-      "matchDate": "c",
-      "status": "rejected",
-      "subject": "e"
-    },
-    {
-      "fullName": "a",
-      "email": "b",
-      "matchDate": "c",
-      "status": "waiting",
-      "subject": "e"
-    },
-    {
-      "fullName": "a",
-      "email": "b",
-      "matchDate": "c",
-      "status": "waiting",
-      "subject": "e"
-    },
-    {
-      "fullName": "a",
-      "email": "b",
-      "matchDate": "c",
-      "status": "waiting",
-      "subject": "e"
-    },
+  // requestsMock: any = [
+  //   {
+  //     "fullName": "a",
+  //     "email": "b",
+  //     "matchDate": "c",
+  //     "status": "accepted",
+  //     "subject": "e"
+  //   },
+  //   {
+  //     "fullName": "a",
+  //     "email": "b",
+  //     "matchDate": "c",
+  //     "status": "rejected",
+  //     "subject": "e"
+  //   },
+  //   {
+  //     "fullName": "a",
+  //     "email": "b",
+  //     "matchDate": "c",
+  //     "status": "rejected",
+  //     "subject": "e"
+  //   },
+  //   {
+  //     "fullName": "a",
+  //     "email": "b",
+  //     "matchDate": "c",
+  //     "status": "waiting",
+  //     "subject": "e"
+  //   },
+  //   {
+  //     "fullName": "a",
+  //     "email": "b",
+  //     "matchDate": "c",
+  //     "status": "waiting",
+  //     "subject": "e"
+  //   },
+  //   {
+  //     "fullName": "a",
+  //     "email": "b",
+  //     "matchDate": "c",
+  //     "status": "waiting",
+  //     "subject": "e"
+  //   },
 
-  ]
+  // ];
 
   constructor(
     private userAccountService: UserAccountService,
@@ -109,7 +109,14 @@ export class UserProfileComponent implements OnInit {
       this.email = params.get("email") || "";
       this.parameterEmail = this.email;
     });
+    
+    this.checkAndSetProfileDetails();
+    this.getUserInfo();
+    this.getUserRequests();
+    this.getAllUserRequestsAndCreateChart();
+  }
 
+  checkAndSetProfileDetails() {
     if (this.email === "") {
       this.isPersonalProfile = true;
       this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
@@ -136,33 +143,17 @@ export class UserProfileComponent implements OnInit {
         this.rol = "mentor";  
       }
     }
-    
-    this.userAccountService
-      .GetUserInfoWithAddressByEmail(this.email, this.rol)
-      .subscribe(res => {
-        this.userAccountWithAddress = res;
-        this.rating = res.numberOfStars;
+  }
 
-        let rememberMe = localStorage.getItem("rememberMe");
-
-        if (rememberMe === 'true')
-          localStorage.setItem("Verificare_User_Profile", "");
-        else 
-          sessionStorage.setItem("Verificare_User_Profile", "");
-      });
-
-    this.mentorRequestService.GetUserRequests(this.email).subscribe(res => {
-      this.notifications = res.length;
-    });
-
-    this.mentorRequestService.GetAllRequests(this.email).subscribe(res => {
+  getAllUserRequestsAndCreateChart() {
+    this.mentorRequestService.GetAllRequests(this.email!).subscribe(res => {
       this.requests = res;
 
       this.chartOptions = {
         series: [
-          this.requestsMock.filter((x: { status: string; }) => x.status === "accepted").length,
-          this.requestsMock.filter((x: { status: string; }) => x.status === "waiting").length,
-          this.requestsMock.filter((x: { status: string; }) => x.status === "rejected").length],
+          this.requests.filter((x: { status: string; }) => x.status === "accepted").length,
+          this.requests.filter((x: { status: string; }) => x.status === "waiting").length,
+          this.requests.filter((x: { status: string; }) => x.status === "rejected").length],
         chart: {
           width: 600,
           type: "pie",
@@ -196,11 +187,32 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  getUserRequests() {
+    this.mentorRequestService.GetUserRequests(this.email!).subscribe(res => {
+      this.notifications = res.length;
+    });
+  }
+
+  getUserInfo() {
+    this.userAccountService
+      .GetUserInfoWithAddressByEmail(this.email!, this.rol!)
+      .subscribe(res => {
+        this.userAccountWithAddress = res;
+        this.rating = res.numberOfStars;
+
+        let rememberMe = localStorage.getItem("rememberMe");
+
+        if (rememberMe === 'true')
+          localStorage.setItem("Verificare_User_Profile", "");
+        else 
+          sessionStorage.setItem("Verificare_User_Profile", "");
+      });
+  }
+
   ngOnInit() {
   }
 
-  public delete(email: any): void{
-    console.log(email);
+  public delete(email: any): void {
     this.userAccountService.SoftDeleteUserByEmail(email).subscribe(result => {
       console.log(result);
     });
