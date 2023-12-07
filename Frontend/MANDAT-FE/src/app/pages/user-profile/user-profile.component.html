@@ -95,7 +95,7 @@
 <div
   class="requests-chart"
   *ngIf="
-    roles.isMentor(rol) && requestsMock.length !== 0 && parameterEmail === ''
+    roles.isMentor(rol) && requests.length !== 0 && parameterEmail === ''
   ">
   <div id="chart" *ngIf="chartOptions !== undefined">
     <apx-chart

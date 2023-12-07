@@ -1,7 +1,7 @@
 import {
-  FacebookLoginProvider,
-  SocialAuthService,
-  SocialUser,
+  // FacebookLoginProvider,
+  // SocialAuthService,
+  // SocialUser,
 } from "@abacritt/angularx-social-login";
 import { Component } from "@angular/core";
 import {
@@ -21,7 +21,7 @@ import { UserAccountService } from "src/app/services/user-account.service";
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  socialUser!: SocialUser;
+  // socialUser!: SocialUser;
   isLoggedin?: boolean;
   isRememberMeChecked: boolean = true;
   email = new FormControl("", [Validators.required, Validators.email]);
@@ -31,7 +31,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    public socialAuthService: SocialAuthService,
+    // public socialAuthService: SocialAuthService,
     private userAccount: UserAccountService
   ) {
     this.model = this.formBuilder.group({
@@ -40,12 +40,12 @@ export class LoginComponent {
       rememberMe: [false],
     });
   }
- 
+
   public changeState() {
     this.isRememberMeChecked = !this.isRememberMeChecked;
   }
 
-  Login(): void {
+  LoginUser(): void {
     let data = {
       password: this.model.get("password")?.value,
       email: this.model.get("email")?.value,
@@ -70,10 +70,8 @@ export class LoginComponent {
           localStorage.setItem("rememberMe", this.isRememberMeChecked.toString());
         });
 
-        this.router.navigate(["/home"]);
-        setTimeout(function () {
-          window.location.reload();
-        }, 1000);
+        this.navigateToHome();
+        
       },
 
       error => {
@@ -81,5 +79,15 @@ export class LoginComponent {
       }
     );
 
+  }
+  navigateToHome() {
+    this.router.navigate(["/home"]);
+    setTimeout( () => {
+      this.reloadPage();
+    }, 1000);
+  }
+
+  public reloadPage(): void {
+    window.location.reload();
   }
 }

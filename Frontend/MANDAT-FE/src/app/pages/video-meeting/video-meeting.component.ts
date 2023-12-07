@@ -22,16 +22,18 @@ export class VideoMeetingComponent implements OnInit, AfterViewInit {
         private router: Router
     ) { }
 
+    nume: string | null;
+
     ngOnInit(): void {
-        let nume = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
+        this.nume = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
     
         var randomWords = require('random-words');
         this.room = randomWords({ exactly: 3, join: '-' }); // Set your room name
         this.user = {
-            name: nume// Set your username
+            name: this.nume// Set your username
         }
         let text =  document.getElementsByTagName("text");
-        text[0].innerHTML = nume !== null ? nume : '';
+        text[0].innerHTML = this.nume !== null ? this.nume : '';
     }
 
     ngAfterViewInit(): void {
