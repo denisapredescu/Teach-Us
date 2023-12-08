@@ -76,6 +76,9 @@
 					<button  *ngIf="pageToShowOn == 'my-students'" mat-raised-button class="button" (click)="addAssessment(person)">
 						Create Assessment
 					</button>
+					<button  *ngIf="pageToShowOn == 'my-students'" mat-raised-button class="button" (click)="viewHomework(person)">
+						View  Assessments
+					</button> 
 					<a *ngIf="pageToShowOn == 'my-mentors'" [ngClass]="person.link" href={{person.link}}>
 						<button mat-raised-button class="button">Meet Link</button>
 					</a>

@@ -124,6 +124,9 @@ import { NgxYoutubePlayerModule } from "ngx-youtube-player";
     NgApexchartsModule,
     NgxYoutubePlayerModule.forRoot(),
     NgApexchartsModule,
+    MatNativeDateModule,
+    MatDatepickerModule ,
+    BrowserAnimationsModule
     
   ],
   exports: [
@@ -132,6 +135,7 @@ import { NgxYoutubePlayerModule } from "ngx-youtube-player";
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AcceptJSService,
