@@ -69,12 +69,16 @@
           </div>
             <div class="info-address divider">
               <div id="mentorPDF">          
-                <p>See teacher assignment: </p>  
-                <button mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">Open Mentor's PDF</button>
-             </div>
+                <p *ngIf="rol == 'student'">See teacher assignment: </p>  
+                <p *ngIf="rol == 'mentor'">See given assignment: </p> 
+                <button *ngIf="rol == 'student'" mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">Open Mentor's PDF</button>
+                <button *ngIf="rol == 'mentor'" mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">View Assessment</button>
+
+              </div>
             
              <div id="homeworkPdf">
                <p></p>
+               <div id="formular" *ngIf="rol == 'student'">
                <form [formGroup]="addHomework" class="form">
                 <div [formGroup]="addHomework">
                   <mat-form-field appearance="outline">
@@ -88,16 +92,20 @@
                 </div>
               </form>
               <button mat-raised-button (click)="saveAdd(pag, i)" appHoverBtn>Save</button>
-              
+            </div>
                <div style="margin-top: 10px;"></div>
-               <button mat-raised-button *ngIf="pag.studentPdf" (click)="openFileStudent( pag.assessmentId , pag)">Open Homework PDF</button>
+               <button  mat-raised-button *ngIf="pag.studentPdf && rol == 'student'" (click)="openFileStudent( pag.assessmentId , pag)">Open Homework PDF</button>
+               <button  mat-raised-button *ngIf="pag.studentPdf && rol == 'mentor' && pag.check  == true" (click)="openFileStudent( pag.assessmentId , pag)">Open Homework PDF</button>
 
              <p>Homework Status:</p>
-             <label>
+             <label *ngIf="rol == 'student'">
               <input type="checkbox" name="confidentialitate" [id]="pag.mentorEmail" [value]="pag.check" [checked]="pag.check" (change)="togglePublicField($event, pag)">
               <span [id]="'conf-' + pag.mentorEmail" style="color: black;">{{ pag.check ? 'Done' : 'Not Finished' }}</span>
             </label>
-            
+            <label *ngIf="rol == 'mentor'">
+              <input type="checkbox" name="confidentialitate" [id]="pag.mentorEmail" [value]="pag.check" [checked]="pag.check" readonly>
+              <span [id]="'conf-' + pag.mentorEmail" style="color: black;">{{ pag.check ? 'Done' : 'Not Finished' }}</span>
+            </label>
 					</div>
       </div>
       </div>

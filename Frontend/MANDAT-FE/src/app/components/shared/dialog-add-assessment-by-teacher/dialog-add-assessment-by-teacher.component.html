@@ -18,9 +18,11 @@
         </mat-form-field> -->
         <mat-form-field appearance="outline">
             <mat-label>Assessment Deadline</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Assessment Deadline" formControlName="assessmentDeadline" />
+            <input matInput [matDatepicker]="picker" formControlName="assessmentDeadline">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+          
         <mat-form-field appearance="outline">
             <mat-label>Subject</mat-label>
             <input matInput placeholder="Subject" formControlName="subject"/>
@@ -33,20 +35,14 @@
         <div [formGroup]="addAssessmentForm">
             <mat-form-field appearance="outline">
               <mat-label>Mentor PDF</mat-label>
-              <input type="text" formControlName="mentorPdf" matInput readonly/>
+              <input type="text" [value]="selectedFileName" formControlName="mentorPdf" matInput readonly />
             </mat-form-field>
           
             <div>
               <label for="fileInput">Choose File</label>
-              <input type="file" id="fileInput" (change)="onFileSelected($event)" formControlName="mentorPdf" style="display: none"/>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none" />
             </div>
           </div>
-          
-          
-          
-          
-          
-        
     </form>
 
     <button mat-raised-button (click)="saveAdd()" appHoverBtn>Save</button>

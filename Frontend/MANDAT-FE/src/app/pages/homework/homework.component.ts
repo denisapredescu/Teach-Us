@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Binary } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
@@ -13,13 +13,14 @@ import { AssessmentService } from 'src/app/services/assessment.service';
   styleUrls: ['./homework.component.scss']
 })
 export class HomeworkComponent implements OnInit {
-  public emailStudent?: string;
-  public emailMentor?: string ;
-  public subject?: string;
+  public emailStudent: string = '';
+  public emailMentor: string = '';
+  public subject: string = '';
   public model: HomeworkModel[] = [];;
   public currentPage = 0;
   public pageFiles: File[] = [];
   public selectedFileName: string = '';
+  @Input() rol: string = "";
   public addHomework: FormGroup = new FormGroup({
     
     studentPdfFile: new FormControl(null), 
@@ -31,24 +32,36 @@ export class HomeworkComponent implements OnInit {
 
   
 
-  ngOnInit(): void {
-    this.emailStudent = localStorage.getItem("EmailSStudent")!;
-    this.emailMentor = localStorage.getItem("EmailMMentor") !;
-    this.subject = localStorage.getItem("Subject") !;
-    
-    this.assessmentService.getStudentAssignment(this.emailStudent, 
-                                                this.emailMentor,
-                                                this.subject)
-                            .subscribe(
-      (result: HomeworkModel[]) =>{
-        this.model = result;
-        console.log(result);
-        console.log(this.model[0].materie);
-      },
-      (error) => {
-        console.error(error);}
-      
-      );
+              ngOnInit(): void {
+                this.model = [];
+                this.rol = localStorage.getItem("Rol")!;
+                if ( this.rol == "mentor"){
+                  this.emailStudent = localStorage.getItem("EmailPersoana")!;
+                  this.emailMentor = localStorage.getItem("Email")!;
+                }
+                else{
+                  this.emailStudent = localStorage.getItem("Email")!;
+                  this.emailMentor = localStorage.getItem("EmailPersoana")!;
+                }
+                
+                this.subject = localStorage.getItem("Subject")!;
+               
+                this.assessmentService.getStudentAssignment(this.emailStudent, this.emailMentor, this.subject)
+                  .subscribe(
+                    (result: HomeworkModel[]) => {
+                      this.model = result;
+                      console.log(result);
+              
+                      if (result && result.length > 0 && result[0].materie) {
+                        console.log(result[0].materie);
+                      } else {
+                        console.log('Materie is undefined or empty');
+                      }
+                    },
+                    (error) => {
+                      console.error('Error fetching student assignment data:', error);
+                    }
+                  );
       const coverPage = document.getElementById('firstpage');
     if (coverPage) {
       coverPage.classList.add('flipped');
@@ -63,6 +76,9 @@ onFileSelected(event: Event, pag: HomeworkModel): void {
   if (file) {
     this.selectedFileName = file.name;
     pag.studentPdfFile = file;
+
+    this.pageFiles = this.pageFiles || [];
+    this.pageFiles.push(file);
   }
 
 
@@ -71,8 +87,6 @@ onFileSelected(event: Event, pag: HomeworkModel): void {
 
 saveAdd(pag: HomeworkModel, pageIndex: number): void {
   const formData = new FormData();
-
-  // Get the corresponding page from the model array
   const pag1 = this.model[pageIndex];
   const studentPdf = pag.studentPdfFile;
 
@@ -89,74 +103,60 @@ saveAdd(pag: HomeworkModel, pageIndex: number): void {
     }
   );
 }
-  flipPage(index: number) {
-    if (index === 0) {
-      const coverPage = document.getElementById('firstpage');
-      if (coverPage) {
-        coverPage.classList.toggle('flipped');
-      }
-    } else {
-     const pageElement = document.getElementById(`page-${index}`);
-      if (pageElement) {
-        pageElement.classList.toggle('flipped');
-      }
+  // flipPage(index: number) {
+  //   if (index === 0) {
+  //     const coverPage = document.getElementById('firstpage');
+  //     if (coverPage) {
+  //       coverPage.classList.toggle('flipped');
+  //     }
+  //   } else {
+  //    const pageElement = document.getElementById(`page-${index}`);
+  //     if (pageElement) {
+  //       pageElement.classList.toggle('flipped');
+  //     }
   
-      if (index % 2 === 0) {
-        const siblingPage = pageElement?.previousElementSibling as HTMLElement;
-        if (siblingPage) {
-          siblingPage.classList.toggle('flipped');
-        }
-      } else {
-        const siblingPage = pageElement?.nextElementSibling as HTMLElement;
-        if (siblingPage) {
-          siblingPage.classList.toggle('flipped');
-        }
-      }
+  //     if (index % 2 === 0) {
+  //       const siblingPage = pageElement?.previousElementSibling as HTMLElement;
+  //       if (siblingPage) {
+  //         siblingPage.classList.toggle('flipped');
+  //       }
+  //     } else {
+  //       const siblingPage = pageElement?.nextElementSibling as HTMLElement;
+  //       if (siblingPage) {
+  //         siblingPage.classList.toggle('flipped');
+  //       }
+  //     }
   
-      this.currentPage = index;
-    }
-  }
+  //     this.currentPage = index;
+  //   }
+  // }
  
   openFile(binaryData: any, fileName: string) {
-    // Convert the binary data to a Blob
     const blob = new Blob([binaryData], { type: 'application/octet-stream' });
-  
-    // Create a Blob URL
-    const blobUrl = URL.createObjectURL(blob);
-    
+    const blobUrl = URL.createObjectURL(blob); 
     const link = document.createElement('a');
     link.href = blobUrl;
     link.download = fileName;
   
     document.body.appendChild(link);
-  
     link.click();
-  
     document.body.removeChild(link);
-  
     URL.revokeObjectURL(blobUrl);
   }
 
   openFileStudent(assessmentId: Guid, pag: HomeworkModel): void {
   
     const arrayBuffer = this.convertBinaryToArrayBuffer(pag.studentPdf);
-  
     const uint8Array = new Uint8Array(arrayBuffer);
-  
     const blob = new Blob([uint8Array], { type: 'application/octet-stream' });
-  
     const blobUrl = URL.createObjectURL(blob);
-  
     const link = document.createElement('a');
     link.href = blobUrl;
     link.download = `Homework_${this.subject}.pdf`; // You can customize the file name here
   
     document.body.appendChild(link);
-  
     link.click();
-  
     document.body.removeChild(link);
-  
     URL.revokeObjectURL(blobUrl);
   }
   
@@ -177,7 +177,7 @@ saveAdd(pag: HomeworkModel, pageIndex: number): void {
 
   }
  
-  
+ 
   togglePublicField(event: any, pag: HomeworkModel): void {
     const check = event.target.checked;
   

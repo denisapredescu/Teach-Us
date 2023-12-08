@@ -8,7 +8,7 @@ import { MentorModel } from "src/app/models/mentor-model";
 import { DialogAddAssessmentByTeacherComponent } from "../shared/dialog-add-assessment-by-teacher/dialog-add-assessment-by-teacher.component";
 import { DialogAddReviewByMentorComponent } from "../shared/dialog-add-review-by-mentor/dialog-add-review-by-mentor.component";
 import { CookieService } from "ngx-cookie-service";
-
+import { Location } from '@angular/common'; 
 @Component({
   selector: "app-card",
   templateUrl: "./card.component.html",
@@ -20,17 +20,22 @@ export class CardComponent {
   @Input() status: boolean;
   public cookieSubject: string | null;
   public email: string | null;
-  public emailMMentor: string | null;
-  public emailSStudent: string | null;
+  public emailPersoana: string | null;
   public Ssubject: string | null;
   public varTest: boolean = false; /// to verify if the page is access by a mentor or by the student; in backend I verify if the user is mentor or student to find the number of stars
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private mentorService: MentorService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private location: Location,
   ) {
     this.cookieSubject = "";
+  }
+
+  private reloadPage(): void {
+    this.location.replaceState(this.location.path());  // This will simulate a replaceState without triggering a navigation
+    window.location.reload();
   }
   isArray(subject: any): boolean {
     return Array.isArray(subject);
@@ -82,15 +87,15 @@ export class CardComponent {
     );
     dialog.afterClosed().subscribe(result => {
       if (result) {
-        window.location.reload();
+        this.reloadPage();
+        // window.location.reload();
       }
     });
   }
   public viewHomework(person:any){
-    this.emailSStudent = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
-    this.emailMMentor = person.email;
-    localStorage.setItem('EmailMMentor', this.emailMMentor?.split(',')[0]!);
-    localStorage.setItem('EmailSStudent', this.emailSStudent!);
+    this.emailPersoana = person.email;
+    localStorage.setItem('EmailPersoana', this.emailPersoana!);
+    //localStorage.setItem('EmailSStudent', this.emailSStudent!);
     localStorage.setItem('Subject',  person.subject);
     this.router.navigate([`/homework`]);
    

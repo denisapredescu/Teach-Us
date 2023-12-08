@@ -11,8 +11,8 @@ import { AssessmentService } from 'src/app/services/assessment.service';
 export class DialogAddAssessmentByTeacherComponent implements OnInit {
   public emailStudent: string = '';
   public emailMentor: string | null = '';
-  public user: any;
-
+  public user: { email?: string } = {};
+  public selectedFileName: string = '';
   public addAssessmentForm: FormGroup = new FormGroup({
     studentEmail: new FormControl(''),
     mentorEmail: new FormControl(''),
@@ -21,20 +21,23 @@ export class DialogAddAssessmentByTeacherComponent implements OnInit {
     text: new FormControl(''),
     mentorPdf: new FormControl(null), // Store the file object
   });
-
+  errorMessage: string;
+  
   constructor(
     private dialogRef: MatDialogRef<DialogAddAssessmentByTeacherComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private assessmentService: AssessmentService
   ) {
+    this.user = data?.data || {};
     if (data) {
       this.user = data.data;
     }
 
-    this.emailMentor = localStorage.getItem('Email');
-    this.emailStudent = this.user.email;
+    this.emailMentor = localStorage.getItem('Email') || '';
+    this.emailStudent = this.user?.email || '';
     this.addAssessmentForm.get('studentEmail')?.setValue(this.emailStudent);
     this.addAssessmentForm.get('mentorEmail')?.setValue(this.emailMentor);
+    
 
   }
 
@@ -47,11 +50,11 @@ export class DialogAddAssessmentByTeacherComponent implements OnInit {
     const file = fileInput?.files?.[0];
   
     if (file) {
-      this.addAssessmentForm.patchValue({
-        mentorPdf: file
-      });
+      this.selectedFileName = file.name;
+      this.addAssessmentForm.get('mentorPdf')?.setValue(file);
     }
   }
+  
   formatDateForServer(date: Date): string {
 
     return date.toISOString();
@@ -59,7 +62,6 @@ export class DialogAddAssessmentByTeacherComponent implements OnInit {
   
 
   saveAdd(): void {
-    // Handle form submission here, including sending the file to the backend
     const formData = new FormData();
 
     formData.append('mentorEmail', this.addAssessmentForm.get('mentorEmail')!.value);
@@ -71,7 +73,6 @@ export class DialogAddAssessmentByTeacherComponent implements OnInit {
 
     
     const mentorPdf = this.addAssessmentForm.get('mentorPdf')!.value;
-console.log('Type of mentorPdf:', typeof mentorPdf);
 
 if (mentorPdf instanceof File) {
   formData.append('mentorPdf', mentorPdf, mentorPdf.name);
@@ -85,11 +86,16 @@ if (mentorPdf instanceof File) {
     },
     (error) => {
       console.log(error);
+      this.errorMessage = 'An error occurred. Please try again.';
     }
   );
   }
 
   ngOnInit(): void {
-    // Initialize if needed
+    if (this.data && this.data.data) {
+      this.user = this.data.data;
+      this.emailMentor = this.user.email!;
+      this.addAssessmentForm.get('mentorEmail')?.setValue(this.emailMentor);
+    }
   }
 }
