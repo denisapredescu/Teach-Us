@@ -12,9 +12,9 @@ fdescribe('VideoPageMentorComponent', () => {
   let fixture: ComponentFixture<VideoPageMentorComponent>;
   let mentorRequestsServiceSpy: jasmine.SpyObj<MentorRequestsService>;
   let videoServiceSpy: jasmine.SpyObj<VideoService>;
-  
+ 
   beforeEach(async () => {
-    mentorRequestsServiceSpy = jasmine.createSpyObj('MentorRequestsService', ['GetAllMatchingStudents']);
+    mentorRequestsServiceSpy = jasmine.createSpyObj("MentorRequestsService", ['GetAllMatchingStudents']);
     videoServiceSpy = jasmine.createSpyObj('VideoService', ['createVideo']);
 
     await TestBed.configureTestingModule({
@@ -23,14 +23,19 @@ fdescribe('VideoPageMentorComponent', () => {
       declarations: [ VideoPageMentorComponent ],
       providers: [
         { provide: MentorRequestsService, useValue: mentorRequestsServiceSpy },
-        { provide: VideoService, useValue: videoServiceSpy },
+       { provide: VideoService, useValue: videoServiceSpy },
       ],
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(VideoPageMentorComponent);
     component = fixture.componentInstance;
+    const emailMentor = 'clara@yahoo.com';
+    
+    mentorRequestsServiceSpy.GetAllMatchingStudents.and.returnValue(of(['andreea@yahoo.com', 'hanuta@yahoo.com','sandra@yahoo.com']));
     fixture.detectChanges();
+
+   
   });
 
   it('should create', () => {

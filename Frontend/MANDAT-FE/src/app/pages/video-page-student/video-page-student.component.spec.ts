@@ -30,6 +30,17 @@ fdescribe('VideoPageStudentComponent', () => {
 
     fixture = TestBed.createComponent(VideoPageStudentComponent);
     component = fixture.componentInstance;
+    const emailStudent = 'hanuta@yahoo.com';
+    mentorRequestsServiceSpy.GetAllMatchingMentorsSubject.and.returnValue(of([
+      { 
+        emailMentor: 'clara@yahoo.com', 
+        subject: ['History', 'Informatics','Romanian'] 
+      },
+      { 
+        emailMentor: 'simona@yahoo.com', 
+        subject: ['Biology', 'Informatics'] 
+      },
+    ]));
     fixture.detectChanges();
   });
 
