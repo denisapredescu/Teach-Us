@@ -155,7 +155,7 @@ fdescribe('HomeworkComponent', () => {
 
   
   it('should open file', () => {
-    const mockBinaryData = new Uint8Array([1, 2, 3]);
+    const mockBinaryData = 'AQID';
     const fileName = 'test.pdf';
     
     spyOn(window.URL, 'createObjectURL').and.returnValue('mockBlobUrl');
