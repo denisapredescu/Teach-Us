@@ -94,8 +94,9 @@ if (mentorPdf instanceof File) {
   ngOnInit(): void {
     if (this.data && this.data.data) {
       this.user = this.data.data;
+      console.log("useeer",this.user)
       this.emailMentor = this.user.email!;
-      this.addAssessmentForm.get('mentorEmail')?.setValue(this.emailMentor);
+      this.addAssessmentForm.get('mentorEmail')?.setValue(localStorage.getItem('Email') || '');
     }
   }
 }

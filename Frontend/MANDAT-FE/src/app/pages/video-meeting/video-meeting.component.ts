@@ -10,7 +10,7 @@ declare var JitsiMeetExternalAPI: any;
 })
 export class VideoMeetingComponent implements OnInit, AfterViewInit {
   domain: string = "meet.jit.si"; // For self hosted use your domain
-    room: any;
+    room: "vpaas-magic-cookie-4f36a486b2994a919657f431528c3daa/SampleAppJointMentionsReferWorldwide";
     options: any;
     api: any;
     user: any;

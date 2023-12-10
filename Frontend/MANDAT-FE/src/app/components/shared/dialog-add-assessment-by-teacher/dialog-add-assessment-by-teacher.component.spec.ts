@@ -57,6 +57,7 @@ fdescribe('DialogAddAssessmentByTeacherComponent', () => {
   });
 
   it('should update form values when data is provided', () => {
+    var email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     const data = {
       email: 'test@example.com',
     };
@@ -65,9 +66,12 @@ fdescribe('DialogAddAssessmentByTeacherComponent', () => {
   
     component.ngOnInit();
   
+    // expect(component.user).toEqual({ email: data.email });
+    // expect(component.emailMentor).toEqual(data.email);
+    // expect(component.addAssessmentForm.get('mentorEmail')!.value).toEqual(data.email);
     expect(component.user).toEqual({ email: data.email });
-    expect(component.emailMentor).toEqual(data.email);
-    expect(component.addAssessmentForm.get('mentorEmail')!.value).toEqual(data.email);
+    expect(component.emailMentor).toEqual(email);
+    expect(component.addAssessmentForm.get('mentorEmail')!.value).toEqual(email);
   });
   
   

@@ -151,9 +151,9 @@ export class UserProfileComponent implements OnInit {
 
       this.chartOptions = {
         series: [
-          this.requests.filter((x: { status: string; }) => x.status === "accepted").length,
-          this.requests.filter((x: { status: string; }) => x.status === "waiting").length,
-          this.requests.filter((x: { status: string; }) => x.status === "rejected").length],
+          this.requests.filter((x: { status: string; }) => x.status.toLowerCase() === "accepted").length,
+          this.requests.filter((x: { status: string; }) => x.status.toLowerCase() === "waiting").length,
+          this.requests.filter((x: { status: string; }) => x.status.toLowerCase() === "rejected").length],
         chart: {
           width: 600,
           type: "pie",
