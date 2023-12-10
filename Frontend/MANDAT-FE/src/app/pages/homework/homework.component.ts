@@ -132,7 +132,8 @@ saveAdd(pag: HomeworkModel, pageIndex: number): void {
   // }
  
   openFile(binaryData: any, fileName: string) {
-    const blob = new Blob([binaryData], { type: 'application/octet-stream' });
+    const byteArray = new Uint8Array(atob(binaryData).split('').map(char => char.charCodeAt(0)));
+    const blob = new Blob([byteArray], { type: 'application/octet-stream' });
     const blobUrl = URL.createObjectURL(blob); 
     const link = document.createElement('a');
     link.href = blobUrl;
@@ -143,12 +144,30 @@ saveAdd(pag: HomeworkModel, pageIndex: number): void {
     document.body.removeChild(link);
     URL.revokeObjectURL(blobUrl);
   }
-
-  openFileStudent(assessmentId: Guid, pag: HomeworkModel): void {
+  // openF(binaryData: any) {
+  //   // Crearea unui obiect Blob cu datele binare și tipul 'application/pdf'
+  //   console.log(binaryData);
+  //   const byteArray = new Uint8Array(atob(binaryData).split('').map(char => char.charCodeAt(0)));
+  //   const blob = new Blob([byteArray], { type: 'application/pdf' });
+  //   console.log(blob.text());
+  //   // Crearea unui obiect URL pentru obiectul Blob
+  //   const blobUrl = URL.createObjectURL(blob);
+  //   // Crearea unui element iframe
+  //   const iframe = document.createElement('iframe');
   
-    const arrayBuffer = this.convertBinaryToArrayBuffer(pag.studentPdf);
-    const uint8Array = new Uint8Array(arrayBuffer);
-    const blob = new Blob([uint8Array], { type: 'application/octet-stream' });
+  //   // Setarea atributelor iframe
+  //   iframe.src = blobUrl;
+  //   iframe.width = '100%';
+  //   iframe.height = '500px'; // Puteți ajusta dimensiunile iframe după nevoie
+  
+  //   // Adăugarea iframe la corpul documentului
+  //   document.body.appendChild(iframe);
+  // }
+  openFileStudent(assessmentId: Guid, pag: HomeworkModel): void {
+  console.log(pag.studentPdf)
+    const arrayBuffer = this.convertBinaryToA(pag.studentPdf)//this.convertBinaryToArrayBuffer(pag.studentPdf);
+   // const uint8Array = new Uint8Array(arrayBuffer);
+    const blob = new Blob([arrayBuffer], { type: 'application/application/pdf' });
     const blobUrl = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = blobUrl;
@@ -168,7 +187,10 @@ saveAdd(pag: HomeworkModel, pageIndex: number): void {
     }
     return buffer;
   }
-  
+  private convertBinaryToA(binaryData: any): Uint8Array {
+    const byteArray = new Uint8Array(atob(binaryData).split('').map(char => char.charCodeAt(0)));
+    return byteArray;
+  }
   
 
   uploadFile(page: any) {

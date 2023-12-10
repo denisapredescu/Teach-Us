@@ -73,7 +73,6 @@
                 <p *ngIf="rol == 'mentor'">See given assignment: </p> 
                 <button *ngIf="rol == 'student'" mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">Open Mentor's PDF</button>
                 <button *ngIf="rol == 'mentor'" mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">View Assessment</button>
-
               </div>
             
              <div id="homeworkPdf">
