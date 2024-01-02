@@ -81,6 +81,52 @@ namespace MANDAT.DataAccess.Migrations
                     b.ToTable("Announcements");
                 });
 
+            modelBuilder.Entity("MANDAT.Entities.Entities.Assessment", b =>
+                {
+                    b.Property<Guid>("AssessmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("AssessmentCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("AssessmentDeadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("MentorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("MentorPdf")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("StudentPdf")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("checkStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("AssessmentId");
+
+                    b.HasIndex("MentorId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Assessment");
+                });
+
             modelBuilder.Entity("MANDAT.Entities.Entities.IdentityRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -202,6 +248,8 @@ namespace MANDAT.DataAccess.Migrations
 
                     b.HasKey("StudentId", "MentorId", "AnnouncementId");
 
+                    b.HasIndex("AnnouncementId");
+
                     b.HasIndex("MentorId");
 
                     b.ToTable("Matches");
@@ -272,6 +320,36 @@ namespace MANDAT.DataAccess.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("MANDAT.Entities.Entities.Video", b =>
+                {
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MentorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("SendDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("YoutubeVideoCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentId", "MentorId", "SendDate");
+
+                    b.HasIndex("MentorId");
+
+                    b.ToTable("Videos");
+                });
+
             modelBuilder.Entity("MANDAT.Entities.Entities.VideoMeetingDetails", b =>
                 {
                     b.Property<Guid>("StudentId")
@@ -320,6 +398,25 @@ namespace MANDAT.DataAccess.Migrations
                     b.Navigation("Mentor");
                 });
 
+            modelBuilder.Entity("MANDAT.Entities.Entities.Assessment", b =>
+                {
+                    b.HasOne("MANDAT.Entities.Entities.Mentor", "Mentor")
+                        .WithMany("Assessments")
+                        .HasForeignKey("MentorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MANDAT.Entities.Entities.Student", "Student")
+                        .WithMany("Assessments")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Mentor");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("MANDAT.Entities.Entities.IdentityUser", b =>
                 {
                     b.HasOne("MANDAT.Entities.Entities.IdentityRole", "Role")
@@ -344,6 +441,12 @@ namespace MANDAT.DataAccess.Migrations
 
             modelBuilder.Entity("MANDAT.Entities.Entities.Match", b =>
                 {
+                    b.HasOne("MANDAT.Entities.Entities.Announcement", "Announcement")
+                        .WithMany("Matches")
+                        .HasForeignKey("AnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MANDAT.Entities.Entities.Mentor", "Mentor")
                         .WithMany("Matches")
                         .HasForeignKey("MentorId")
@@ -355,6 +458,8 @@ namespace MANDAT.DataAccess.Migrations
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Announcement");
 
                     b.Navigation("Mentor");
 
@@ -402,6 +507,25 @@ namespace MANDAT.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MANDAT.Entities.Entities.Video", b =>
+                {
+                    b.HasOne("MANDAT.Entities.Entities.Mentor", "Mentor")
+                        .WithMany("Videos")
+                        .HasForeignKey("MentorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MANDAT.Entities.Entities.Student", "Student")
+                        .WithMany("Videos")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Mentor");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("MANDAT.Entities.Entities.VideoMeetingDetails", b =>
                 {
                     b.HasOne("MANDAT.Entities.Entities.Mentor", "Mentor")
@@ -419,6 +543,11 @@ namespace MANDAT.DataAccess.Migrations
                     b.Navigation("Mentor");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("MANDAT.Entities.Entities.Announcement", b =>
+                {
+                    b.Navigation("Matches");
                 });
 
             modelBuilder.Entity("MANDAT.Entities.Entities.IdentityRole", b =>
@@ -445,20 +574,28 @@ namespace MANDAT.DataAccess.Migrations
                 {
                     b.Navigation("Announcements");
 
+                    b.Navigation("Assessments");
+
                     b.Navigation("Matches");
 
                     b.Navigation("Reviews");
 
                     b.Navigation("VideoMeetingsDetails");
+
+                    b.Navigation("Videos");
                 });
 
             modelBuilder.Entity("MANDAT.Entities.Entities.Student", b =>
                 {
+                    b.Navigation("Assessments");
+
                     b.Navigation("Matches");
 
                     b.Navigation("Reviews");
 
                     b.Navigation("VideoMeetingsDetails");
+
+                    b.Navigation("Videos");
                 });
 #pragma warning restore 612, 618
         }

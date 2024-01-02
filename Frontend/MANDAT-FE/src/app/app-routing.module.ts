@@ -13,6 +13,12 @@ import { CreateAnnouncementComponent } from "./pages/create-announcement/create-
 import { MyAnnouncementsComponent } from "./pages/my-announcements/my-announcements.component";
 import { AdminManageUsersComponent } from "./pages/admin-manage-users/admin-manage-users.component";
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
+import { MatchingFormComponent } from "./pages/matching-form/matching-form.component";
+import { VideoPageMentorComponent } from "./pages/video-page-mentor/video-page-mentor.component";
+import { VideoPageStudentComponent } from "./pages/video-page-student/video-page-student.component";
+import { SettingsComponent } from "./pages/settings/settings.component";
+import { HomeworkComponent } from "./pages/homework/homework.component";
+import { AboutUsComponent } from "./pages/about-us/about-us.component";
 
 const routes: Routes = [
   { path: "home", component: HomePageComponent },
@@ -28,9 +34,17 @@ const routes: Routes = [
   { path: "requests", component: MentorRequestsComponent },
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "mentors", component: MentorsComponent },
+  {path: "homework", component: HomeworkComponent},
+  { path: "match", component: MatchingFormComponent },
   { path: "#popup-article", component: MyStudentsComponent },
   { path: "video-meeting", component: VideoMeetingComponent },
+  { path:"video-mentor",component:VideoPageMentorComponent},
+  { path:"videos-student",component:VideoPageStudentComponent},
+  { path: "settings/:email", component: SettingsComponent },
+  { path: "settings", component: SettingsComponent },
+  {path: "about-us", component: AboutUsComponent},
   { path: "**", component: NotFoundComponent },
+  
 ];
 
 @NgModule({

@@ -29,6 +29,10 @@ export class ReviewService {
     return this.http.patch(`${this.url +"/editReview/"+ id + ", " + message}`, {'headers':headers});
   }
 
+  public deleteReview(id: any): Observable<any> {
+    return this.http.delete(`${this.url}?id=${id}`);
+  }
+
   public getAllMentorReviews(email: string): Observable<any>{
     return this.http.get<any>(`${this.url}/ViewAllMentorReviews/${email}`);
   }
@@ -39,5 +43,9 @@ export class ReviewService {
 
   public getStudentStars(email: string): Observable<any>{
     return this.http.get<any>(`${this.url}/StudentStars/${email}`);
+  }
+
+  public getAllStudentReviews(email: string): Observable<any>{
+    return this.http.get<any>(`${this.url}/ViewAllStudentReviews/${email}`);
   }
 }

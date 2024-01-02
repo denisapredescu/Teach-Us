@@ -36,23 +36,20 @@ namespace MANDAT.BusinessLogic.Services
                 return  review;
             });
         }
-        public async Task<bool> DeleteReview(Guid id)
+        public bool DeleteReview(Guid id)
         {
-
             return ExecuteInTransaction(uow =>
             {
-
-                var comment =  uow.Reviews.Get()
-                                                .Where(cd => cd.Id.Equals(id))
-                                                .Single();
-                if (comment == null)
+                var review = uow.Reviews.Get()
+                                            .Where(r => r.Id.Equals(id))
+                                            .SingleOrDefault();
+                if (review == null)
                 {
                     return false;
                 }
-                uow.Reviews.Delete(comment);
+                uow.Reviews.Delete(review);
                 uow.SaveChanges();
                 return true;
-
             });
         }
 

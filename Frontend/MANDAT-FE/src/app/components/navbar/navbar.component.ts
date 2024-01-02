@@ -11,7 +11,7 @@ import { Roles } from "src/app/constants/roles";
 })
 export class NavbarComponent {
   @Input() sidenav: MatSidenav;
-  
+
   socialUser!: SocialUser;
   isLoggedin?: string | null;
   name?: string | null;
@@ -21,20 +21,32 @@ export class NavbarComponent {
 
   constructor(
     private router: Router,
-    public socialAuthService: SocialAuthService,
+    public socialAuthService: SocialAuthService
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedin = localStorage.getItem("LoggedIn") !== null ? localStorage.getItem("LoggedIn") : sessionStorage.getItem("LoggedIn");
-    if (this.isLoggedin !== '' && this.isLoggedin !== null) {
-      this.name = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");;
-      this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");;
-      
-      if(this.rol === "mentor")
-        this.rol1 = "teacher";
-      else 
-        this.rol1 = "student"
+    this.isLoggedin =
+      localStorage.getItem("LoggedIn") !== null
+        ? localStorage.getItem("LoggedIn")
+        : sessionStorage.getItem("LoggedIn");
+    if (this.isLoggedin !== "" && this.isLoggedin !== null) {
+      this.name =
+        localStorage.getItem("Nume") !== null
+          ? localStorage.getItem("Nume")
+          : sessionStorage.getItem("Nume");
+      this.rol =
+        localStorage.getItem("Rol") !== null
+          ? localStorage.getItem("Rol")
+          : sessionStorage.getItem("Rol");
+
+      if (this.rol === "mentor") this.rol1 = "teacher";
+      else this.rol1 = "student";
     }
+  }
+
+  closeSidenavAndNavigate(link: string) {
+    this.router.navigate([link]);
+    this.sidenav.close();
   }
 
   public myMentors(): void {
@@ -60,11 +72,10 @@ export class NavbarComponent {
   public redirectToProfile() {
     let rememberMe = localStorage.getItem("rememberMe");
 
-    if (rememberMe === 'true') 
+    if (rememberMe === "true")
       localStorage.setItem("Verificare_User_Profile", "false");
-    else 
-      sessionStorage.setItem("Verificare_User_Profile", "false");
-    
+    else sessionStorage.setItem("Verificare_User_Profile", "false");
+
     this.router.navigate(["/user-profile"]);
   }
 }

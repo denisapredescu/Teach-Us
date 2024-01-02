@@ -1,0 +1,116 @@
+<!-- <div class="wrapper_journal">
+  <div class="book">
+    <div id="pages" class="pages">
+      <div class="page" id="firstpage" [class.flipped]="currentPage !== 0" (click)="flipPage(0)">
+        <h2 style="margin-top: 30%;">My Homework Book</h2>
+      </div>
+      <div class="page1"  [class.flipped]="currentPage !== 1" (click)="flipPage(1)">
+				<div id="str"  ></div>
+			</div>   
+      <div *ngFor="let pag of model; let i = index" class="page" id="page-{{i}}" [class.flipped]="currentPage === i" (click)="flipPage(i + 1)">
+        <p>
+
+        </p>
+        <p> Deadline: {{ pag.assessmentDeadline  | date:'yyyy-MM-dd HH:mm'}}</p>
+        <p>{{ pag.text }}</p>
+        <div class="status">
+          <p> Subject: {{ pag.materie }}</p>
+          <div id="mentorPDF">          
+             <p>See teacher assignment: </p>  
+             <button mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">Open Mentor's PDF</button>
+          </div>
+         
+          <div id="homeworkPdf">
+            <p></p>
+            <form [formGroup]="addHomework" class="form">
+            <div [formGroup]="addHomework">
+              <mat-form-field appearance="outline">
+                <mat-label>Upload your homework here (pdf only)</mat-label>
+                <input type="text" formControlName="studentPdf" matInput readonly/>
+              </mat-form-field>
+            
+              <div  mat-raised-button>
+                <label for="fileInput" mat-button>Choose File</label>
+                <input type="file" id="fileInput" (change)="onFileSelected($event, i)" formControlName="studentPdf" style="display: none"/>
+              </div>
+            </div>
+          </form>
+          <button mat-raised-button (click)="saveAdd(pag.assessmentId, i)" appHoverBtn>Save</button>
+
+            <div style="margin-top: 10px;"></div>
+            <button mat-raised-button *ngIf="pag.studentPdf" (click)="openFileStudent( pag.assessmentId , pag.studentPdf, pag.studentEmail + '.pdf')">Open Homework PDF</button>
+          
+          </div>
+          <p>Homework Status:</p>
+          <label>
+            <input type="checkbox" name="confidentialitate" [id]="pag.mentorEmail" [value]="pag.check" [checked]="pag.check">
+            <span [id]="'conf-' + pag.mentorEmail" style="color: black;">{{ pag.check ? 'Done' : 'Not Finished' }}</span>
+          </label>
+        </div>
+
+  </div>
+</div> -->
+
+
+<div class="container" >
+	<div class="display"   >
+    <div class="display-item" *ngFor="let pag of model; let i = index" class="page" id="page-{{i}}">
+			<div class="card seamus">
+				<div class="card-top"></div>
+        <div class="card-profile">
+				</div>
+				<div class="card-info">
+					<div class="info-title">
+						<p> Deadline: {{ pag.assessmentDeadline  | date:'yyyy-MM-dd HH:mm'}}</p>
+            <p>{{ pag.text }}</p>
+            <div class="status">
+              <p> Subject: {{ pag.materie }}</p>
+            </div>
+          </div>
+            <div class="info-address divider">
+              <div id="mentorPDF">          
+                <p *ngIf="rol == 'student'">See teacher assignment: </p>  
+                <p *ngIf="rol == 'mentor'">See given assignment: </p> 
+                <button *ngIf="rol == 'student'" mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">Open Mentor's PDF</button>
+                <button *ngIf="rol == 'mentor'" mat-raised-button (click)="openFile(pag.mentorPdf, pag.mentorEmail + ' ' + pag.assessmentDeadline + '.pdf')">View Assessment</button>
+              </div>
+            
+             <div id="homeworkPdf">
+               <p></p>
+               <div id="formular" *ngIf="rol == 'student'">
+               <form [formGroup]="addHomework" class="form">
+                <div [formGroup]="addHomework">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Upload your homework here (pdf only)</mat-label>
+                    <input readonly type="text" [value]="selectedFileName" formControlName="studentPdfFile" matInput />
+                  </mat-form-field>
+                  <div mat-raised-button>
+                    <label for="fileInput" mat-button style="margin-bottom: 5%;">Choose File</label>
+                    <input type="file" id="fileInput" (change)="onFileSelected($event, pag)" formControlName="studentPdfFile" style="display: none"/>
+                  </div>
+                </div>
+              </form>
+              <button mat-raised-button (click)="saveAdd(pag, i)" appHoverBtn>Save</button>
+            </div>
+               <div style="margin-top: 10px;"></div>
+               <button  mat-raised-button *ngIf="pag.studentPdf && rol == 'student'" (click)="openFileStudent( pag.assessmentId , pag)">Open Homework PDF</button>
+               <button  mat-raised-button *ngIf="pag.studentPdf && rol == 'mentor' && pag.check  == true" (click)="openFileStudent( pag.assessmentId , pag)">Open Homework PDF</button>
+
+             <p>Homework Status:</p>
+             <label *ngIf="rol == 'student'">
+              <input type="checkbox" name="confidentialitate" [id]="pag.mentorEmail" [value]="pag.check" [checked]="pag.check" (change)="togglePublicField($event, pag)">
+              <span [id]="'conf-' + pag.mentorEmail" style="color: black;">{{ pag.check ? 'Done' : 'Not Finished' }}</span>
+            </label>
+            <label *ngIf="rol == 'mentor'">
+              <input type="checkbox" name="confidentialitate" [id]="pag.mentorEmail" [value]="pag.check" [checked]="pag.check" readonly>
+              <span [id]="'conf-' + pag.mentorEmail" style="color: black;">{{ pag.check ? 'Done' : 'Not Finished' }}</span>
+            </label>
+					</div>
+      </div>
+      </div>
+  </div>
+</div>
+  </div>
+</div>
+ 
+  

@@ -1,0 +1,40 @@
+
+<div class="header">
+    <h1 class="title">Send a video for a student of yours</h1>
+</div>
+<form [formGroup]="videoAddForm" (ngSubmit)="saveDetailsVideo()" autocomplete="off" class="p-1 border">
+    <div class="pozele">
+        <br>
+        <div class="form-floating mb-3">
+            <label for="studentEmail">Student<span class="required">*</span></label>
+            <select formControlName="studentEmail" class="form-control" id="studentEmail">
+              <option *ngFor="let studentEmail of studentsEmails" [value]="studentEmail">
+                {{ studentEmail }}
+              </option>
+            </select>
+          </div>
+        <br>
+
+        <div class="form-floating mb-3">
+            <input formControlName="videoUrl" type="text" class="form-control" placeholder="videoUrl">
+            <label for="videoUrl">Video Url<span class="required">*</span></label>
+        </div>
+        <div class="form-floating mb-3">
+            <input formControlName="youtubeVideoCode" type="text" class="form-control" placeholder="youtubeVideoCode">
+            <label for="youtubeVideoCode">Youtube Video Code<span class="required">*</span></label>
+        </div>
+        <br>
+        <div class="form-floating mb-3">
+            <input formControlName="subject" type="text" class="form-control" placeholder="subject">
+            <label for="subject">Subject<span class="required">*</span></label>
+        </div>
+
+    </div>
+
+    <div class="d-grid mt-4 px-4">
+        <button class="btn btn-warning" type="submit"
+            style="font-weight: bold; margin-left:20%; margin-right: 20%;"
+            [disabled]="!isFormComplete"
+            >Add Video</button>
+    </div>
+</form>

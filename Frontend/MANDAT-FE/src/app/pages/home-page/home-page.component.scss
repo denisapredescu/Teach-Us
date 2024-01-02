@@ -5,13 +5,11 @@
   flex-direction: column;
   justify-content: space-around;
   min-height: calc(100% + 50vh);
-
 }
 
 .cards-container {
   display: flex;
   justify-content: space-evenly;
-
 }
 
 .first-element {
@@ -40,4 +38,147 @@
   background: url("../../../assets/images/third-div.jpg");
   background-size: cover;
   background-position: center;
+}
+
+.black {
+  color: black;
+}
+
+.grey {
+  color: grey;
+}
+
+.button {
+  margin: auto;
+  width: 150px;
+  margin-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.pre {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 12px;
+  text-shadow: 0 0 7px rgb(238, 237, 240), 0 0 10px rgb(3, 167, 254),
+    0 0 21px rgb(4, 252, 223), 0 0 42px rgb(245, 250, 247),
+    0 0 82px rgb(255, 1, 196), 0 0 92px rgb(3, 252, 231),
+    0 0 102px rgb(2, 81, 250), 0 0 151px rgb(246, 240, 249);
+}
+a {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  text-decoration: none;
+  color: #000000;
+  color: 0 0 7px rgb(238, 237, 240), 0 0 10px rgb(3, 167, 254),
+    0 0 21px rgb(4, 252, 223), 0 0 42px rgb(245, 250, 247),
+    0 0 82px rgb(255, 1, 196), 0 0 92px rgb(3, 252, 231),
+    0 0 102px rgb(2, 81, 250), 0 0 151px rgb(246, 240, 249);
+}
+.second-element {
+  padding: 30px;
+
+  h2 {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+.second-element a:visited {
+  background-color: rgb(100, 179, 179);
+  text-shadow: 0 0 7px rgb(89, 137, 239), 0 0 10px rgb(115, 172, 225),
+    0 0 21px rgb(243, 209, 209), 0 0 42px rgb(112, 86, 115),
+    0 0 82px rgb(113, 216, 81), 0 0 92px rgb(24, 86, 230),
+    0 0 102px rgb(71, 76, 223), 0 0 151px rgb(248, 239, 245);
+}
+.second-element a:hover {
+  background-color: rgb(131, 156, 236);
+  text-shadow: 0 0 7px rgb(89, 137, 239), 0 0 10px rgb(115, 172, 225),
+    0 0 21px rgb(243, 209, 209), 0 0 42px rgb(112, 86, 115),
+    0 0 82px rgb(113, 216, 81), 0 0 92px rgb(24, 86, 230),
+    0 0 102px rgb(71, 76, 223), 0 0 151px rgb(248, 239, 245);
+}
+span {
+  font-size: 4vw;
+  width: 30px;
+  vertical-align: sub;
+}
+.first-span {
+  margin-top: 10px;
+}
+
+#first {
+  height: 20px;
+}
+
+.top-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.top-title {
+  align-self: center;
+  font-size: 35px;
+  padding: 25px;
+}
+.top-mentors {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 30px;
+}
+
+.mentor-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  position: relative;
+  border: 1px solid #5d5b5b;
+  box-shadow: 2px 2px 4px #000000;
+  background-color: rgb(131, 156, 236);
+  position: relative;
+  width: 20%;
+  margin-left: 6%;
+  padding: 15px;
+  div {
+    padding: 10px;
+  }
+}
+.name {
+  font-weight: bold;
+}
+
+#mentor_1 {
+  height: 300px;
+}
+#mentor_0 {
+  margin-left: -4px;
+  height: 230px;
+}
+#mentor_2 {
+  height: 190px;
+}
+.number {
+  font-size: 45px;
+  color: #4b52df;
+  margin-bottom: 8px;
+}
+
+form {
+  align-self: center;
+  margin-bottom: 8px;
+  background-color: transparent;
+}
+select {
+  background: transparent; /* Set background to transparent */
+  border: none; /* Remove the border */
+  outline: none; /* Remove the outline */
+  /* Add any additional styles as needed */
 }

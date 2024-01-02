@@ -25,6 +25,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDividerModule } from "@angular/material/divider";
 import { HttpClientModule } from "@angular/common/http";
 import { NgApexchartsModule } from "ng-apexcharts";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import {
   SocialLoginModule,
@@ -52,6 +53,15 @@ import { CardsListComponent } from './components/cards-list/cards-list.component
 import { AdminManageUsersComponent } from './pages/admin-manage-users/admin-manage-users.component';
 import { VideoMeetingComponent } from "./pages/video-meeting/video-meeting.component";
 import { AddParticipantsComponent } from "./pages/video-meeting/add-participants/add-participants.component";
+import { MatchingFormComponent } from './pages/matching-form/matching-form.component';
+import { VideoPageMentorComponent } from './pages/video-page-mentor/video-page-mentor.component';
+import { VideoPageStudentComponent } from './pages/video-page-student/video-page-student.component';
+// import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { SettingsComponent } from "./pages/settings/settings.component";
+import { MatNativeDateModule } from "@angular/material/core";
+import { HomeworkComponent } from './pages/homework/homework.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { NgxYoutubePlayerModule } from "ngx-youtube-player";
 
 @NgModule({
   declarations: [
@@ -81,12 +91,20 @@ import { AddParticipantsComponent } from "./pages/video-meeting/add-participants
     AdminManageUsersComponent,
     VideoMeetingComponent,
     AddParticipantsComponent,
+    MatchingFormComponent,
+    VideoPageMentorComponent,
+    VideoPageStudentComponent,
+    SettingsComponent,
+    HomeworkComponent,
+    AboutUsComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -103,7 +121,21 @@ import { AddParticipantsComponent } from "./pages/video-meeting/add-participants
     FormsModule,
     CommonModule,
     MatDialogModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxYoutubePlayerModule.forRoot(),
+    NgApexchartsModule,
+    MatNativeDateModule,
+    MatDatepickerModule ,
+    BrowserAnimationsModule
+    
+  ],
+  exports: [
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AcceptJSService,

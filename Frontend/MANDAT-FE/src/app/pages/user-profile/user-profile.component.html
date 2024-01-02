@@ -1,6 +1,5 @@
 <div class="header-section">
   <div class="profile-card">
-    <img src="../../../assets/images/user-profile.png" class="profile-image" />
     <div class="details">
       <div class="name-surname">
         <span class="value">{{
@@ -58,9 +57,11 @@
 
   <div class="menu-box" *ngIf="isPersonalProfile">
     <ng-container *ngIf="roles.isMentor(rol)">
+      <a routerLink="/settings">{{ "Settings" | titlecase }}</a> 
       <a routerLink="/video-meeting">{{ "Video Link" | titlecase }}</a>
       <a routerLink="/my-students">{{ "My Students" | titlecase }}</a>
       <a routerLink="/my-announcements">{{ "My Announcements" | titlecase }}</a>
+      <a routerLink="/video-mentor">{{ "Add Video" | titlecase }}</a>
       <a
         routerLink="/requests"
         [ngClass]="notifications > 0 ? 'notifications' : ''"
@@ -68,7 +69,11 @@
       >
     </ng-container>
     <ng-container *ngIf="roles.isStudent(rol)">
-      <a routerLink="/my-mentors">{{ "My Mentors" | titlecase }}</a>
+      <a routerLink="/settings">{{ "Settings" | titlecase }}</a> 
+      <a routerLink="/my-mentors">{{ "My Teachers" | titlecase }}</a>
+      <a routerLink="/match">{{ "Find a Teacher" | titlecase }}</a> 
+      <a routerLink="/videos-student">{{ "Watch Videos" | titlecase }}</a>
+
     </ng-container>
   </div>
 </div>
@@ -87,13 +92,16 @@
   </div>
 </div>
 
-<div class="requests-chart" *ngIf="roles.isMentor(rol) && requestsMock.length !== 0 && parameterEmail === ''">
-  <div id="chart" *ngIf="chartOptions !== undefined"> 
+<div
+  class="requests-chart"
+  *ngIf="
+    roles.isMentor(rol) && requests.length !== 0 && parameterEmail === ''
+  ">
+  <div id="chart" *ngIf="chartOptions !== undefined">
     <apx-chart
       [series]="chartOptions.series"
       [chart]="chartOptions.chart"
       [labels]="chartOptions.labels"
-      [responsive]="chartOptions.responsive"
-    ></apx-chart>
+      [responsive]="chartOptions.responsive"></apx-chart>
   </div>
 </div>

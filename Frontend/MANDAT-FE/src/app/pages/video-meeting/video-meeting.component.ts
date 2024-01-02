@@ -10,7 +10,7 @@ declare var JitsiMeetExternalAPI: any;
 })
 export class VideoMeetingComponent implements OnInit, AfterViewInit {
   domain: string = "meet.jit.si"; // For self hosted use your domain
-    room: any;
+    room: "vpaas-magic-cookie-4f36a486b2994a919657f431528c3daa/SampleAppJointMentionsReferWorldwide";
     options: any;
     api: any;
     user: any;
@@ -22,16 +22,18 @@ export class VideoMeetingComponent implements OnInit, AfterViewInit {
         private router: Router
     ) { }
 
+    nume: string | null;
+
     ngOnInit(): void {
-        let nume = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
+        this.nume = localStorage.getItem("Nume") !== null ? localStorage.getItem("Nume") : sessionStorage.getItem("Nume");
     
         var randomWords = require('random-words');
         this.room = randomWords({ exactly: 3, join: '-' }); // Set your room name
         this.user = {
-            name: nume// Set your username
+            name: this.nume// Set your username
         }
         let text =  document.getElementsByTagName("text");
-        text[0].innerHTML = nume !== null ? nume : '';
+        text[0].innerHTML = this.nume !== null ? this.nume : '';
     }
 
     ngAfterViewInit(): void {

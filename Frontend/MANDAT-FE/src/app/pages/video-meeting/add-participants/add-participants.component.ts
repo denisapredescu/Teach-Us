@@ -10,23 +10,25 @@ import { VideoCallService } from "src/app/services/video-call.service";
   styleUrls: ["./add-participants.component.scss"],
 })
 export class AddParticipantsComponent {
-  public email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
-  public model: MeetingModel = {
-    link: "",
-    studentEmail: "",
-    mentorEmail: this.email !== null ? this.email : ''
-  };
-
-  emailFormControl = new FormControl("", [
-    Validators.required,
-    Validators.email,
-  ]);
+  public email: string | null; //localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+  public model: MeetingModel;
 
   matcher = new MyErrorStateMatcher();
+  rememberMe: String | null = "false" ;
 
   constructor(
     private videocallService: VideoCallService,
   ) {}
+  
+  ngOnInit() {
+    this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
+    this.rememberMe = localStorage.getItem("rememberMe") !== null ? localStorage.getItem("rememberMe") : sessionStorage.getItem("rememberMe");; 
+    this.model = {
+      link: "",
+      studentEmail: "",
+      mentorEmail: this.email !== null ? this.email : ''
+    };
+  }
 
   public Send(): void {
     this.videocallService.CreateOrUpdateLink(this.model).subscribe(
@@ -38,9 +40,7 @@ export class AddParticipantsComponent {
       }
     );
 
-    let rememberMe = localStorage.getItem("rememberMe") !== null ? localStorage.getItem("rememberMe") : sessionStorage.getItem("rememberMe");;
-    
-    if (rememberMe === 'false') {
+    if (this.rememberMe === 'false') {
       sessionStorage.setItem("Student Email", this.model.studentEmail);
       sessionStorage.setItem("Link", this.model.link.toString());
     } else {

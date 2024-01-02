@@ -48,7 +48,11 @@ namespace MANDAT.DataAccess
 
         private IRepository<VideoMeetingDetails> videoDetails;
         public IRepository<VideoMeetingDetails> VideoMeetingsDetails => videoDetails ?? (videoDetails = new BaseRepository<VideoMeetingDetails>(Context));
+        private IRepository<Assessment> assessments;
+        public IRepository<Assessment> Assessments => assessments ?? (assessments = new BaseRepository<Assessment>(Context));
 
+        private IRepository<Video> videos;
+        public IRepository<Video> Videos => videos ?? (videos = new BaseRepository<Video>(Context));
         public void SaveChanges()
         {
             Context.SaveChanges();

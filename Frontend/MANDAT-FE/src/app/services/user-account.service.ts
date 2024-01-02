@@ -34,9 +34,9 @@ export class UserAccountService {
     return this.http.get(`${this.url}/GetUserInfoWithAddressByEmail/${email}/${rol}`);
   }
 
-  // public UpdateUserInfoWithAddressByEmail(email: string, user: AccountModel): Observable<any> {
-  //   return this.http.put(`${this.url}/UpdateUserWithAddressByEmail/${email}`, user);
-  // }
+  public UpdateUserInfoWithAddressByEmail(email: string, user: AccountModel): Observable<any> {
+    return this.http.put(`${this.url}/UpdateUserWithAddressByEmail/${email}`, user);
+  }
 
 
   public SoftDeleteUserByEmail(email: string): Observable<any> {

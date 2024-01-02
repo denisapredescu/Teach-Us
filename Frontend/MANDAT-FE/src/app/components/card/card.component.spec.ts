@@ -5,7 +5,7 @@ import { CardComponent } from "./card.component";
 import { StudentModel } from "../../models/student-model";
 import { MentorModel } from "../../models/mentor-model";
 
-fdescribe("CardComponent", () => {
+describe("CardComponent", () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
   beforeEach(async () => {

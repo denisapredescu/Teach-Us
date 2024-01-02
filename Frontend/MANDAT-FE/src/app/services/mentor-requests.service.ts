@@ -25,4 +25,12 @@ export class MentorRequestsService {
     const headers = { 'content-type': 'application/json'};
     return this.http.patch(`${this.url + 'RespondToRequests/' + emailMentor + ", " + studentEmail + ", " + status + "/"+ subject}`, {'headers':headers});
   }
+
+  public GetAllMatchingStudents(mentorEmail : string) : Observable<any>{
+    return this.http.get(`${this.url + 'MatchedStudent/' + mentorEmail}`);
+  }
+
+  public GetAllMatchingMentorsSubject(studentEmail : string) : Observable<any>{
+    return this.http.get(`${this.url + 'MatchedTeachersSubject/' + studentEmail}`);
+  }
 }
