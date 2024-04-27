@@ -1,21 +1,27 @@
 <link
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" />
+  
 <mat-toolbar class="mat-elevation-z8">
   <button
     mat-icon-button
     *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
-      <i class="fa-regular fa-bars"></i>
+      menu
     </mat-icon>
-    <mat-icon *ngIf="sidenav.opened"> Close </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      menu_open
+    </mat-icon>
     Teach Us
   </button>
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" style="width:270px">
     <app-navbar [sidenav]="sidenav"></app-navbar>
   </mat-sidenav>
   <mat-sidenav-content>
