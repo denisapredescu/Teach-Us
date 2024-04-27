@@ -40,7 +40,7 @@ export class NavbarComponent {
           : sessionStorage.getItem("Rol");
 
       if (this.rol === "mentor") this.rol1 = "teacher";
-      else this.rol1 = "student";
+      else this.rol1 = this.rol ?? "";
     }
   }
 

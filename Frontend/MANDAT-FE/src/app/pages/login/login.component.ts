@@ -5,6 +5,7 @@ import {
 } from "@abacritt/angularx-social-login";
 import { Component } from "@angular/core";
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -24,14 +25,13 @@ export class LoginComponent {
   // socialUser!: SocialUser;
   isLoggedin?: boolean;
   isRememberMeChecked: boolean = true;
-  email = new FormControl("", [Validators.required, Validators.email]);
+  // email = new FormControl("", [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
   public model: FormGroup;
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    // public socialAuthService: SocialAuthService,
     private userAccount: UserAccountService
   ) {
     this.model = this.formBuilder.group({

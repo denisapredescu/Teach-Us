@@ -22,12 +22,12 @@ export const RegisterAccountFormDetails: AccountFormDetails = {
     question: "Already have an account?",
     button: {
       link: "/login",
-      caption: "Sign In",
+      caption: "Login",
     },
   },
   submitButton: {
     link: "/home",
-    caption: "Sign Up",
+    caption: "Register",
   },
 };
 

@@ -48,13 +48,30 @@ export class AccountFormComponent {
     educationalInstitution: "",
   };
 
+  hidePassword = true;
+  hideRepeatPassword = true;
+
   emailFormControl = new FormControl("", [
     Validators.required,
     Validators.email,
   ]);
+
   passwordFormControl = new FormControl("", [
     Validators.required,
     Validators.pattern("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"),
+  ]);
+
+  repeatPasswordFormControl = new FormControl("", [
+    Validators.required,
+    Validators.pattern("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"),
+  ]);
+
+
+  phoneFormControl = new FormControl("", [
+  ]);
+
+  roleFormControl = new FormControl("", [
+    Validators.required
   ]);
 
   matcher = new MyErrorStateMatcher();

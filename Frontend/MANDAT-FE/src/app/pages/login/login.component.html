@@ -1,10 +1,14 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet" />
+
 <div class="box">
   <div class="login-form">
     <div class="login-form-header">
       <h1>Login to your account</h1>
       <h3>
         Don't have an account yet?
-        <a routerLink="/register" class="register-link">Sign up Here</a>
+        <a routerLink="/register" class="register-link">Register</a>
       </h3>
     </div>
 
@@ -17,14 +21,15 @@
               type="email"
               matInput
               [errorStateMatcher]="matcher"
-              placeholder="Ex. pat@example.com"
-              formControlName="email" />
-            <mat-hint>Errors appear instantly!</mat-hint>
+              formControlName="email" 
+              placeholder="Example: pat@example.com" />
+            <mat-icon matPrefix >mail</mat-icon>
+            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
             <mat-error
-              *ngIf="email.hasError('email') && !email.hasError('required')">
+              *ngIf="model.get('email')?.hasError('email') && !model.get('email')?.hasError('required')">
               Please enter a valid email address
             </mat-error>
-            <mat-error *ngIf="email.hasError('required')">
+            <mat-error *ngIf="model.get('email')?.hasError('required')">
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -33,11 +38,18 @@
             <mat-label>{{ "Password" | titlecase }}</mat-label>
             <input
               matInput
-              [placeholder]="'Ex. ' + 'Jeff'"
               value=""
               type="password"
-              formControlName="password" />
+              formControlName="password" 
+              placeholder="Example: Password123!"/>
+              <mat-icon matPrefix >lock</mat-icon>
+            <!-- <mat-hint>Example: Password123!</mat-hint> -->
+            <mat-error *ngIf="model.get('password')?.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
+          <!-- [placeholder]="'Password123!'" -->
+          
         </form>
       </div>
       <div class="form-check">
