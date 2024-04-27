@@ -32,3 +32,11 @@
     width: 75%;
   }
 }
+
+.buttons {
+  display: grid;
+  grid-template-rows: auto;
+  width: 35%;
+  margin: auto;
+  gap: 30px;
+}
