@@ -15,381 +15,198 @@
     </div>
 
     <div>
-      
-        <form [formGroup]="accountModel">
-          <div class="form-fields">
-        <mat-form-field class="example-form">
-          <mat-label>{{ "First Name" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Jeff'"
-            value=""
-            type="text"
-            formControlName="firstName" />
-          <mat-icon matPrefix>badge</mat-icon>
-        </mat-form-field>
-  
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Last Name" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Smith'"
-            value=""
-            type="text"
-            formControlName="lastName" />
-          <mat-icon matPrefix>badge</mat-icon>
-        </mat-form-field>
-  
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            formControlName="email"
-            [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com" />
-          <mat-icon matPrefix>mail</mat-icon>
-          <mat-error
-            *ngIf="
-            accountModel.get('email')?.hasError('email') &&
-              !accountModel.get('email')?.hasError('required')
-            ">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="accountModel.get('email')?.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Password" | titlecase }}</mat-label>
-          <input
-            matInput  
-            name="password"
-            required
-            pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"
-            value=""
-            [type]="hidePassword ? 'password' : 'text'"
-            formControlName="password" />
-          <mat-icon matPrefix>lock</mat-icon>
-          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-            {{hidePassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-          <mat-error *ngIf="accountModel.get('password')?.hasError('pattern')"
-            >Password must be a combination of lower-case, upper-case, numbers and
-            at least 9 characters long</mat-error>
-          <mat-error *ngIf="accountModel.get('password')?.hasError('required')"
-            >Password is <strong>required</strong></mat-error>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill" *ngIf="isRegisterPage()">
-          <mat-label>{{ "Account Type" | titlecase }}</mat-label>
-          <mat-select required value="Student" formControlName="role" appearance="fill" [formControl]="roleFormControl">
-            <mat-option
-              *ngFor="let accountType of accountTypes"
-              [value]="accountType">
-              {{ accountType }}
-            </mat-option>
-          </mat-select>
-          <mat-icon matPrefix>category</mat-icon>
-          <mat-error *ngIf="accountModel.get('role')?.hasError('required')"
-            >Account type is <strong>required</strong></mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Repeat Password" | titlecase }}</mat-label>
-          <input
-            matInput
-            name="repeat password"
-            required
-            value=""
-            [type]="hideRepeatPassword ? 'password' : 'text'"
-            formControlName="repeatPassword" />
-          <mat-icon matPrefix>lock_reset</mat-icon>
-          <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword">
-            {{hideRepeatPassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-          <mat-error *ngIf="this.accountModel.get('repeatPassword')?.hasError('confirmedValidator')">
-            The repeated password should be the same as the new password
-          </mat-error>
-          
-          <mat-error *ngIf="accountModel.get('repeatPassword')?.hasError('required')"
-            >Repeat password is <strong>required</strong></mat-error>
-          
-        </mat-form-field>
-      </div>
-      
-      <mat-divider></mat-divider> 
-
-      <div class="form-fields">
-        <mat-form-field class="example-form">
-          <mat-label>{{ "County" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Ilfov'"
-            value=""
-            type="text"
-            formControlName="county" />
-          <mat-icon matPrefix>flag</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "City" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Bucuresti'"
-            value=""
-            type="text"
-            formControlName="city" />
-          <mat-icon matPrefix>location_city</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Address" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Cool People Street, number 1'"
-            value=""
-            type="text"
-            formControlName="addressInfo" />
-          <mat-icon matPrefix>home</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Phone Number" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + '0769905888'"
-            value=""
-            type="text"
-            minlength="10"
-            maxlength="10"
-            formControlName="phoneNumber" 
-            />
-            <mat-icon matPrefix>call</mat-icon>
-            <mat-error *ngIf="accountModel.get('phoneNumber')?.hasError('maxlength') || accountModel.get('phoneNumber')?.hasError('minlength')">
-              The phone number must have 10 digits
+      <form [formGroup]="accountModel">
+        <div class="form-fields">
+          <mat-form-field class="example-form">
+            <mat-label>{{ "First Name" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + 'Jeff'"
+              value=""
+              type="text"
+              formControlName="firstName" />
+            <mat-icon matPrefix>badge</mat-icon>
+          </mat-form-field>
+    
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Last Name" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + 'Smith'"
+              value=""
+              type="text"
+              formControlName="lastName" />
+            <mat-icon matPrefix>badge</mat-icon>
+          </mat-form-field>
+    
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              formControlName="email"
+              [errorStateMatcher]="matcher"
+              placeholder="Ex. pat@example.com" />
+            <mat-icon matPrefix>mail</mat-icon>
+            <mat-error
+              *ngIf="
+              accountModel.get('email')?.hasError('email') &&
+                !accountModel.get('email')?.hasError('required')
+              ">
+              Please enter a valid email address
             </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Bio" | titlecase }}</mat-label>
-          <textarea
-            matInput
-            [placeholder]="'Ex. Description for your profile....'"
-            value=""
-            type="text"
-            formControlName="bio"></textarea>
-          <mat-icon matPrefix>description</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Educational Institution" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'ICHB'"
-            value=""
-            type="text"
-            formControlName="educationalInstitution" />
-          <mat-icon matPrefix>school</mat-icon>
-        </mat-form-field>
-      
-      </div>
-    </form>
-      <!-- <div class="form-fields">
-        <mat-form-field class="example-form">
-          <mat-label>{{ "First Name" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Jeff'"
-            value=""
-            type="text"
-            [(ngModel)]="model.firstName" />
-          <mat-icon matPrefix>badge</mat-icon>
-        </mat-form-field>
-  
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Last Name" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Smith'"
-            value=""
-            type="text"
-            [(ngModel)]="model.lastName" />
-          <mat-icon matPrefix>badge</mat-icon>
-        </mat-form-field>
-  
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input
-            type="email"
-            matInput
-            [formControl]="emailFormControl"
-            [(ngModel)]="model.email"
-            [errorStateMatcher]="matcher"
-            placeholder="Ex. pat@example.com" />
-          <mat-icon matPrefix>mail</mat-icon>
-          <mat-error
-            *ngIf="
-              emailFormControl.hasError('email') && !emailFormControl.hasError('required')
-            ">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Password" | titlecase }}</mat-label>
-          <input
-            matInput
-            [formControl]="passwordFormControl"
-            name="password"
-            required
-            pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"
-            value=""
-            [type]="hidePassword ? 'password' : 'text'"
-            [(ngModel)]="model.password" />
-          <mat-icon matPrefix>lock</mat-icon>
-          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-            {{hidePassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-          <mat-error *ngIf="passwordFormControl.hasError('pattern')"
-            >Password must be a combination of lower-case, upper-case, numbers and
-            at least 9 characters long</mat-error>
-          <mat-error *ngIf="passwordFormControl.hasError('required')"
-            >Password is <strong>required</strong></mat-error>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill" *ngIf="isRegisterPage()">
-          <mat-label>{{ "Account Type" | titlecase }}</mat-label>
-          <mat-select required value="Student" [(ngModel)]="model.role" appearance="fill" [formControl]="roleFormControl">
-            <mat-option
-              *ngFor="let accountType of accountTypes"
-              [value]="accountType">
-              {{ accountType }}
-            </mat-option>
-          </mat-select>
-          <mat-icon matPrefix>category</mat-icon>
-          <mat-error *ngIf="roleFormControl.hasError('required')"
-            >Account type is <strong>required</strong></mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Repeat Password" | titlecase }}</mat-label>
-          <input
-            matInput
-            name="repeat password"
-            required
-            pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"
-            value=""
-            [type]="hideRepeatPassword ? 'password' : 'text'"
-            [formControl]="repeatPasswordFormControl"
-            [(ngModel)]="model.repeatPassword" />
-          <mat-icon matPrefix>lock_reset</mat-icon>
-          <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword">
-            {{hideRepeatPassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-          <mat-error *ngIf="model.password.length !== model.repeatPassword.length || model.password !== model.repeatPassword"
-            >The repeated password should be the same as the new password
-          </mat-error>
-          
-        </mat-form-field>
-      </div>
-
-      {{model.password.length !== model.repeatPassword.length}}
-      {{model.password !== model.repeatPassword}}
-      
-      <mat-divider></mat-divider> 
-
-      <div class="form-fields">
-        <mat-form-field class="example-form">
-          <mat-label>{{ "County" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Ilfov'"
-            value=""
-            type="text"
-            [(ngModel)]="model.county" />
-          <mat-icon matPrefix>flag</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "City" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Bucuresti'"
-            value=""
-            type="text"
-            [(ngModel)]="model.city" />
-          <mat-icon matPrefix>location_city</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Address" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'Cool People Street, number 1'"
-            value=""
-            type="text"
-            [(ngModel)]="model.addressInfo" />
-          <mat-icon matPrefix>home</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Phone Number" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + '0769905888'"
-            value=""
-            type="text"
-            minlength="10"
-            maxlength="10"
-            [formControl]="phoneFormControl"
-            [(ngModel)]="model.phoneNumber" 
-            />
-            <mat-icon matPrefix>call</mat-icon>
-            <mat-error *ngIf="phoneFormControl.hasError('maxlength') || phoneFormControl.hasError('minlength')">
-              The phone number must have 10 digits
+            <mat-error *ngIf="accountModel.get('email')?.hasError('required')">
+              Email is <strong>required</strong>
             </mat-error>
-        </mat-form-field>
+          </mat-form-field>
+    
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Password" | titlecase }}</mat-label>
+            <input
+              matInput  
+              name="password"
+              required
+              pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"
+              value=""
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password" />
+            <mat-icon matPrefix>lock</mat-icon>
+            <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+              {{hidePassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+            <mat-error *ngIf="accountModel.get('password')?.hasError('pattern')"
+              >Password must be a combination of lower-case, upper-case, numbers and
+              at least 9 characters long</mat-error>
+            <mat-error *ngIf="accountModel.get('password')?.hasError('required')"
+              >Password is <strong>required</strong></mat-error>
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" *ngIf="isRegisterPage()">
+            <mat-label>{{ "Account Type" | titlecase }}</mat-label>
+            <mat-select required value="Student" formControlName="role" appearance="fill">
+              <mat-option
+                *ngFor="let accountType of accountTypes"
+                [value]="accountType">
+                {{ accountType }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matPrefix>category</mat-icon>
+            <mat-error *ngIf="accountModel.get('role')?.hasError('required')"
+              >Account type is <strong>required</strong></mat-error>
+          </mat-form-field>
 
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Bio" | titlecase }}</mat-label>
-          <textarea
-            matInput
-            [placeholder]="'Ex. Description for your profile....'"
-            value=""
-            type="text"
-            [(ngModel)]="model.bio"></textarea>
-          <mat-icon matPrefix>description</mat-icon>
-        </mat-form-field>
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Repeat Password" | titlecase }}</mat-label>
+            <input
+              matInput
+              name="repeat password"
+              required
+              value=""
+              [type]="hideRepeatPassword ? 'password' : 'text'"
+              formControlName="repeatPassword" />
+            <mat-icon matPrefix>lock_reset</mat-icon>
+            <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword">
+              {{hideRepeatPassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+            <mat-error *ngIf="this.accountModel.get('repeatPassword')?.hasError('confirmedValidator')">
+              The repeated password should be the same as the new password
+            </mat-error>
+            
+            <mat-error *ngIf="accountModel.get('repeatPassword')?.hasError('required')"
+              >Repeat password is <strong>required</strong></mat-error>
+            
+          </mat-form-field>
+        </div>
 
-        <mat-form-field class="example-form">
-          <mat-label>{{ "Educational Institution" | titlecase }}</mat-label>
-          <input
-            matInput
-            [placeholder]="'Ex. ' + 'ICHB'"
-            value=""
-            type="text"
-            [(ngModel)]="model.educationalInstitution" />
-          <mat-icon matPrefix>school</mat-icon>
-        </mat-form-field>
-      </div>
-       -->
+        <mat-divider></mat-divider> 
+
+        <div class="form-fields">
+          <mat-form-field class="example-form">
+            <mat-label>{{ "County" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + 'Ilfov'"
+              value=""
+              type="text"
+              formControlName="county" />
+            <mat-icon matPrefix>flag</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-form">
+            <mat-label>{{ "City" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + 'Bucuresti'"
+              value=""
+              type="text"
+              formControlName="city" />
+            <mat-icon matPrefix>location_city</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Address" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + 'Cool People Street, number 1'"
+              value=""
+              type="text"
+              formControlName="addressInfo" />
+            <mat-icon matPrefix>home</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Phone Number" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + '0769905888'"
+              value=""
+              type="text"
+              minlength="10"
+              maxlength="10"
+              formControlName="phoneNumber" 
+              />
+              <mat-icon matPrefix>call</mat-icon>
+              <mat-error *ngIf="accountModel.get('phoneNumber')?.hasError('maxlength') || accountModel.get('phoneNumber')?.hasError('minlength')">
+                The phone number must have 10 digits
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Bio" | titlecase }}</mat-label>
+            <textarea
+              matInput
+              [placeholder]="'Ex. Description for your profile....'"
+              value=""
+              type="text"
+              formControlName="bio"></textarea>
+            <mat-icon matPrefix>description</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="example-form">
+            <mat-label>{{ "Educational Institution" | titlecase }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'Ex. ' + 'ICHB'"
+              value=""
+              type="text"
+              formControlName="educationalInstitution" />
+            <mat-icon matPrefix>school</mat-icon>
+          </mat-form-field>
+        </div>
+      </form>
+      
       <div class="buttons">
         <button
           mat-raised-button
           (click)="submit()"
           style="cursor: pointer"
           color="primary"
-          [disabled]="!emailFormControl.valid || 
-                      !passwordFormControl.valid || 
-                      !repeatPasswordFormControl.valid ||
-                      !phoneFormControl.valid ||
-                      !roleFormControl.valid ||
-                      (isRegisterPage() && !passwordFormControl.valid)"
+          [disabled]="!accountModel.get('email')?.valid || 
+                      !accountModel.get('password')?.valid || 
+                      !accountModel.get('repeatPassword')?.valid ||
+                      !accountModel.get('phoneNumber')?.valid ||
+                      !accountModel.get('role')?.valid ||
+                      (isRegisterPage() && !accountModel.get('password')?.valid)"
           [routerLink]="[accountFormDetails.submitButton.link]">
           {{ accountFormDetails.submitButton.caption | titlecase }}
         </button>

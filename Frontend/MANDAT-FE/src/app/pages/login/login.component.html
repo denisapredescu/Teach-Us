@@ -1,7 +1,3 @@
-<!-- <link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet" /> -->
-
 <div class="box">
   <div class="login-form">
     <div class="login-form-header">
@@ -24,7 +20,6 @@
               formControlName="email" 
               placeholder="Example: pat@example.com" />
             <mat-icon matPrefix >mail</mat-icon>
-            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
             <mat-error
               *ngIf="model.get('email')?.hasError('email') && !model.get('email')?.hasError('required')">
               Please enter a valid email address
@@ -43,12 +38,10 @@
               formControlName="password" 
               placeholder="Example: Password123!"/>
               <mat-icon matPrefix >lock</mat-icon>
-            <!-- <mat-hint>Example: Password123!</mat-hint> -->
             <mat-error *ngIf="model.get('password')?.hasError('required')">
               Password is <strong>required</strong>
             </mat-error>
           </mat-form-field>
-          <!-- [placeholder]="'Password123!'" -->
           
         </form>
       </div>

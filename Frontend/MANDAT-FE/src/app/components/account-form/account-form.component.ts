@@ -31,7 +31,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-
 export class CustomValidators {
   static MatchValidator(source: string, target: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -57,53 +56,14 @@ export class CustomValidators {
 })
 export class AccountFormComponent {
   public accountModel: FormGroup;
-  public model: AccountModel = {
-    firstName: "",
-    lastName: "",
-    userName: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
-    county: "",
-    city: "",
-    addressInfo: "",
-    role: "",
-    bio: "",
-    phoneNumber: "",
-    educationalInstitution: "",
-  };
 
-  hidePassword = true;
-  hideRepeatPassword = true;
-
-  emailFormControl = new FormControl("", [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  passwordFormControl = new FormControl("", [
-    Validators.required,
-    Validators.pattern("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"),
-  ]);
-
-  repeatPasswordFormControl = new FormControl("", [
-    Validators.required,
-    Validators.pattern("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"),
-  ]);
-
-  phoneFormControl = new FormControl("", [
-    Validators.maxLength(10),
-    Validators.minLength(10)
-  ]);
-
-  roleFormControl = new FormControl("", [
-    Validators.required
-  ]);
-
+  hidePassword: boolean = true;
+  hideRepeatPassword: boolean = true;
   matcher = new MyErrorStateMatcher();
   accountTypes: string[] = ["Student", "Mentor"];
   email: string | null;
   rol: string | null;
+
   @Input() accountFormDetails: AccountFormDetails;
   @Output() submitEmitter = new EventEmitter<AccountFormModel>();
   @Output() deleteEmitter = new EventEmitter<string>();
@@ -156,8 +116,8 @@ export class AccountFormComponent {
         this.userAccountService
         .GetUserInfoWithAddressByEmail(this.email, this.rol)
         .subscribe(res => {
-          this.model = res;
-          [this.model.firstName, this.model.lastName] = res.username.split(" ");
+          this.accountModel = res;
+          [this.accountModel.value.firstName, this.accountModel.value.lastName] = res.username.split(" ");
         });
       }
     }
@@ -183,12 +143,12 @@ export class AccountFormComponent {
 
   submit(): void {
     if(this.email != null){
-    const accountFormModel: AccountFormModel = {
-      userEmail: this.email,
-      model: this.model,
-    };
-    this.submitEmitter.emit(accountFormModel);
-  }
+      const accountFormModel: AccountFormModel = {
+        userEmail: this.email,
+        model: this.accountModel.value,
+      };
+      this.submitEmitter.emit(accountFormModel);
+    }
   }
 
   delete(): void {
