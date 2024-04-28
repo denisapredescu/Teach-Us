@@ -1,13 +1,6 @@
-import {
-  // FacebookLoginProvider,
-  // SocialAuthService,
-  // SocialUser,
-} from "@abacritt/angularx-social-login";
 import { Component } from "@angular/core";
 import {
-  AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";

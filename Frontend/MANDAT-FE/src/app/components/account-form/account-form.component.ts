@@ -1,20 +1,16 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   FormGroupDirective,
   NgForm,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
 import { AccountFormDetails } from "src/app/constants/account-form-details";
-import { AccountFormModel, AccountModel } from "src/app/models/account-model";
+import { AccountFormModel } from "src/app/models/account-model";
 import { UserAccountService } from "src/app/services/user-account.service";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -28,24 +24,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
       control.invalid &&
       (control.dirty || control.touched || isSubmitted)
     );
-  }
-}
-
-export class CustomValidators {
-  static MatchValidator(source: string, target: string): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      console.log(source, target, control.value)
-      const sourceCtrl = control.get(source);
-      const targetCtrl = control.get(target);
-
-      console.log(sourceCtrl?.value)
-      console.log(targetCtrl?.value)
-      console.log(sourceCtrl?.value !== targetCtrl?.value)
-
-      return sourceCtrl && targetCtrl && sourceCtrl.value !== targetCtrl.value
-        ? { mismatch: true }
-        : null;
-    };
   }
 }
 
