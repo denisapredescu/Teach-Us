@@ -1,13 +1,6 @@
-import {
-  // FacebookLoginProvider,
-  // SocialAuthService,
-  // SocialUser,
-} from "@abacritt/angularx-social-login";
 import { Component } from "@angular/core";
 import {
-  AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
@@ -21,11 +14,8 @@ import { UserAccountService } from "src/app/services/user-account.service";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
-  loginForm!: FormGroup;
-  // socialUser!: SocialUser;
   isLoggedin?: boolean;
   isRememberMeChecked: boolean = true;
-  // email = new FormControl("", [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
   public model: FormGroup;
 
