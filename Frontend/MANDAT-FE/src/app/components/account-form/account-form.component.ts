@@ -94,7 +94,15 @@ export class AccountFormComponent {
         this.userAccountService
         .GetUserInfoWithAddressByEmail(this.email, this.rol)
         .subscribe(res => {
-          this.accountModel = res;
+          this.accountModel.value.email = res.email;
+          this.accountModel.value.userName = res.username;
+          this.accountModel.value.phoneNumber = res.phoneNumber;
+          this.accountModel.value.bio = res.bio;
+          this.accountModel.value.educationalInstitution = res.educationalInstitution;
+          this.accountModel.value.city = res.city;
+          this.accountModel.value.county = res.county;
+          this.accountModel.value.addressInfo = res.addressInfo;
+          this.accountModel.value.role = this.rol;
           [this.accountModel.value.firstName, this.accountModel.value.lastName] = res.username.split(" ");
         });
       }
