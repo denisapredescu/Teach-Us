@@ -21,11 +21,8 @@ import { UserAccountService } from "src/app/services/user-account.service";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
-  loginForm!: FormGroup;
-  // socialUser!: SocialUser;
   isLoggedin?: boolean;
   isRememberMeChecked: boolean = true;
-  // email = new FormControl("", [Validators.required, Validators.email]);
   matcher = new MyErrorStateMatcher();
   public model: FormGroup;
 
