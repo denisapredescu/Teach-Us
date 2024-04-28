@@ -56,4 +56,11 @@ export class MentorRequestsComponent {
       );
     }
   }
+
+  public redirectToProfile(email:string) {
+
+    setTimeout(() => {
+      this.router.navigate([`/user-profile/${email}`]);
+    }, 1000);
+  }
 }
