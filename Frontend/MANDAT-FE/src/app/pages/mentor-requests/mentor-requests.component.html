@@ -1,7 +1,7 @@
 <div class="landing" *ngIf="requests.length > 0" else noData>
   <div *ngFor="let req of requests" class="container">
     <span style="display: flex" class="card" id="{{ req.email }}"
-      ><img alt="user Avatar" src="../../../assets/images/profile.jpg" />
+      ><img (click)="redirectToProfile(req.email)" alt="user Avatar" src="../../../assets/images/profile.jpg" />
       <h2>{{ req.fullName }}</h2>
       <p
         >Email: {{ req.email }} <br />
