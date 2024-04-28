@@ -33,7 +33,35 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./account-form.component.scss"],
 })
 export class AccountFormComponent {
-  public accountModel: FormGroup;
+  public accountModel: FormGroup = this.formBuilder.group({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    userName: new FormControl(""),
+    email: new FormControl("", [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl("", [
+      Validators.required,
+      Validators.pattern("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"),
+    ]),
+    repeatPassword: new FormControl("", [
+      Validators.required
+    ]),
+    county: new FormControl(""),
+    city: new FormControl(""),
+    addressInfo: new FormControl(""),
+    role: new FormControl("", [
+      Validators.required
+    ]),
+    bio: new FormControl(""),
+    phoneNumber: new FormControl(""),
+    educationalInstitution: new FormControl("")
+  }, 
+  {
+    validator: this.ConfirmedValidator('password', 'repeatPassword')
+  }
+);
 
   hidePassword: boolean = true;
   hideRepeatPassword: boolean = true;
@@ -52,36 +80,6 @@ export class AccountFormComponent {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
-      this.accountModel = this.formBuilder.group({
-        firstName: new FormControl(''),
-        lastName: new FormControl(''),
-        userName: new FormControl(""),
-        email: new FormControl("", [
-          Validators.required,
-          Validators.email,
-        ]),
-        password: new FormControl("", [
-          Validators.required,
-          Validators.pattern("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$"),
-        ]),
-        repeatPassword: new FormControl("", [
-          Validators.required
-        ]),
-        county: new FormControl(""),
-        city: new FormControl(""),
-        addressInfo: new FormControl(""),
-        role: new FormControl("", [
-          Validators.required
-        ]),
-        bio: new FormControl(""),
-        phoneNumber: new FormControl(""),
-        educationalInstitution: new FormControl("")
-      }, 
-      {
-        validator: this.ConfirmedValidator('password', 'repeatPassword')
-      }
-    );
-
     this.rol = localStorage.getItem("Rol");
     if (this.router.url.startsWith("/settings")) {
       this.activatedRoute.paramMap.subscribe(params => {
@@ -94,16 +92,18 @@ export class AccountFormComponent {
         this.userAccountService
         .GetUserInfoWithAddressByEmail(this.email, this.rol)
         .subscribe(res => {
-          this.accountModel.value.email = res.email;
-          this.accountModel.value.userName = res.username;
-          this.accountModel.value.phoneNumber = res.phoneNumber;
-          this.accountModel.value.bio = res.bio;
-          this.accountModel.value.educationalInstitution = res.educationalInstitution;
-          this.accountModel.value.city = res.city;
-          this.accountModel.value.county = res.county;
-          this.accountModel.value.addressInfo = res.addressInfo;
-          this.accountModel.value.role = this.rol;
-          [this.accountModel.value.firstName, this.accountModel.value.lastName] = res.username.split(" ");
+          this.accountModel.controls["email"].setValue(res.email);
+          this.accountModel.controls["userName"].setValue(res.username);
+          this.accountModel.controls["phoneNumber"].setValue(res.phoneNumber);
+          this.accountModel.controls["bio"].setValue(res.bio);;
+          this.accountModel.controls["educationalInstitution"].setValue(res.educationalInstitution);
+          this.accountModel.controls["city"].setValue(res.city);
+          this.accountModel.controls["county"].setValue(res.county);
+          this.accountModel.controls["addressInfo"].setValue(res.addressInfo);
+          this.accountModel.controls["role"].setValue(this.rol);
+          var name = res.username.split(" ");
+          this.accountModel.controls["firstName"].setValue(name[0]);
+          this.accountModel.controls["lastName"].setValue(name[1]);
         });
       }
     }
