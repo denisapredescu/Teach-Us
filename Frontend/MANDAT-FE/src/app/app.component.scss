@@ -1,6 +1,7 @@
 mat-toolbar {
   background: #004a9f;
   color: white;
+  z-index: 9;
 }
 
 mat-sidenav {
@@ -66,4 +67,11 @@ mat-divider {
   margin-top: 16px;
   margin-bottom: 16px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+app-alert {
+  position: absolute;
+  width: 98%;
+  margin: 1%;
+  z-index: 10;
 }

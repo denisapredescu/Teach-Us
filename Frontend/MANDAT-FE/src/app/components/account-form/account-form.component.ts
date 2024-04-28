@@ -81,6 +81,7 @@ export class AccountFormComponent {
     private formBuilder: FormBuilder
   ) {
     this.rol = localStorage.getItem("Rol");
+    this.email = localStorage.getItem("Email");
     if (this.router.url.startsWith("/settings")) {
       this.activatedRoute.paramMap.subscribe(params => {
         this.email = params.get("email") || "";
@@ -128,7 +129,9 @@ export class AccountFormComponent {
   }
 
   submit(): void {
+    console.log(this.email)
     if(this.email != null){
+      console.log(this.accountModel.value)
       const accountFormModel: AccountFormModel = {
         userEmail: this.email,
         model: this.accountModel.value,
@@ -143,11 +146,20 @@ export class AccountFormComponent {
     }
   }
 
+  resetPassword(): void {
+    if(this.email != null)
+      this.router.navigate(["/reset-password"])
+  }
+
   isRegisterPage(): boolean {
     return this.accountFormDetails.pageUrl === "/register";
   }
 
   isSettingsPage(): boolean {
-    return this.accountFormDetails.pageUrl == "/settings";
+    return this.accountFormDetails.pageUrl === "/settings";
+  }
+
+  isResetPasswordPage(): boolean {
+    return this.accountFormDetails.pageUrl === "/reset-password";
   }
 }

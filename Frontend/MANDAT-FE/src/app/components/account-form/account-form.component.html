@@ -39,7 +39,7 @@
             <mat-icon matPrefix>badge</mat-icon>
           </mat-form-field>
     
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="example-full-width" *ngIf="isRegisterPage()">
             <mat-label>Email</mat-label>
             <input
               type="email"
@@ -60,7 +60,7 @@
             </mat-error>
           </mat-form-field>
     
-          <mat-form-field class="example-form">
+          <mat-form-field class="example-form" *ngIf="isRegisterPage()">
             <mat-label>{{ "Password" | titlecase }}</mat-label>
             <input
               matInput  
@@ -95,7 +95,7 @@
               >Account type is <strong>required</strong></mat-error>
           </mat-form-field>
 
-          <mat-form-field class="example-form">
+          <mat-form-field class="example-form" *ngIf="isRegisterPage()">
             <mat-label>{{ "Repeat Password" | titlecase }}</mat-label>
             <input
               matInput
@@ -201,12 +201,13 @@
           (click)="submit()"
           style="cursor: pointer"
           color="primary"
-          [disabled]="!accountModel.get('email')?.valid || 
-                      !accountModel.get('password')?.valid || 
-                      !accountModel.get('repeatPassword')?.valid ||
-                      !accountModel.get('phoneNumber')?.valid ||
-                      !accountModel.get('role')?.valid ||
-                      (isRegisterPage() && !accountModel.get('password')?.valid)"
+          [disabled]="!accountModel.get('phoneNumber')?.valid ||
+                      (isRegisterPage() && (
+                        !accountModel.get('email')?.valid || 
+                        !accountModel.get('password')?.valid || 
+                        !accountModel.get('repeatPassword')?.valid || 
+                        !accountModel.get('role')?.valid )
+                      )"
           [routerLink]="[accountFormDetails.submitButton.link]">
           {{ accountFormDetails.submitButton.caption | titlecase }}
         </button>
@@ -214,7 +215,15 @@
         <button
           mat-raised-button
           *ngIf="isSettingsPage()"
-          class="delete-button"
+          color="primary"
+          (click)="resetPassword()">
+          {{ "Reset Password" | titlecase }}
+        </button>
+
+        <button
+          mat-raised-button
+          *ngIf="isSettingsPage()"
+          color="warn"
           (click)="delete()">
           {{ "Delete Account" | titlecase }}
         </button>

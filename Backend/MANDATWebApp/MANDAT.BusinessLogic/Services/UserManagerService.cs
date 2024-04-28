@@ -276,17 +276,9 @@ namespace MANDAT.BusinessLogic.Services
                     location.County = registerCommand.County;
                     location.AddressInfo = registerCommand.AddressInfo;
 
-                    
-
-
                     if (result != null)
                     {
                         registerUser.PasswordHash = result;
-                        uow.IdentityUsers.Insert(registerUser);
-
-
-                        //  var id = await uow.IdentityUsers.Where(u => u.Email.Equals(registerCommand.Email)).Select(u => u.Id).SingleOrDefaultAsync();
-                        //var roleid = Guid.NewGuid();
                         uow.IdentityUsers.Insert(registerUser);
                         if (registerCommand.Role == "Student")
                         {
@@ -306,18 +298,11 @@ namespace MANDAT.BusinessLogic.Services
                             uow.Mentors.Insert(mentor);
                         }
                         uow.Adress.Insert(location);
-                        //uow.IdentityRoles.Insert(new IdentityUserIdentityRole(registerUser.Id, roleid));
                         uow.SaveChanges();
-
                     }
-
                 }
             });
-            
-
         }
-
-
 
         public IdentityUser updateUser(IdentityUser user)
         {
@@ -327,8 +312,6 @@ namespace MANDAT.BusinessLogic.Services
                 uow.SaveChanges();
                 return user;
             });
-            
-
         }
 
         public bool UpdateUserWithAddressByEmail(string email, CurrentUserWithAddressDto user)
@@ -356,5 +339,25 @@ namespace MANDAT.BusinessLogic.Services
             });
         }
 
+        public bool ResetPassword(ResetPasswordDTO dto)
+        {
+            return ExecuteInTransaction(uow =>
+            {
+
+                var user = uow.IdentityUsers.Get().Where(u => u.Email.Equals(dto.Email)).SingleOrDefault();
+
+                if (user == null)
+                {
+                    string message = "User with email " + dto.Email + " not found";
+                    throw new NotFoundException(nameof(IdentityUser), message);
+                }
+
+                user.PasswordHash = _hashAlgo.CalculateHashValueWithInput(dto.Password);
+                uow.IdentityUsers.Update(user);
+                uow.SaveChanges();
+
+                return true;
+            });
+        }
     }
 }
