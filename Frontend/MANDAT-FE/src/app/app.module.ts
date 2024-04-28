@@ -62,6 +62,8 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { HomeworkComponent } from './pages/homework/homework.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { NgxYoutubePlayerModule } from "ngx-youtube-player";
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { NgxYoutubePlayerModule } from "ngx-youtube-player";
     SettingsComponent,
     HomeworkComponent,
     AboutUsComponent,
+    ResetPasswordComponent,
+    AlertComponent,
 
   ],
   imports: [
@@ -115,7 +119,6 @@ import { NgxYoutubePlayerModule } from "ngx-youtube-player";
     MatSidenavModule,
     MatDividerModule,
     MatListModule,
-    BrowserAnimationsModule,
     SocialLoginModule,
     HttpClientModule,
     FormsModule,
@@ -126,7 +129,8 @@ import { NgxYoutubePlayerModule } from "ngx-youtube-player";
     NgApexchartsModule,
     MatNativeDateModule,
     MatDatepickerModule ,
-    BrowserAnimationsModule
+    
+    // AlertComponent
     
   ],
   exports: [

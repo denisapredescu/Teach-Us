@@ -11,6 +11,7 @@ export class UserAccountService {
   private url = "https://localhost:7278/api/Accounts";
 
   constructor(private http: HttpClient) {}
+
   public Register(user: RegisterModel): Observable<any> {
     const headers = { "content-type": "application/json" };
     // const body=JSON.stringify();
@@ -38,11 +39,14 @@ export class UserAccountService {
     return this.http.put(`${this.url}/UpdateUserWithAddressByEmail/${email}`, user);
   }
 
-
   public SoftDeleteUserByEmail(email: string): Observable<any> {
     return this.http.put(`${this.url}/SoftDelete`, {email: email});
   }
 
+  public ResetPassword(dto: any): Observable<any> {
+    const headers = { "content-type": "application/json" };
+    return this.http.put(`${this.url}/ResetPassword`, dto, { headers: headers });
+  }
 
   public Logout(email: any): Observable<any> {
     const headers = { "content-type": "application/json" };

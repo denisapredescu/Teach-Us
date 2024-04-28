@@ -106,6 +106,21 @@ namespace MANDATWebApp.Controllers
             return Ok(result);
         }
 
+        [HttpPut("ResetPassword")]
+        public IActionResult ResetPassword([FromBody] ResetPasswordDTO dto)
+        {
+            try
+            {
+                var result = _userAccountService.ResetPassword(dto);
+                return Ok(result);
+            }
+            catch (NotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("refresh-token")]
         public async Task<IActionResult> RefreshLoginToken([FromBody] RefreshTokenCommand refreshTokenCommand, CancellationToken cancellationToken)

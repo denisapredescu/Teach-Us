@@ -46,3 +46,19 @@ export const SettingsAccountFormDetails: AccountFormDetails = {
     caption: "Save Settings",
   },
 };
+
+export const ResetPasswordUserAccount: AccountFormDetails = {
+  pageUrl: "/reset-password",
+  pageTitle: "Reset Password",
+  subTitle: {
+    question: "Changed your mind?",
+    button: {
+      link: "/settings",
+      caption: "Go back",
+    },
+  },
+  submitButton: {
+    link: "/settings",
+    caption: "Reset password",
+  },
+};

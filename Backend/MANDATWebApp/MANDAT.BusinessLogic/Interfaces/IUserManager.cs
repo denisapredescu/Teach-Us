@@ -32,6 +32,7 @@ namespace MANDAT.BusinessLogic.Interfaces
         CurrentUserWithAddressDto GetUserInfoWithAddressByEmail(string email);
         Guid GetUserIdByEmail(string email);
         bool SoftDeleteUser(string email);
+        bool ResetPassword(ResetPasswordDTO dto);
         Guid GetUserByTheEmail(string email);
     }
 }
