@@ -314,7 +314,7 @@ namespace MANDAT.BusinessLogic.Services
             });
         }
 
-        public bool UpdateUserWithAddressByEmail(string email, CurrentUserWithAddressDto user)
+        public bool UpdateUserWithAddressByEmail(string email, CurrentUserUpdateDto user)//CurrentUserWithAddressDto
         {
             return ExecuteInTransaction(uow =>
             {

@@ -176,7 +176,7 @@ namespace MANDATWebApp.Controllers
         }
 
         [HttpPut("UpdateUserWithAddressByEmail/{email}")]
-        public IActionResult UpdateUserWithAddress([FromRoute] string email, [FromBody] CurrentUserWithAddressDto user)
+        public IActionResult UpdateUserWithAddress([FromRoute] string email, [FromBody] CurrentUserUpdateDto user)//CurrentUserWithAddressDto
         {
             var result = _userAccountService.UpdateUserWithAddressByEmail(email, user);
             return Ok(result);

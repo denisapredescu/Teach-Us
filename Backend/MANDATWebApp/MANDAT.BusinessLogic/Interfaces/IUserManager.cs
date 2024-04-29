@@ -27,7 +27,7 @@ namespace MANDAT.BusinessLogic.Interfaces
         void Register(RegisterCommand registerCommand);
         Task<IdentityUserToken> GetUserTokenByRefreshToken(string refreshtoken);
         IdentityUser updateUser(IdentityUser user);
-        bool UpdateUserWithAddressByEmail(string email, CurrentUserWithAddressDto user);
+        bool UpdateUserWithAddressByEmail(string email, CurrentUserUpdateDto user);//CurrentUserWithAddressDto
         CurrentUserDto GetUserInfoByEmail(string email);
         CurrentUserWithAddressDto GetUserInfoWithAddressByEmail(string email);
         Guid GetUserIdByEmail(string email);
