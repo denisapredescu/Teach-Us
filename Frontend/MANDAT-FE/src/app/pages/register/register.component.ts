@@ -23,6 +23,7 @@ export class RegisterComponent {
 
   public register(accountFormModel: AccountFormModel): void {
     const model = accountFormModel.model;
+    console.log(model)
     this.userAccount.Register(model).subscribe(
       result => {
         console.log(result);

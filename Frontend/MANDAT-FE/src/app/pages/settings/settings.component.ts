@@ -18,7 +18,6 @@ import { UserAccountService } from "src/app/services/user-account.service";
 export class SettingsComponent {
   accountFormDetails: AccountFormDetails = SettingsAccountFormDetails;
   roles: Roles = new Roles();
-
   constructor(
     private userAccountService: UserAccountService,
     private accountService: AccountService,
@@ -30,7 +29,7 @@ export class SettingsComponent {
     const email = accountFormModel.userEmail;
     const model = accountFormModel.model;
     console.log(email);
-    // console.log(model);
+    console.log(model.userName);
     model.userName = `${model.firstName} ${model.lastName}`;
     this.userAccountService
       .UpdateUserInfoWithAddressByEmail(email, model)

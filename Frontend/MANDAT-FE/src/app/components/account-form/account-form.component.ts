@@ -33,6 +33,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./account-form.component.scss"],
 })
 export class AccountFormComponent {
+  completedEmail: string="";
   public accountModel: FormGroup = this.formBuilder.group({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -127,18 +128,29 @@ export class AccountFormComponent {
       }
     };
   }
-
   submit(): void {
-    console.log(this.email)
-    if(this.email != null){
+    console.log("aiiv")
+    this.completedEmail = this.accountModel.get("email")?.value;
+    if(this.completedEmail != null){
+      console.log("d")
       console.log(this.accountModel.value)
       const accountFormModel: AccountFormModel = {
-        userEmail: this.email,
+        userEmail: this.completedEmail,
         model: this.accountModel.value,
       };
       this.submitEmitter.emit(accountFormModel);
     }
   }
+  // submit(): void {
+  //   if(this.email != null){
+  //     console.log(this.accountModel.value)
+  //     const accountFormModel: AccountFormModel = {
+  //       userEmail: this.email,
+  //       model: this.accountModel.value,
+  //     };
+  //     this.submitEmitter.emit(accountFormModel);
+  //   }
+  // }
 
   delete(): void {
     if(this.email != null){
