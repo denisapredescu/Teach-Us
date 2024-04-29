@@ -68,6 +68,11 @@ export class DialogAddReviewByStudentComponent implements OnInit{
   }
 
   public saveAdd(): void{
+    if (this.addReviewForm.value.starsNumber < 1) 
+      {
+        alert("Stars number should be positive!")
+        return;
+      }
     if (this.addReviewForm.value.starsNumber > 5) 
       this.addReviewForm.value.starsNumber = 5;
       
