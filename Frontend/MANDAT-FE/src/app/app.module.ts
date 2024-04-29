@@ -128,10 +128,7 @@ import { AlertComponent } from './alert/alert.component';
     NgxYoutubePlayerModule.forRoot(),
     NgApexchartsModule,
     MatNativeDateModule,
-    MatDatepickerModule ,
-    
-    // AlertComponent
-    
+    MatDatepickerModule     
   ],
   exports: [
     MatDatepickerModule,

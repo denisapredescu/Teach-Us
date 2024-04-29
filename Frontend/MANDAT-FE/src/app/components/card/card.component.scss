@@ -19,9 +19,7 @@ img {
 
 .display {
 	display: grid;
-    /* justify-content: center; */
     flex-wrap: wrap;
-   // margin-left: 30%;
   .display-item {
     flex-grow: 1;
     flex-basis: 1px;
@@ -31,6 +29,7 @@ img {
     max-width: 100%;
   }
 }
+
 .card{
 	
 	width:480px;

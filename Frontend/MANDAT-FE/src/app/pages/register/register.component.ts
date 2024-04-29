@@ -32,6 +32,5 @@ export class RegisterComponent {
         console.log(error);
       }
     );
-    //this.router.navigate(['/login'])
   }
 }

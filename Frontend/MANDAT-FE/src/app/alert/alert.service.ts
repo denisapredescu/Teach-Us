@@ -16,13 +16,10 @@ export class AlertService {
 
     // convenience methods
     success(message: string, options?: AlertOptions) {
-        console.log(message)
         this.alert(new Alert({ ...options, type: AlertType.Success, message:message }));
     }
 
     error(message: string, options?: AlertOptions) {
-        console.log(message)
-        console.log(options)
         this.alert(new Alert({ ...options, type: AlertType.Error, message }));
     }
 
