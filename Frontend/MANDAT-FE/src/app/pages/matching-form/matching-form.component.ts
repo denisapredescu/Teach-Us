@@ -41,6 +41,7 @@ export class MatchingFormComponent implements OnInit {
     this.cookieService.set("matchSubject", this.model.subjects);
     this.cookieService.set("matchMeeting", this.model.meetingType);
     this.cookieService.set("matchStars", this.stars.toString());
+    localStorage.setItem('matchSubject', this.model.subjects);
     this.router.navigate(["/mentors"]);
   }
 

@@ -20,7 +20,7 @@ namespace MANDATWebApp.Controllers
             _userAccountService = userManager;
         }
 
-        [HttpGet("ViewMentorsReview/{id}/{asc}")]
+        /*[HttpGet("ViewMentorsReview/{id}/{asc}")]
         public List<ViewMentorReview> ViewMentorsReview([FromRoute] Guid id, bool asc) 
         {
             var result = new List<ViewMentorReview>();
@@ -31,6 +31,21 @@ namespace MANDATWebApp.Controllers
             else
             {
                  result = _review.ViewMentorReviewsDesc(id);
+            }
+            return result;
+        }*/
+        [HttpGet("ViewMentorsReview/{email}")]
+        public List<ViewMentorReview> ViewMentorsReview([FromRoute] string email, bool asc)
+        {
+            var id = _userAccountService.GetUserByTheEmail(email);
+            var result = new List<ViewMentorReview>();
+            if (asc)
+            {
+                result = _review.ViewMentorReviewsAsc(id);
+            }
+            else
+            {
+                result = _review.ViewMentorReviewsDesc(id);
             }
             return result;
         }
@@ -54,9 +69,24 @@ namespace MANDATWebApp.Controllers
         }
 
 
-        [HttpGet("ViewStudentsReview")]
+        /*[HttpGet("ViewStudentsReview")]
         public List<ViewStudentReview> ViewStudentsReview(Guid id, bool asc)
         {
+            var result = new List<ViewStudentReview>();
+            if (asc)
+            {
+                result = _review.ViewStudentReviewsAsc(id);
+            }
+            else
+            {
+                result = _review.ViewStudentReviewsDesc(id);
+            }
+            return result;
+        }*/
+        [HttpGet("ViewStudentsReview/{email}")]
+        public List<ViewStudentReview> ViewStudentsReview([FromRoute] string email, bool asc)
+        {
+            var id = _userAccountService.GetUserByTheEmail(email);
             var result = new List<ViewStudentReview>();
             if (asc)
             {

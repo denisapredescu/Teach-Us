@@ -134,6 +134,7 @@ export class CardComponent {
   }
 
   public chooseAMentor(person: any, subject: any) {
+    console.log("subject",subject)
     this.email = localStorage.getItem("Email") !== null ? localStorage.getItem("Email") : sessionStorage.getItem("Email");
     
     if (this.email === "" || this.email === null) {

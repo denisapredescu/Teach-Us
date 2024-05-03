@@ -10,6 +10,9 @@ import {
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
+import { ReviewViewStudent } from "src/app/models/review-view-student";
+import { ReviewService } from "src/app/services/review.service";
+import { ReviewViewMentor } from "src/app/models/review-view-mentor";
 
 export type ChartOptions = {
   series:  ApexNonAxisChartSeries; 
@@ -52,6 +55,12 @@ export class UserProfileComponent implements OnInit {
   isPersonalProfile: boolean = false;
   requests: any = [];
   justViewProfile: string | null = 'false';
+  public reviews: ReviewViewStudent[] = [];
+  public reviewsMentor: ReviewViewMentor[]=[];
+  public reviewsLoggedStudent: ReviewViewStudent[]=[];  
+  public reviewsLoggedMentor: ReviewViewMentor[]=[];
+  
+
 
   // requestsMock: any = [
   //   {
@@ -103,7 +112,8 @@ export class UserProfileComponent implements OnInit {
     private userAccountService: UserAccountService,
     private mentorRequestService: MentorRequestsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private reviewService: ReviewService
   ) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.email = params.get("email") || "";
@@ -114,8 +124,11 @@ export class UserProfileComponent implements OnInit {
     this.getUserInfo();
     this.getUserRequests();
     this.getAllUserRequestsAndCreateChart();
+    this.getReviewsReceiveByStudent();
   }
+  getReviewsReceiveByStudent(){
 
+  }
   checkAndSetProfileDetails() {
     if (this.email === "") {
       this.isPersonalProfile = true;
@@ -133,14 +146,57 @@ export class UserProfileComponent implements OnInit {
 
     this.rol = localStorage.getItem("Rol") !== null ? localStorage.getItem("Rol") : sessionStorage.getItem("Rol");
     this.rol = this.rol === null ? '' : this.rol;
+    
 
     // is not current user profile
     if (this.justViewProfile === 'true') {
       if(this.rol === "mentor"){
-        this.rol = "student";       
+        this.rol = "student"; 
+        this.reviewService.getStudentAllReviewsReceive(this.email).subscribe(
+        (result: ReviewViewStudent[]) => {
+          this.reviews = result;
+        },
+        (error) => {
+          console.error(error);
+        }
+        );
+
       }
       else {
         this.rol = "mentor";  
+        this.reviewService.getMentorAllReviewsReceive(this.email).subscribe(
+          (result: ReviewViewMentor[]) => {
+            this.reviewsMentor = result;
+          },
+          (error) => {
+            console.error(error);
+          }
+          );
+      }
+    }
+    else{
+      if(this.rol === "student"){
+       
+        this.reviewService.getStudentAllReviewsReceive(this.email).subscribe(
+        (result: ReviewViewStudent[]) => {
+          this.reviews = result;
+        },
+        (error) => {
+          console.error(error);
+        }
+        );
+
+      }
+      else {
+         
+        this.reviewService.getMentorAllReviewsReceive(this.email).subscribe(
+          (result: ReviewViewMentor[]) => {
+            this.reviewsMentor = result;
+          },
+          (error) => {
+            console.error(error);
+          }
+          );
       }
     }
   }

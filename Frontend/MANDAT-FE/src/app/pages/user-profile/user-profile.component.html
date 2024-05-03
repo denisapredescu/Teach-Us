@@ -54,7 +54,6 @@
       </div>
     </div>
   </div>
-
   <div class="menu-box" *ngIf="isPersonalProfile">
     <ng-container *ngIf="roles.isMentor(rol)">
       <a routerLink="/settings">{{ "Settings" | titlecase }}</a> 
@@ -91,6 +90,108 @@
     <p>{{ userAccountWithAddress.bio }}</p>
   </div>
 </div>
+
+<div *ngIf="!isPersonalProfile" style="height: 20%; width: 90%;">
+
+  <div *ngIf="rol === 'mentor' && justViewProfile" style="background-color:  rgb(232, 230, 230);border: 3px solid rgb(21, 142, 217); padding: 10px; border-radius: 10px;">
+    <h2  style="text-align: center; text-decoration: underline;">Students Reviews for {{userAccountWithAddress.username | titlecase
+    }}</h2>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Message</th>
+            <th>Stars</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let review of reviewsMentor">
+            <td>{{ review.studentName | titlecase }}</td>
+            <td>{{ review.message }}</td>
+            <td>{{ review.starsNumber }}/5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="rol === 'student' && justViewProfile"style="background-color:  rgb(232, 230, 230);border: 3px solid rgb(21, 142, 217); padding: 10px; border-radius: 10px;">
+    <h2 style="text-align: center; text-decoration: underline;">Mentors Reviews for {{userAccountWithAddress.username | titlecase
+    }}</h2>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Mentor Name</th>
+            <th>Message</th>
+            <th>Stars</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let review of reviews">
+            <td>{{ review.mentorName | titlecase}}</td>
+            <td>{{ review.message }}</td>
+            <td>{{ review.starsNumber }}/5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="isPersonalProfile" style="height: 20%; width: 90%;">
+
+  <div *ngIf="rol === 'mentor'" style="background-color:  rgb(232, 230, 230);border: 3px solid rgb(21, 142, 217); padding: 10px; border-radius: 10px;">
+    <h2  style="text-align: center; text-decoration: underline;">Students Reviews for {{userAccountWithAddress.username | titlecase
+    }}</h2>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Message</th>
+            <th>Stars</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let review of reviewsMentor">
+            <td>{{ review.studentName | titlecase }}</td>
+            <td>{{ review.message }}</td>
+            <td>{{ review.starsNumber }}/5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="rol === 'student'"style="background-color:  rgb(232, 230, 230);border: 3px solid rgb(21, 142, 217); padding: 10px; border-radius: 10px;">
+    <h2 style="text-align: center; text-decoration: underline;">Mentors Reviews for {{userAccountWithAddress.username | titlecase
+    }}</h2>
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Mentor Name</th>
+            <th>Message</th>
+            <th>Stars</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let review of reviews">
+            <td>{{ review.mentorName | titlecase}}</td>
+            <td>{{ review.message }}</td>
+            <td>{{ review.starsNumber }}/5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
 
 <div
   class="requests-chart"
