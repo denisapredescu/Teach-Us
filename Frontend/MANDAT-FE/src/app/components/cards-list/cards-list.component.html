@@ -28,7 +28,7 @@
     <div class="leftTitle">{{ card.leftTitle }}</div>
 
     <div class="remaining-details">
-      <div class="mainTitle">{{ card.mainTitle }}</div>
+      <div class="mainTitle" (click)="goToProfile(card.id)">{{ card.mainTitle }}</div>
       <div
         class="type"
         [style]="
@@ -42,8 +42,9 @@
       <div>{{ card.description }}</div>
     </div>
 
-    <div class="options">
+    <div class="options"[class]="isAdminPage() ? 'multiple-options' : ''">
       <button (click)="delete(card.id)">❌</button>
+      <button *ngIf="isAdminPage()" (click)="settings(card.id)">⚙️</button>
     </div>
   </div>
 </div>
