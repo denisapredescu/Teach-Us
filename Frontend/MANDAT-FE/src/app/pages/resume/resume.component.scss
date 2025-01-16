@@ -1,0 +1,57 @@
+div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin: 20px auto;
+  }
+  
+  #numberVal {
+    max-width: 200px;
+  }
+  #textVal {
+    max-width: 500px;
+  }
+  input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .loader {
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #3498db;
+    border-radius: 50%; 
+    width: 60px; 
+    height: 60px; 
+    animation: spin 1s linear infinite; 
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

@@ -64,6 +64,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { NgxYoutubePlayerModule } from "ngx-youtube-player";
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { AlertComponent } from './alert/alert.component';
+import { ResumeComponent } from './pages/resume/resume.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { AlertComponent } from './alert/alert.component';
     AboutUsComponent,
     ResetPasswordComponent,
     AlertComponent,
+    ResumeComponent,
 
   ],
   imports: [

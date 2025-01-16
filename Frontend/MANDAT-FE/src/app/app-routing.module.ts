@@ -20,6 +20,7 @@ import { SettingsComponent } from "./pages/settings/settings.component";
 import { HomeworkComponent } from "./pages/homework/homework.component";
 import { AboutUsComponent } from "./pages/about-us/about-us.component";
 import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
+import { ResumeComponent } from "./pages/resume/resume.component";
 
 const routes: Routes = [
   { path: "home", component: HomePageComponent },
@@ -40,11 +41,12 @@ const routes: Routes = [
   { path: "#popup-article", component: MyStudentsComponent },
   { path: "video-meeting", component: VideoMeetingComponent },
   { path:"video-mentor",component:VideoPageMentorComponent},
-  { path:"videos-student",component:VideoPageStudentComponent},
+  { path:"videos-student",component:VideoPageStudentComponent},//VideoPageStudentComponent
   { path: "settings/:email", component: SettingsComponent },
   { path: "settings", component: SettingsComponent },
   { path: "reset-password", component: ResetPasswordComponent },
   { path: "about-us", component: AboutUsComponent},
+  { path: "resume-student", component:ResumeComponent},
   { path: "**", component: NotFoundComponent },
 ];
 

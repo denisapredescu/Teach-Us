@@ -1,0 +1,21 @@
+<div style="width: 80%;">
+
+    <label for="fileUrl">File URL:</label>
+    <input id="fileUrl" type="text" id="textVal" [(ngModel)]="fileUrl" placeholder="Enter file URL" />
+
+    <label for="numberInput">Number:</label>
+    <input id="numberInput" id="numberVal"type="number" [(ngModel)]="numberValue" placeholder="Enter a number" />
+
+    <button (click)="save()">Send</button>
+
+</div>
+
+<div style="background-color:  rgb(232, 230, 230);border: 3px solid rgb(21, 142, 217); padding: 10px; border-radius: 10px;width: 80%;">
+
+    <h2 style="text-align: center; text-decoration: underline;">Your Resume</h2>
+    <div>
+
+      <div *ngIf="isLoading" class="loader-container"><div class="loader"></div></div>
+      {{this.resumeResult}}
+    </div>
+  </div>
