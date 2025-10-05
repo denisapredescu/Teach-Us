@@ -40,3 +40,11 @@ parolă) sau prin intermediul contului de Facebook sau Google.
 Pe lângă acestea, utilizatorul poate să aleagă să rămână conectat în aplicație prin selectarea opțiunii „Remember me”. 
 Odată logat, utilizatorul are posibilitatea de a-și edita profilul și de a-l șterge în cazul în care vrea să 
 părăsească platforma.
+
+## Dezvoltare
+
+[Management si antreprenoriat](https://github.com/postolache-andreea-miruna/ManagementDeProdusSiAntreprenoriat)
+
+[Implementare SemanticTextSummarizer](https://github.com/postolache-andreea-miruna/SemanticTextSummarizer_ForTeachUs)
+
+[UX-UI](https://github.com/postolache-andreea-miruna/UX-UI)
